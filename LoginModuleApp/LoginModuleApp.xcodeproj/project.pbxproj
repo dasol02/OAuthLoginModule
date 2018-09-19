@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411EF2151D1B600CA7EE0 /* MainViewController.m */; };
+		169411F32151E12100CA7EE0 /* OAuthNaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411F22151E12100CA7EE0 /* OAuthNaver.m */; };
+		169411F72151EC2900CA7EE0 /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411F62151EC2900CA7EE0 /* IndicatorView.m */; };
+		169411FF215204FE00CA7EE0 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411FC215204FE00CA7EE0 /* SVProgressHUD.m */; };
+		16941200215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411FD215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m */; };
+		16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */; };
+		169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 169412032152062F00CA7EE0 /* UIImage+GIF.m */; };
 		16CF04392149FD86007631B2 /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
 		16CF043B214A1861007631B2 /* NaverThirdPartyLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0440214A2DB5007631B2 /* OAuthManager.m */; };
@@ -49,6 +55,18 @@
 /* Begin PBXFileReference section */
 		169411EE2151D1B600CA7EE0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		169411EF2151D1B600CA7EE0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		169411F12151E12100CA7EE0 /* OAuthNaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthNaver.h; sourceTree = "<group>"; };
+		169411F22151E12100CA7EE0 /* OAuthNaver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthNaver.m; sourceTree = "<group>"; };
+		169411F52151EC2900CA7EE0 /* IndicatorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndicatorView.h; sourceTree = "<group>"; };
+		169411F62151EC2900CA7EE0 /* IndicatorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndicatorView.m; sourceTree = "<group>"; };
+		169411F9215204FE00CA7EE0 /* SVIndefiniteAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVIndefiniteAnimatedView.h; sourceTree = "<group>"; };
+		169411FA215204FE00CA7EE0 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		169411FB215204FE00CA7EE0 /* SVProgressHUD-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD-Prefix.pch"; sourceTree = "<group>"; };
+		169411FC215204FE00CA7EE0 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		169411FD215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
+		169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		169412022152062F00CA7EE0 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		169412032152062F00CA7EE0 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
 		16CF0440214A2DB5007631B2 /* OAuthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthManager.m; sourceTree = "<group>"; };
@@ -116,11 +134,37 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		169411F42151EC0C00CA7EE0 /* IndicatorView */ = {
+			isa = PBXGroup;
+			children = (
+				169411F52151EC2900CA7EE0 /* IndicatorView.h */,
+				169411F62151EC2900CA7EE0 /* IndicatorView.m */,
+			);
+			path = IndicatorView;
+			sourceTree = "<group>";
+		};
+		169411F8215204FE00CA7EE0 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				169412022152062F00CA7EE0 /* UIImage+GIF.h */,
+				169412032152062F00CA7EE0 /* UIImage+GIF.m */,
+				169411F9215204FE00CA7EE0 /* SVIndefiniteAnimatedView.h */,
+				169411FA215204FE00CA7EE0 /* SVProgressHUD.h */,
+				169411FB215204FE00CA7EE0 /* SVProgressHUD-Prefix.pch */,
+				169411FC215204FE00CA7EE0 /* SVProgressHUD.m */,
+				169411FD215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m */,
+				169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		16CF043D214A2D8F007631B2 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
 				16CF043F214A2DB5007631B2 /* OAuthManager.h */,
 				16CF0440214A2DB5007631B2 /* OAuthManager.m */,
+				169411F12151E12100CA7EE0 /* OAuthNaver.h */,
+				169411F22151E12100CA7EE0 /* OAuthNaver.m */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -174,8 +218,8 @@
 			isa = PBXGroup;
 			children = (
 				169411ED2151D1A500CA7EE0 /* Main */,
-				169411EC2151D18D00CA7EE0 /* UserProfile */,
 				169411EB2151D18800CA7EE0 /* Login */,
+				169411EC2151D18D00CA7EE0 /* UserProfile */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -183,6 +227,7 @@
 		16FC52002148A85E00219255 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				169411F42151EC0C00CA7EE0 /* IndicatorView */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -198,6 +243,7 @@
 		16FC52022148A87400219255 /* Libray */ = {
 			isa = PBXGroup;
 			children = (
+				169411F8215204FE00CA7EE0 /* SVProgressHUD */,
 			);
 			path = Libray;
 			sourceTree = "<group>";
@@ -304,6 +350,7 @@
 				16FC51E82148A84600219255 /* LaunchScreen.storyboard in Resources */,
 				16FC51E52148A84600219255 /* Assets.xcassets in Resources */,
 				16FC51E02148A84200219255 /* Main.storyboard in Resources */,
+				16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,8 +372,13 @@
 				16FC51DD2148A84200219255 /* LoginViewController.m in Sources */,
 				16FC51EB2148A84600219255 /* main.m in Sources */,
 				16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */,
+				169411F32151E12100CA7EE0 /* OAuthNaver.m in Sources */,
 				169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */,
+				169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */,
 				16FC51DA2148A84200219255 /* AppDelegate.m in Sources */,
+				169411FF215204FE00CA7EE0 /* SVProgressHUD.m in Sources */,
+				169411F72151EC2900CA7EE0 /* IndicatorView.m in Sources */,
+				16941200215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m in Sources */,
 				16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

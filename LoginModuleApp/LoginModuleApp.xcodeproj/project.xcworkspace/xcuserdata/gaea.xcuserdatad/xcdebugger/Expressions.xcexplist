@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[MainViewController setUpdateButtonUI]:MainViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate application:openURL:options:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController viewWillAppear:]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

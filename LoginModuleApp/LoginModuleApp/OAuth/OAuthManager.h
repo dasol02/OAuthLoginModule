@@ -1,4 +1,12 @@
 #import <NaverThirdPartyLogin/NaverThirdPartyLogin.h>
+#import "IndicatorView.h"
+
+#pragma mark- Naver Define
+
+#define kAuthNaverServiceAppUrlScheme    @"loginmoduleappdeeplinkscheme"
+#define kAuthNaverConsumerKey            @"DMM9F1vOnLoTdfm8Qx6w"
+#define kAuthNaverConsumerSecret         @"5_uvXsmbPj"
+#define kAuthNaverServiceAppName         @"loginmoduleapp"
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
@@ -18,7 +26,14 @@
 - (void)oAuthManagerRefreshToken;
 - (NSArray*)oAUthManagerGetAccessToken;
 
-#pragma mark- NAVER OAuth
+
+#pragma mark - OAuth First Setting
+- (void)setOAuthNaverSetting;
+
+#pragma mark - OAuth openURL Cehck
+- (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options;
+
+#pragma mark- NAVER LOGIN
 - (void) requestThirdpartyLogin;
 
 @end

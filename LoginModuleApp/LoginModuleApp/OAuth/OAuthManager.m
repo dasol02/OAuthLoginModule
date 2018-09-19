@@ -19,6 +19,27 @@
     return self;
 }
 
+#pragma mark - OAuth First Setting
+- (void)setOAuthNaverSetting{
+    [self.thirdPartyLoginConn setIsNaverAppOauthEnable:YES];
+    [self.thirdPartyLoginConn setServiceUrlScheme:kServiceAppUrlScheme];
+    [self.thirdPartyLoginConn setConsumerKey:kConsumerKey];
+    [self.thirdPartyLoginConn setConsumerSecret:kConsumerSecret];
+    [self.thirdPartyLoginConn setAppName:kServiceAppName];
+}
+
+
+#pragma mark - OAuth openURL Cehck
+- (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
+    if([[options objectForKey:@"UIApplicationOpenURLOptionsSourceApplicationKey"] isEqualToString:@"com.nhncorp.NaverSearch"]){
+        return [[NaverThirdPartyLoginConnection getSharedInstance] application:app openURL:url options:options];
+    }else{
+        return NO;
+    }
+}
+
+
+
 // 로그인 여부 확인
 - (BOOL)oAuthManagerLoginState{
     NSArray *arrayToken = [self oAUthManagerGetAccessToken];
@@ -61,6 +82,7 @@
 // 로그아웃
 - (void)oAuthManagerLogout{
     if([self.thirdPartyLoginConn state]){ //Naver
+        [[IndicatorView sharedInstnace] show];
         [self.thirdPartyLoginConn resetToken];
     }
 }
@@ -82,6 +104,7 @@
 #pragma mark- NAVER
 // 로그인 실행
 - (void) requestThirdpartyLogin {
+    [[IndicatorView sharedInstnace] show];
     [self.thirdPartyLoginConn requestThirdPartyLogin];
 }
 
@@ -122,12 +145,20 @@
 // 로그인 성공
 - (void)oauth20ConnectionDidFinishRequestACTokenWithAuthCode {
     NSString *result = [NSString stringWithFormat:@"OAuth Success!\n\nAccess Token - %@\n\nAccess Token Expire Date- %@\n\nRefresh Token - %@", self.thirdPartyLoginConn.accessToken, self.thirdPartyLoginConn.accessTokenExpireDate, self.thirdPartyLoginConn.refreshToken];
+    
+    /**
+     로그인 성공 및 실패 여부 노티 알림 (로딩 화면 생성)
+     **/
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"OAuthLoginSuccess" object:nil];
+    [[IndicatorView sharedInstnace]dismiss];
     NSLog(@"\nOAuth Login === NAVER \n%@",result);
 }
 
 // 로그인 실패
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailWithError:(NSError *)error{
     NSLog(@"\nOAuth Login === NAVER \n%@",error);
+    [[IndicatorView sharedInstnace]dismiss];
 }
 
 // 인앱 로그인 // 실행여부 미확인

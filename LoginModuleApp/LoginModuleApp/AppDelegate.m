@@ -1,5 +1,5 @@
-#import <NaverThirdPartyLogin/NaverThirdPartyLogin.h>
 #import "AppDelegate.h"
+#import "OAuth/OAuthManager.h"
 
 @interface AppDelegate ()
 @end
@@ -8,25 +8,15 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    // Naver
-    [self setOAuthNaver];
-    
+    [[OAuthManager sharedInstnace] setOAuthNaverSetting];
     return YES;
 }
 
-- (void)setOAuthNaver{
-    NaverThirdPartyLoginConnection *thirdConn = [NaverThirdPartyLoginConnection getSharedInstance];
-    [thirdConn setIsNaverAppOauthEnable:YES];
-    [thirdConn setServiceUrlScheme:kServiceAppUrlScheme];
-    [thirdConn setConsumerKey:kConsumerKey];
-    [thirdConn setConsumerSecret:kConsumerSecret];
-    [thirdConn setAppName:kServiceAppName];
-}
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
-    return [[NaverThirdPartyLoginConnection getSharedInstance] application:app openURL:url options:options];
+    return [[OAuthManager sharedInstnace] oAuthCheckOpenURL:app openURL:url options:options];
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
