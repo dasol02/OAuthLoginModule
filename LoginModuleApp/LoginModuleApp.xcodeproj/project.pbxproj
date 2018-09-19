@@ -67,6 +67,8 @@
 		169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		169412022152062F00CA7EE0 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		169412032152062F00CA7EE0 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
+		169412052152156400CA7EE0 /* OAuthAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthAPI.h; sourceTree = "<group>"; };
+		169412062152205C00CA7EE0 /* OAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthDelegate.h; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
 		16CF0440214A2DB5007631B2 /* OAuthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthManager.m; sourceTree = "<group>"; };
@@ -161,6 +163,8 @@
 		16CF043D214A2D8F007631B2 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
+				169412052152156400CA7EE0 /* OAuthAPI.h */,
+				169412062152205C00CA7EE0 /* OAuthDelegate.h */,
 				16CF043F214A2DB5007631B2 /* OAuthManager.h */,
 				16CF0440214A2DB5007631B2 /* OAuthManager.m */,
 				169411F12151E12100CA7EE0 /* OAuthNaver.h */,

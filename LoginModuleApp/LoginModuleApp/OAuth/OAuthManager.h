@@ -1,39 +1,30 @@
-#import <NaverThirdPartyLogin/NaverThirdPartyLogin.h>
+#import <Foundation/Foundation.h>
+#import "OAuthAPI.h"
 #import "IndicatorView.h"
-
-#pragma mark- Naver Define
-
-#define kAuthNaverServiceAppUrlScheme    @"loginmoduleappdeeplinkscheme"
-#define kAuthNaverConsumerKey            @"DMM9F1vOnLoTdfm8Qx6w"
-#define kAuthNaverConsumerSecret         @"5_uvXsmbPj"
-#define kAuthNaverServiceAppName         @"loginmoduleapp"
+#import "OAuthDelegate.h"
+#import "OAuthNaver.h"
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
 - (void)getOAuthManagerUserData:(NSString *)userData;
 @end
-@interface OAuthManager : NSObject<NaverThirdPartyLoginConnectionDelegate>
-@property (strong, nonatomic) NaverThirdPartyLoginConnection *thirdPartyLoginConn;
+
+
+@interface OAuthManager : NSObject<OAuthDelegate>
 @property (weak, nonatomic) id<OAuthManagerDelegate> delegate;
+@property (strong, nonatomic) OAuthNaver *oAuthNaver;
 
 + (OAuthManager *)sharedInstnace;
 
-- (BOOL)oAuthManagerLoginState;
-- (void)oAuthManagerUserData;
+- (BOOL)oAuthManagerLoginState; // 로그인 상태
+- (void)oAuthManagerUserData; // 사용자 데이터 호출
 
-- (void)oAuthManagerLogout;
-- (void)oAuthManagerDelete;
-- (void)oAuthManagerRefreshToken;
-- (NSArray*)oAUthManagerGetAccessToken;
+- (void)oAuthManagerLogin:(int)loginOAuthName; // 로그인
+- (void)oAuthManagerLogout; // 로그아웃
+- (void)oAuthManagerDelete; // 인증해제
+- (void)oAuthManagerRefreshToken; // 토큰 업데이트
 
-
-#pragma mark - OAuth First Setting
-- (void)setOAuthNaverSetting;
-
-#pragma mark - OAuth openURL Cehck
+// 외부 로그인 앱 연동 스키마 전달
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options;
-
-#pragma mark- NAVER LOGIN
-- (void) requestThirdpartyLogin;
 
 @end

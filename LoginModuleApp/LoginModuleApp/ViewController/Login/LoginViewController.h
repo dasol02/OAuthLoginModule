@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "OAuthManager.h"
+#import "OAuthAPI.h"
 @interface LoginViewController : UIViewController<OAuthManagerDelegate>
 
 - (IBAction)actionNaverLogin:(id)sender;

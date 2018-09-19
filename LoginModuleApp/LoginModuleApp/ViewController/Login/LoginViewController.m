@@ -41,7 +41,7 @@
 
 
 - (IBAction)actionNaverLogin:(id)sender {
-    [[OAuthManager sharedInstnace] requestThirdpartyLogin];
+    [[OAuthManager sharedInstnace] oAuthManagerLogin:kAuthLoginName_NAVER];
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {

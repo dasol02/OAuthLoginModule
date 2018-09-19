@@ -8,7 +8,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[OAuthManager sharedInstnace] setOAuthNaverSetting];
+    [OAuthManager sharedInstnace];
     return YES;
 }
 
