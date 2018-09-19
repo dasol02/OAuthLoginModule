@@ -1,6 +1,4 @@
 #import "MainViewController.h"
-#import "UserProfileViewController.h"
-#import "LoginViewController.h"
 
 @interface MainViewController ()
 

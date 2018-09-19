@@ -1,5 +1,4 @@
 #import "AppDelegate.h"
-#import "OAuth/OAuthManager.h"
 
 @interface AppDelegate ()
 @end

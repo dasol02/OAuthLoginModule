@@ -6,8 +6,8 @@
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
-- (void)getOAuthManagerUserData:(NSString *)userData;
-- (void)responseLoginResult:(BOOL)state;
+- (void)getOAuthManagerUserData:(NSString *)userData; // 사용자 정보 확인
+- (void)responseLoginResult:(BOOL)state; // 로그인 여부 확인
 @end
 
 @interface OAuthManager : NSObject<OAuthDelegate>{
@@ -25,8 +25,7 @@
 - (void)oAuthManagerLogout; // 로그아웃
 - (void)oAuthManagerDelete; // 인증해제
 - (void)oAuthManagerRefreshToken; // 토큰 업데이트
-
-- (int)oAuthgetLoginName;
+- (int)oAuthgetLoginName; // 연동중인 API 확인
 
 // 외부 로그인 앱 연동 스키마 전달
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options;

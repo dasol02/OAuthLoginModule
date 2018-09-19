@@ -23,7 +23,7 @@
     return self;
 }
 
-#pragma mark - OAuth First Setting
+#pragma mark - OAuth NAVER First Setting
 - (void)setOAuthNaverSetting{
     [self.thirdPartyLoginConn setIsNaverAppOauthEnable:YES];
     [self.thirdPartyLoginConn setServiceUrlScheme:kServiceAppUrlScheme];

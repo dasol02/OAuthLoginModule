@@ -1,5 +1,4 @@
 #import "LoginViewController.h"
-#import "UserProfileViewController.h"
 
 @interface LoginViewController ()
 @end
