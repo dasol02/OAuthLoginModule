@@ -2,7 +2,6 @@
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
-- (void)getOAuthManagerLoginState:(BOOL)loginState;
 - (void)getOAuthManagerUserData:(NSString *)userData;
 @end
 @interface OAuthManager : NSObject<NaverThirdPartyLoginConnectionDelegate>
@@ -11,7 +10,7 @@
 
 + (OAuthManager *)sharedInstnace;
 
-- (void)oAuthManagerLoginState;
+- (BOOL)oAuthManagerLoginState;
 - (void)oAuthManagerUserData;
 
 - (void)oAuthManagerLogout;

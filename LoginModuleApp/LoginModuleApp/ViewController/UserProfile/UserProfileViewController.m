@@ -1,11 +1,11 @@
-#import "UserViewController.h"
+#import "UserProfileViewController.h"
 
-@interface UserViewController ()
+@interface UserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textFieldUserData;
 
 @end
 
-@implementation UserViewController
+@implementation UserProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,4 +34,8 @@
 }
 */
 
+- (IBAction)actionLogout:(id)sender {
+    [[OAuthManager sharedInstnace] oAuthManagerLogout];
+    [self.navigationController popViewControllerAnimated:YES];
+}
 @end

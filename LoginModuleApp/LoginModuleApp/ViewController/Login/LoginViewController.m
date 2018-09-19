@@ -1,23 +1,14 @@
-#import "ViewController.h"
-#import "UserViewController.h"
+#import "LoginViewController.h"
+#import "UserProfileViewController.h"
 
-@interface ViewController ()
+@interface LoginViewController ()
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [OAuthManager sharedInstnace].delegate = self;
-}
-
-
--(void)getOAuthManagerLoginState:(BOOL)loginState{
-    if(loginState){
-        UIStoryboard *getStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UserViewController *view = [getStoryboard instantiateViewControllerWithIdentifier:@"UserViewController"];
-        [self.navigationController pushViewController:view animated:YES];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -35,7 +26,6 @@
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLoginState];
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {
@@ -43,4 +33,5 @@
 
 - (IBAction)actionGoogleLogin:(id)sender {
 }
+
 @end

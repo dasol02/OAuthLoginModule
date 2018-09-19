@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 #import "OAuthManager.h"
-@interface ViewController : UIViewController<OAuthManagerDelegate>
+@interface LoginViewController : UIViewController<OAuthManagerDelegate>
 
 - (IBAction)actionNaverLogin:(id)sender;
 - (IBAction)actionKakaoLogin:(id)sender;

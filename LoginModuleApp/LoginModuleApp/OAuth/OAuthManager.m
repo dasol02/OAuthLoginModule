@@ -20,22 +20,22 @@
 }
 
 // 로그인 여부 확인
-- (void)oAuthManagerLoginState{
-    NSArray *arrayToken = [[OAuthManager sharedInstnace] oAUthManagerGetAccessToken];
+- (BOOL)oAuthManagerLoginState{
+    NSArray *arrayToken = [self oAUthManagerGetAccessToken];
 
     if([arrayToken count] <= 1){
-        return;
+        return NO;
     }
 
     if(arrayToken[1] == nil || [arrayToken[1] length] <= 0 || [arrayToken isKindOfClass:[NSNull class]]){
-        return;
+        return NO;
     }
     
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerLoginState:)]){
-        [self.delegate getOAuthManagerLoginState:YES];
-    }
+    return YES;
 }
 
+
+#pragma mark- Naver OAuth
 // 사용자 데이터 호출
 - (void)oAuthManagerUserData{
     [self getNaverUserData];

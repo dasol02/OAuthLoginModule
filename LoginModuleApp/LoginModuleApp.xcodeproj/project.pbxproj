@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411EF2151D1B600CA7EE0 /* MainViewController.m */; };
 		16CF04392149FD86007631B2 /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
 		16CF043B214A1861007631B2 /* NaverThirdPartyLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0440214A2DB5007631B2 /* OAuthManager.m */; };
-		16CF0444214A3EC2007631B2 /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0443214A3EC2007631B2 /* UserViewController.m */; };
+		16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0443214A3EC2007631B2 /* UserProfileViewController.m */; };
 		16FC51DA2148A84200219255 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FC51D92148A84200219255 /* AppDelegate.m */; };
-		16FC51DD2148A84200219255 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FC51DC2148A84200219255 /* ViewController.m */; };
+		16FC51DD2148A84200219255 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16FC51DC2148A84200219255 /* LoginViewController.m */; };
 		16FC51E02148A84200219255 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16FC51DE2148A84200219255 /* Main.storyboard */; };
 		16FC51E32148A84200219255 /* LoginModuleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 16FC51E12148A84200219255 /* LoginModuleApp.xcdatamodeld */; };
 		16FC51E52148A84600219255 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16FC51E42148A84600219255 /* Assets.xcassets */; };
@@ -46,16 +47,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		169411EE2151D1B600CA7EE0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		169411EF2151D1B600CA7EE0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
 		16CF0440214A2DB5007631B2 /* OAuthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthManager.m; sourceTree = "<group>"; };
-		16CF0442214A3EC2007631B2 /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
-		16CF0443214A3EC2007631B2 /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		16CF0442214A3EC2007631B2 /* UserProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
+		16CF0443214A3EC2007631B2 /* UserProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		16FC51D52148A84200219255 /* LoginModuleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginModuleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16FC51D82148A84200219255 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		16FC51D92148A84200219255 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		16FC51DB2148A84200219255 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		16FC51DC2148A84200219255 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		16FC51DB2148A84200219255 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		16FC51DC2148A84200219255 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		16FC51DF2148A84200219255 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		16FC51E22148A84200219255 /* LoginModuleApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LoginModuleApp.xcdatamodel; sourceTree = "<group>"; };
 		16FC51E42148A84600219255 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +89,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		169411EB2151D18800CA7EE0 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				16FC51DB2148A84200219255 /* LoginViewController.h */,
+				16FC51DC2148A84200219255 /* LoginViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		169411EC2151D18D00CA7EE0 /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				16CF0442214A3EC2007631B2 /* UserProfileViewController.h */,
+				16CF0443214A3EC2007631B2 /* UserProfileViewController.m */,
+			);
+			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		169411ED2151D1A500CA7EE0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				169411EE2151D1B600CA7EE0 /* MainViewController.h */,
+				169411EF2151D1B600CA7EE0 /* MainViewController.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		16CF043D214A2D8F007631B2 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,16 +147,16 @@
 			isa = PBXGroup;
 			children = (
 				16CF043D214A2D8F007631B2 /* OAuth */,
-				16FC52042148A89B00219255 /* Supporting Files */,
 				16FC52032148A89300219255 /* StoryBoard */,
-				16FC52022148A87400219255 /* Libray */,
-				16FC52012148A86300219255 /* Frameworks */,
-				16FC52002148A85E00219255 /* Util */,
 				16FC51FF2148A85900219255 /* ViewController */,
 				16FC51D82148A84200219255 /* AppDelegate.h */,
 				16FC51D92148A84200219255 /* AppDelegate.m */,
 				16FC51E42148A84600219255 /* Assets.xcassets */,
 				16FC51E62148A84600219255 /* LaunchScreen.storyboard */,
+				16FC52002148A85E00219255 /* Util */,
+				16FC52022148A87400219255 /* Libray */,
+				16FC52042148A89B00219255 /* Supporting Files */,
+				16FC52012148A86300219255 /* Frameworks */,
 			);
 			path = LoginModuleApp;
 			sourceTree = "<group>";
@@ -143,10 +173,9 @@
 		16FC51FF2148A85900219255 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				16FC51DB2148A84200219255 /* ViewController.h */,
-				16FC51DC2148A84200219255 /* ViewController.m */,
-				16CF0442214A3EC2007631B2 /* UserViewController.h */,
-				16CF0443214A3EC2007631B2 /* UserViewController.m */,
+				169411ED2151D1A500CA7EE0 /* Main */,
+				169411EC2151D18D00CA7EE0 /* UserProfile */,
+				169411EB2151D18800CA7EE0 /* Login */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -293,9 +322,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				16FC51E32148A84200219255 /* LoginModuleApp.xcdatamodeld in Sources */,
-				16FC51DD2148A84200219255 /* ViewController.m in Sources */,
+				16FC51DD2148A84200219255 /* LoginViewController.m in Sources */,
 				16FC51EB2148A84600219255 /* main.m in Sources */,
-				16CF0444214A3EC2007631B2 /* UserViewController.m in Sources */,
+				16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */,
+				169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */,
 				16FC51DA2148A84200219255 /* AppDelegate.m in Sources */,
 				16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */,
 			);

@@ -8,7 +8,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    // Naver
     [self setOAuthNaver];
+    
     return YES;
 }
 

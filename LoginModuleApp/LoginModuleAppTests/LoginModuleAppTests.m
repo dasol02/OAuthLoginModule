@@ -1,11 +1,3 @@
-//
-//  LoginModuleAppTests.m
-//  LoginModuleAppTests
-//
-//  Created by GAEA on 2018. 9. 12..
-//  Copyright © 2018년 LDS. All rights reserved.
-//
-
 #import <XCTest/XCTest.h>
 
 @interface LoginModuleAppTests : XCTestCase
