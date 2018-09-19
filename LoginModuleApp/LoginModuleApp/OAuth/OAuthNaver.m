@@ -33,6 +33,21 @@
 }
 
 #pragma mark - REQUEST OAuth
+- (BOOL)getLoginState{
+    
+    NSString * accessToken;
+    
+    if([self.thirdPartyLoginConn state]){
+        accessToken = self.thirdPartyLoginConn.accessToken;
+    }
+    
+    if(accessToken == nil || accessToken.length <= 0 || [accessToken isKindOfClass:[NSNull class]]){
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (void)oAuthNaverUserData{
      [self getNaverUserData];
 }
@@ -53,8 +68,12 @@
 }
 
 - (void)oAuthNaverRefreshToken{
+    // 전급 토근은 있고 &&  유효기간이 지난 경우
     if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
         [self.thirdPartyLoginConn requestAccessTokenWithRefreshToken];
+        NSLog(@"\nOAUTH NAVER oAuthNaverRefreshToken SUCCES");
+    }else{
+        NSLog(@"\nOAUTH NAVER oAuthNaverRefreshToken FAIL");
     }
 }
 
@@ -105,8 +124,8 @@
     NSString *result = [NSString stringWithFormat:@"OAuth Success!\n\nAccess Token - %@\n\nAccess Token Expire Date- %@\n\nRefresh Token - %@", self.thirdPartyLoginConn.accessToken, self.thirdPartyLoginConn.accessTokenExpireDate, self.thirdPartyLoginConn.refreshToken];
     NSLog(@"\nOAuth Login === NAVER \n%@",result);
     
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthDelegateSuccess:)]){
-        [self.delegate oAuthDelegateSuccess:kAuthLoginName_NAVER];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthDelegateLoginResult:OAuthName:)]){
+        [self.delegate oAuthDelegateLoginResult:YES OAuthName:kAuthLoginName_NAVER];
     }
     
 }
@@ -114,8 +133,8 @@
 // 로그인 실패
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailWithError:(NSError *)error{
     NSLog(@"\nOAuth Login === NAVER \n%@",error);
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthDelegateErorr:OAuthName:)]){
-        [self.delegate oAuthDelegateErorr:error OAuthName:kAuthLoginName_NAVER];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthDelegateLoginResult:OAuthName:)]){
+        [self.delegate oAuthDelegateLoginResult:NO OAuthName:kAuthLoginName_NAVER];
     }
 }
 
@@ -130,6 +149,9 @@
 // 토큰 갱신
 - (void)oauth20ConnectionDidFinishRequestACTokenWithRefreshToken{
     NSString *result = [NSString stringWithFormat:@"Refresh Success!\n\nAccess Token - %@\n\nAccess sToken ExpireDate- %@", _thirdPartyLoginConn.accessToken, _thirdPartyLoginConn.accessTokenExpireDate ];
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthDelegateSuccess:)]){
+        [self.delegate oAuthDelegateSuccess:kAuthLoginName_NAVER];
+    }
     NSLog(@"\nOAuth Login === NAVER \n%@",result);
 }
 
@@ -146,7 +168,7 @@
 
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailAuthorizationWithRecieveType:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType
 {
-    NSLog(@"NaverApp login fail handler");
+     NSLog(@"Getting auth code from NaverApp faile!");
 }
 
 

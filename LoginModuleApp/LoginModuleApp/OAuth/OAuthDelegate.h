@@ -5,6 +5,7 @@
 
 @protocol OAuthDelegate<NSObject>
 @optional
+- (void)oAuthDelegateLoginResult:(BOOL)state OAuthName:(int)oAuthName;
 - (void)oAuthDelegateSuccess:(int)oAuthName;
 - (void)oAuthDelegateErorr:(NSError *)error OAuthName:(int)oAuthName;
 - (void)oAuthDelegateOAuthManagerUserData:(NSString *)userData;

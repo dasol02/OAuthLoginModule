@@ -9,20 +9,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [OAuthManager sharedInstnace].delegate = self;
-    
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(receiveOAuthLoginSuccessNotification:)
-     name:@"OAuthLoginSuccess"
-     object:nil];
 }
 
-- (void) receiveOAuthLoginSuccessNotification:(NSNotification *) notification {
-    
-    if([notification.name isEqualToString:@"OAuthLoginSuccess"]){
-        [UIView animateWithDuration:1 animations:^{
-                 [self.navigationController popViewControllerAnimated:YES];
-        }];
+- (void)responseLoginResult:(BOOL)state{
+    if(state){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        NSLog(@"ResponseLoginResult FAIL");
     }
 }
 
@@ -45,6 +38,7 @@
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {
+    
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {

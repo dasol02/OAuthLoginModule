@@ -9,6 +9,7 @@
 
 + (OAuthNaver *)sharedInstnace;
 
+- (BOOL)getLoginState; // 연동 정보 확인
 - (void)oAuthNaverUserData; // 사용자 데이터 호출
 - (void)oAuthNaverLogin; // 로그인
 - (void)oAuthNaverLogout; // 로그아웃

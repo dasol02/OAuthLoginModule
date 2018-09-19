@@ -2,6 +2,7 @@
 #define OAuthAPI_h
 
 #pragma mark- LOGIN OAUTH NAME
+#define kAuthLoginName_NULL 99
 #define kAuthLoginName_NAVER 0
 #define kAuthLoginName_KAKAO 1
 #define kAuthLoginName_FACEBOOK 2

@@ -11,7 +11,9 @@
     [super viewDidLoad];
     [OAuthManager sharedInstnace].delegate = self;
     [[OAuthManager sharedInstnace] oAuthManagerUserData];
-    // Do any additional setup after loading the view.
+    
+    NSLog(@"\nLoginViewController Login Oauth Type == %@",[NSString stringWithFormat:@"%d",[[OAuthManager sharedInstnace] oAuthgetLoginName]]);
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,18 +26,14 @@
             [self.textFieldUserData setText:userData];
     });
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)actionLogout:(id)sender {
     [[OAuthManager sharedInstnace] oAuthManagerLogout];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)actionOAuthDelete:(id)sender {
+    [[OAuthManager sharedInstnace] oAuthManagerDelete];
     [self.navigationController popViewControllerAnimated:YES];
 }
 @end

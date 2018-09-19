@@ -203,8 +203,20 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XwL-6c-gZJ">
+                                <rect key="frame" x="187.5" y="617" width="171.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="0wK-I6-EfB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="연동해제"/>
+                                <connections>
+                                    <action selector="actionLogout:" destination="QAq-oo-5zz" eventType="touchUpInside" id="ljj-88-eKV"/>
+                                    <action selector="actionOAuthDelete:" destination="QAq-oo-5zz" eventType="touchUpInside" id="ddN-v4-39u"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0U-95-5w4">
-                                <rect key="frame" x="16" y="617" width="343" height="50"/>
+                                <rect key="frame" x="16" y="617" width="171.5" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="FTO-IF-33B"/>
                                 </constraints>
@@ -219,9 +231,13 @@
                         <constraints>
                             <constraint firstItem="UwO-ic-KkQ" firstAttribute="top" secondItem="J0U-95-5w4" secondAttribute="bottom" id="21t-Rw-fNF"/>
                             <constraint firstItem="CPu-R9-o37" firstAttribute="leading" secondItem="OVP-ic-egQ" secondAttribute="leadingMargin" id="7Sv-CW-FmL"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="J0U-95-5w4" secondAttribute="trailing" id="AvD-hb-bBu"/>
+                            <constraint firstAttribute="centerXWithinMargins" secondItem="J0U-95-5w4" secondAttribute="trailing" id="AvD-hb-bBu"/>
                             <constraint firstItem="J0U-95-5w4" firstAttribute="top" secondItem="CPu-R9-o37" secondAttribute="bottom" id="Deg-rf-GZs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CPu-R9-o37" secondAttribute="trailing" id="MC7-VO-H6I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XwL-6c-gZJ" secondAttribute="trailing" id="P5j-9j-2Ep"/>
+                            <constraint firstItem="XwL-6c-gZJ" firstAttribute="leading" secondItem="OVP-ic-egQ" secondAttribute="centerXWithinMargins" id="VT8-bv-7fV"/>
+                            <constraint firstItem="XwL-6c-gZJ" firstAttribute="top" secondItem="J0U-95-5w4" secondAttribute="top" id="VTb-Lt-yfw"/>
+                            <constraint firstItem="UwO-ic-KkQ" firstAttribute="top" secondItem="XwL-6c-gZJ" secondAttribute="bottom" id="WKa-Sd-Ksl"/>
                             <constraint firstItem="J0U-95-5w4" firstAttribute="leading" secondItem="OVP-ic-egQ" secondAttribute="leadingMargin" id="ghe-2L-Cld"/>
                             <constraint firstItem="CPu-R9-o37" firstAttribute="top" secondItem="nmC-mf-Pdh" secondAttribute="bottom" id="zdg-KP-stJ"/>
                         </constraints>
