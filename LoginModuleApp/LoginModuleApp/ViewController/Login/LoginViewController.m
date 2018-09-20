@@ -33,7 +33,7 @@
 
 
 - (IBAction)actionNaverLogin:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLogin:kAuthLoginName_NAVER];
+    [[OAuthManager sharedInstnace] oAuthManagerLogin:kOAuth_NAVER];
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {

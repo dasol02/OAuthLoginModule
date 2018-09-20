@@ -29,17 +29,17 @@
     NSLog(@"\nOAUTH MANAGER oAuthManagerUserData");
     
     switch (oAuthLoginName) {
-        case kAuthLoginName_NAVER:
+        case kOAuth_NAVER:
              [self.oAuthNaver oAuthNaverUserData];
             break;
             
-        case kAuthLoginName_KAKAO:
+        case kOAuth_KAKAO:
             break;
             
-        case kAuthLoginName_FACEBOOK:
+        case kOAuth_FACEBOOK:
             break;
             
-        case kAuthLoginName_GOOGLE:
+        case kOAuth_GOOGLE:
             break;
             
         default:
@@ -54,17 +54,17 @@
     
     [[IndicatorView sharedInstnace] show];
     switch (loginOAuthName) {
-        case kAuthLoginName_NAVER:
+        case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverLogin];
             break;
             
-        case kAuthLoginName_KAKAO:
+        case kOAuth_KAKAO:
             break;
             
-        case kAuthLoginName_FACEBOOK:
+        case kOAuth_FACEBOOK:
             break;
             
-        case kAuthLoginName_GOOGLE:
+        case kOAuth_GOOGLE:
             break;
             
         default:
@@ -79,17 +79,17 @@
     NSLog(@"\nOAUTH MANAGER oAuthManagerLogout");
     
     switch (oAuthLoginName) {
-        case kAuthLoginName_NAVER:
+        case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverLogout];
             break;
             
-        case kAuthLoginName_KAKAO:
+        case kOAuth_KAKAO:
             break;
             
-        case kAuthLoginName_FACEBOOK:
+        case kOAuth_FACEBOOK:
             break;
             
-        case kAuthLoginName_GOOGLE:
+        case kOAuth_GOOGLE:
             break;
             
         default:
@@ -103,17 +103,17 @@
     NSLog(@"\nOAUTH MANAGER oAuthManagerDelete");
     
     switch (oAuthLoginName) {
-        case kAuthLoginName_NAVER:
+        case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverDelete];
             break;
             
-        case kAuthLoginName_KAKAO:
+        case kOAuth_KAKAO:
             break;
             
-        case kAuthLoginName_FACEBOOK:
+        case kOAuth_FACEBOOK:
             break;
             
-        case kAuthLoginName_GOOGLE:
+        case kOAuth_GOOGLE:
             break;
             
         default:
@@ -127,17 +127,17 @@
     NSLog(@"\nOAUTH MANAGER oAuthManagerRefreshToken");
     
     switch (oAuthLoginName) {
-        case kAuthLoginName_NAVER:
+        case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverRefreshToken];
             break;
             
-        case kAuthLoginName_KAKAO:
+        case kOAuth_KAKAO:
             break;
             
-        case kAuthLoginName_FACEBOOK:
+        case kOAuth_FACEBOOK:
             break;
             
-        case kAuthLoginName_GOOGLE:
+        case kOAuth_GOOGLE:
             break;
             
         default:
@@ -157,7 +157,7 @@
     NSLog(@"\nOAUTH MANAGER oAuthManagerLoginState");
     
     if([self.oAuthNaver getLoginState]){
-        oAuthLoginName = kAuthLoginName_NAVER;
+        oAuthLoginName = kOAuth_NAVER;
         return YES;
     }else{
         return NO;
@@ -168,7 +168,7 @@
 #pragma mark - OAuth OPEN URL SCHEME
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
     NSLog(@"\nOAUTH MANAGER oAuthCheckOpenURL");
-    if([[options objectForKey:kAuthOpenURLSchemeKEY] isEqualToString:kAuthOpenURLSchemeKEY_NAVER]){
+    if([[options objectForKey:kAuthOpenURLSchemeKEY] isEqualToString:kOAuthOpenURLSchemeKEY_NAVER]){
         return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
     }else{
         return NO;
@@ -177,26 +177,26 @@
 
 #pragma mark- DELEGATE
 
-- (void)oAuthDelegateLoginResult:(BOOL)state OAuthName:(int)oAuthName{
+- (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
     [[IndicatorView sharedInstnace]dismiss];
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
         [self.delegate responseLoginResult:YES];
     }
-    NSLog(@"\n oAuthDelegateSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
+    NSLog(@"\n oAuthResponseSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
 }
 
--(void)oAuthDelegateSuccess:(int)oAuthName{
-    NSLog(@"\n oAuthDelegateSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
+-(void)oAuthResponseSuccess:(int)oAuthName{
+    NSLog(@"\n oAuthResponseSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
 }
 
-- (void)oAuthDelegateErorr:(NSError *)error OAuthName:(int)oAuthName{
-    NSLog(@"\n oAuthDelegateErorr %@",[NSString stringWithFormat:@"%d",oAuthName]);
+- (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
+    NSLog(@"\n oAuthResponseErorr %@",[NSString stringWithFormat:@"%d",oAuthName]);
 }
 
--(void)oAuthDelegateOAuthManagerUserData:(NSString *)userData{
+-(void)oAuthResponseOAuthManagerUserData:(NSString *)userData{
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerUserData:)]){
         [self.delegate getOAuthManagerUserData:userData];
     }
-    NSLog(@"\n oAuthDelegateOAuthManagerUserData");
+    NSLog(@"\n oAuthResponseOAuthManagerUserData");
 }
 @end
