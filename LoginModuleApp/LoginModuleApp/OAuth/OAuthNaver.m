@@ -71,12 +71,12 @@
     // 전급 토근은 있고 &&  유효기간이 지난 경우
     if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
         [self.thirdPartyLoginConn requestAccessTokenWithRefreshToken];
-#if OAuth_LOG_NAVER
-        NSLog(@"\nOAUTH NAVER oAuthNaverRefreshToken SUCCES");
+#ifdef OAuth_LOG_NAVER
+        NSLog(@"\nOAUTH NAVER Response RefreshToken SUCCES");
 #endif
     }else{
-#if OAuth_LOG_NAVER
-        NSLog(@"\nOAUTH NAVER oAuthNaverRefreshToken FAIL");
+#ifdef OAuth_LOG_NAVER
+        NSLog(@"\nOAUTH NAVER Response RefreshToken FAIL");
 #endif
     }
 }
@@ -116,8 +116,8 @@
           if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseOAuthManagerUserData:)]){
               [self.delegate oAuthResponseOAuthManagerUserData:responseStr];
           }
-#if OAuth_LOG_NAVER
-          NSLog(@"Data received: %@", responseStr);
+#ifdef OAuth_LOG_NAVER
+          NSLog(@"\nOAuth NAVER Response received: %@", responseStr);
 #endif
       }] resume];
 }
@@ -128,8 +128,8 @@
 // 로그인 성공
 - (void)oauth20ConnectionDidFinishRequestACTokenWithAuthCode {
     NSString *result = [NSString stringWithFormat:@"OAuth Success!\n\nAccess Token - %@\n\nAccess Token Expire Date- %@\n\nRefresh Token - %@", self.thirdPartyLoginConn.accessToken, self.thirdPartyLoginConn.accessTokenExpireDate, self.thirdPartyLoginConn.refreshToken];
-#if OAuth_LOG_NAVER
-    NSLog(@"\nOAuth Login === NAVER \n%@",result);
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"\nOAuth NAVER Response Login Success  ===  \n%@",result);
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLoginResult:OAuthName:)]){
         [self.delegate oAuthResponseLoginResult:YES OAuthName:oAuthName_Naver];
@@ -139,8 +139,8 @@
 
 // 로그인 실패
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailWithError:(NSError *)error{
-#if OAuth_LOG_NAVER
-    NSLog(@"\nOAuth Login === NAVER \n%@",error);
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"\nOAuth NAVER Response error \n%@",error);
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLoginResult:OAuthName:)]){
         [self.delegate oAuthResponseLoginResult:NO OAuthName:oAuthName_Naver];
@@ -149,8 +149,8 @@
 
 // 인증해제
 - (void)oauth20ConnectionDidFinishDeleteToken{
-#if OAuth_LOG_NAVER
-    NSLog(@"\nOAuth Login === NAVER \n%@",@"네이버 토큰 인증해제 완료");
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"\nOAuth NAVER Response == \n%@",@"네이버 토큰 인증해제 완료");
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseSuccess:)]){
         [self.delegate oAuthResponseSuccess:oAuthName_Naver];
@@ -163,29 +163,29 @@
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseSuccess:)]){
         [self.delegate oAuthResponseSuccess:oAuthName_Naver];
     }
-#if OAuth_LOG_NAVER
-    NSLog(@"\nOAuth Login === NAVER \n%@",result);
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"\nOAuth NAVER Response RefreshToken Success == \n%@",result);
 #endif
 }
 
 // 인앱 로그인 // 실행여부 미확인
 - (void)oauth20ConnectionDidOpenInAppBrowserForOAuth:(NSURLRequest *)request{
-#if OAuth_LOG_NAVER
-    NSLog(@"\nOAuth InAppBrowserForOAuth === NAVER \n%@",result);
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"\nOAuth NAVER Response InAppBrowser == \n%@",request);
 #endif
     //    NLoginThirdPartyOAuth20InAppBrowserViewController *inappAuthBrowser = [[NLoginThirdPartyOAuth20InAppBrowserViewController alloc]initWithRequest:request];
     //    [self.navigationController pushViewController:inappAuthBrowser animated:YES];
 }
 
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFinishAuthorizationWithResult:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{
-#if OAuth_LOG_NAVER
-    NSLog(@"Getting auth code from NaverApp success!");
+#ifdef OAuth_LOG_NAVER
+    NSLog(@"OAuth NAVER Response Getting auth code from NaverApp success!");
 #endif
 }
 
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailAuthorizationWithRecieveType:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{
-#if OAuth_LOG_NAVER
-     NSLog(@"Getting auth code from NaverApp faile!");
+#ifdef OAuth_LOG_NAVER
+     NSLog(@"OAuth NAVER Response Getting auth code from NaverApp faile!");
 #endif
 }
 

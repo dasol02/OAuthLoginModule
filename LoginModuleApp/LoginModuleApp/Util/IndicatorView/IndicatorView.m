@@ -34,7 +34,7 @@
             [SVProgressHUD showLoadingImage];
         }
         self->countIndicatorView += 1;
-#if INDICATION_COUNT_LOG_SHOW
+#ifdef INDICATION_COUNT_LOG_SHOW
         NSLog(@"\n IndicatorView dismiss = %d",self->countIndicatorView);
 #endif
     };
@@ -55,7 +55,7 @@
         }
         
         self->countIndicatorView -= 1;
-#if INDICATION_COUNT_LOG_SHOW
+#ifdef INDICATION_COUNT_LOG_SHOW
         NSLog(@"\n IndicatorView dismiss = %d",self->countIndicatorView);
 #endif
     };
