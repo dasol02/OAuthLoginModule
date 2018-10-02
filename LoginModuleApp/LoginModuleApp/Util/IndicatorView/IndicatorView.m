@@ -35,6 +35,10 @@
 
 - (void)dismiss{
     
+    if(countIndicatorView <= 0){
+        return;
+    }
+    
     if(countIndicatorView == 1){
         [SVProgressHUD dismiss];
     }

@@ -1,6 +1,15 @@
 #ifndef OAuthAPI_h
 #define OAuthAPI_h
 
+#pragma mark - LOG
+#define kOAuth_LOG_MANAGER_DEVELOPER YES // 개발확인 로그
+#define kOAuth_LOG_MANAGER NO  // 로그인 모듈 로그 노출
+#define kOAuth_LOG_NAVER YES   // 네이버 로그인 로그 노출
+#define kOAuth_LOG_KAKAO YES
+#define kOAuth_LOG_FACEBOOK YES
+#define kOAuth_LOG_GOOGLE YES
+
+
 #pragma mark- LOGIN OAUTH NAME
 #define kOAuth_NULL 99
 #define kOAuth_NAVER 0
@@ -10,6 +19,7 @@
 
 
 #pragma mark- OPEN URL
+#define kOAuthOpenURLSchemeKEY @"UIApplicationOpenURLOptionsSourceApplicationKey"
 #define kOAuthOpenURLSchemeKEY_NAVER @"com.nhncorp.NaverSearch"
 
 

@@ -26,8 +26,9 @@
 
 // 사용자 데이터 호출
 - (void)oAuthManagerUserData{
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerUserData");
-    
+#endif
     switch (oAuthLoginName) {
         case kOAuth_NAVER:
              [self.oAuthNaver oAuthNaverUserData];
@@ -50,8 +51,9 @@
 
 // 로그인
 - (void)oAuthManagerLogin:(int)loginOAuthName {
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerLogin");
-    
+#endif
     [[IndicatorView sharedInstnace] show];
     switch (loginOAuthName) {
         case kOAuth_NAVER:
@@ -76,8 +78,9 @@
 
 // 로그아웃
 - (void)oAuthManagerLogout{
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerLogout");
-    
+#endif
     switch (oAuthLoginName) {
         case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverLogout];
@@ -100,8 +103,9 @@
 
 // 인증 해제
 - (void)oAuthManagerDelete{
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerDelete");
-    
+#endif
     switch (oAuthLoginName) {
         case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverDelete];
@@ -124,8 +128,9 @@
 
 // 토큰 갱신
 - (void)oAuthManagerRefreshToken{
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerRefreshToken");
-    
+#endif
     switch (oAuthLoginName) {
         case kOAuth_NAVER:
             [self.oAuthNaver oAuthNaverRefreshToken];
@@ -154,8 +159,9 @@
 
 // 로그인 여부 확인
 - (BOOL)oAuthManagerLoginState{
+#if kOAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"\nOAUTH MANAGER oAuthManagerLoginState");
-    
+#endif
     if([self.oAuthNaver getLoginState]){
         oAuthLoginName = kOAuth_NAVER;
         return YES;
@@ -167,8 +173,10 @@
 
 #pragma mark - OAuth OPEN URL SCHEME
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
+#if kOAuth_LOG_MANAGER
     NSLog(@"\nOAUTH MANAGER oAuthCheckOpenURL");
-    if([[options objectForKey:kAuthOpenURLSchemeKEY] isEqualToString:kOAuthOpenURLSchemeKEY_NAVER]){
+#endif
+    if([[options objectForKey:kOAuthOpenURLSchemeKEY] isEqualToString:kOAuthOpenURLSchemeKEY_NAVER]){
         return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
     }else{
         return NO;
@@ -178,25 +186,37 @@
 #pragma mark- DELEGATE
 
 - (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
+#if kOAuth_LOG_MANAGER
+     NSLog(@"\n oAuthResponseSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
+#endif
+    
     [[IndicatorView sharedInstnace]dismiss];
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
         [self.delegate responseLoginResult:YES];
     }
-    NSLog(@"\n oAuthResponseSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
 }
 
 -(void)oAuthResponseSuccess:(int)oAuthName{
+#if kOAuth_LOG_MANAGER
     NSLog(@"\n oAuthResponseSuccess %@",[NSString stringWithFormat:@"%d",oAuthName]);
+#endif
+    [[IndicatorView sharedInstnace]dismiss];
 }
 
 - (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
+#if kOAuth_LOG_MANAGER
     NSLog(@"\n oAuthResponseErorr %@",[NSString stringWithFormat:@"%d",oAuthName]);
+#endif
+    [[IndicatorView sharedInstnace]dismiss];
 }
 
 -(void)oAuthResponseOAuthManagerUserData:(NSString *)userData{
+#if kOAuth_LOG_MANAGER
+    NSLog(@"\n oAuthResponseOAuthManagerUserData");
+#endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerUserData:)]){
         [self.delegate getOAuthManagerUserData:userData];
     }
-    NSLog(@"\n oAuthResponseOAuthManagerUserData");
+    [[IndicatorView sharedInstnace]dismiss];
 }
 @end
