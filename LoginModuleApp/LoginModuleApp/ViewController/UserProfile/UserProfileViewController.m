@@ -12,7 +12,7 @@
     [OAuthManager sharedInstnace].delegate = self;
     [[OAuthManager sharedInstnace] oAuthManagerUserData];
     
-    NSLog(@"\nLoginViewController Login Oauth Type == %@",[NSString stringWithFormat:@"%d",[[OAuthManager sharedInstnace] oAuthgetLoginName]]);
+    NSLog(@"\nUserProfileViewController Login Oauth Type == %@",[[OAuthManager sharedInstnace] getOAuthgetLoginName]);
 
 }
 

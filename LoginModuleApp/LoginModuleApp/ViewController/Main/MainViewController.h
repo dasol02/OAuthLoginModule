@@ -2,6 +2,7 @@
 #import "OAuthManager.h"
 #import "LoginViewController.h"
 #import "UserProfileViewController.h"
+#import "IndicatorView.h"
 
 @interface MainViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *buttonUserLogin;

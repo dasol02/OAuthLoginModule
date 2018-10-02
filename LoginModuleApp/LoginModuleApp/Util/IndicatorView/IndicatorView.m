@@ -3,7 +3,7 @@
 @implementation IndicatorView
 
 + (IndicatorView *)sharedInstnace{
-    static IndicatorView * indicatorView= nil;
+    static IndicatorView * indicatorView = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -16,36 +16,51 @@
 -(instancetype)init{
     self = [super init];
     
-    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
-    countIndicatorView = 0;
+    dispatch_block_t block = ^{
+        [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+        self->countIndicatorView = 0;
+    };
     
+    [NSThread isMainThread] ? block() : dispatch_async(dispatch_get_main_queue(), block);
+   
     return self;
 }
 
 
 - (void)show{
     
-    if(countIndicatorView == 0){
-        [SVProgressHUD showLoadingImage];
-    }
-    countIndicatorView += 1;
+    dispatch_block_t block = ^{
+        if(self->countIndicatorView == 0){
+            [SVProgressHUD showLoadingImage];
+        }
+        self->countIndicatorView += 1;
+#if INDICATION_COUNT_LOG_SHOW
+        NSLog(@"\n IndicatorView dismiss = %d",self->countIndicatorView);
+#endif
+    };
     
-    NSLog(@"\n IndicatorView show = %d",countIndicatorView);
+    [NSThread isMainThread] ? block() : dispatch_async(dispatch_get_main_queue(), block);
+    
 }
 
 - (void)dismiss{
     
-    if(countIndicatorView <= 0){
-        return;
-    }
+    dispatch_block_t block = ^{
+        if(self->countIndicatorView <= 0){
+            return;
+        }
+        
+        if(self->countIndicatorView == 1){
+            [SVProgressHUD dismiss];
+        }
+        
+        self->countIndicatorView -= 1;
+#if INDICATION_COUNT_LOG_SHOW
+        NSLog(@"\n IndicatorView dismiss = %d",self->countIndicatorView);
+#endif
+    };
     
-    if(countIndicatorView == 1){
-        [SVProgressHUD dismiss];
-    }
-    
-    countIndicatorView -= 1;
-    NSLog(@"\n IndicatorView dismiss = %d",countIndicatorView);
-    
+   [NSThread isMainThread] ? block() : dispatch_async(dispatch_get_main_queue(), block);
 }
 
 

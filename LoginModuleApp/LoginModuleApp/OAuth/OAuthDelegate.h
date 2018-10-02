@@ -3,6 +3,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(int,oAuthName){
+    oAuthName_Default,
+    oAuthName_Naver,
+    oAuthName_Kakao,
+    oAuthName_Facebook,
+    oAuthName_Google
+};
+
 @protocol OAuthDelegate<NSObject>
 @optional
 - (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName; // 로그인 시도 결과
