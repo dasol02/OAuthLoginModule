@@ -14,7 +14,9 @@
 		16941200215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411FD215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m */; };
 		16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */; };
 		169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 169412032152062F00CA7EE0 /* UIImage+GIF.m */; };
-		16CF04392149FD86007631B2 /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
+		16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
+		16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; };
+		16CC7AB12153363200C1305A /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		16CF043B214A1861007631B2 /* NaverThirdPartyLogin.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0440214A2DB5007631B2 /* OAuthManager.m */; };
 		16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16CF0443214A3EC2007631B2 /* UserProfileViewController.m */; };
@@ -46,6 +48,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				16CF043B214A1861007631B2 /* NaverThirdPartyLogin.framework in Embed Frameworks */,
+				16CC7AB12153363200C1305A /* KakaoOpenSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +72,7 @@
 		169412032152062F00CA7EE0 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		169412052152156400CA7EE0 /* OAuthAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthAPI.h; sourceTree = "<group>"; };
 		169412062152205C00CA7EE0 /* OAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthDelegate.h; sourceTree = "<group>"; };
+		16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
 		16CF0440214A2DB5007631B2 /* OAuthManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthManager.m; sourceTree = "<group>"; };
@@ -95,7 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16CF04392149FD86007631B2 /* NaverThirdPartyLogin.framework in Frameworks */,
+				16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */,
+				16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +165,13 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		16CC7AAE2153362A00C1305A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		16CF043D214A2D8F007631B2 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +191,7 @@
 				16FC51D72148A84200219255 /* LoginModuleApp */,
 				16FC51F32148A84600219255 /* LoginModuleAppTests */,
 				16FC51D62148A84200219255 /* Products */,
+				16CC7AAE2153362A00C1305A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -239,6 +252,7 @@
 		16FC52012148A86300219255 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */,
 				16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */,
 			);
 			path = Frameworks;
@@ -545,6 +559,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LoginModuleApp/Frameworks",
+					"$(PROJECT_DIR)/LoginModuleApp/Libray",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LoginModuleApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -552,6 +567,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -569,6 +585,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LoginModuleApp/Frameworks",
+					"$(PROJECT_DIR)/LoginModuleApp/Libray",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LoginModuleApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -576,6 +593,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
