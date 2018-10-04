@@ -3,9 +3,19 @@
 #import "OAuthAPI.h"
 #import "OAuthDelegate.h"
 
+typedef NS_ENUM(int,kakaoError){
+    kakaoError_Login,
+    kakaoError_Logout,
+    kakaoError_Delete,
+    kakaoError_UserData,
+    kakaoError_GetToken
+};
+
 @interface OAuthKakao : NSObject
     
 @property (weak, nonatomic) id<OAuthDelegate> delegate;
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
 
 + (OAuthKakao *)sharedInstnace;
     

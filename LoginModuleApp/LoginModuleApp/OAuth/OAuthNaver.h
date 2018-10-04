@@ -6,7 +6,9 @@
 @interface OAuthNaver : NSObject<NaverThirdPartyLoginConnectionDelegate>
 @property (strong, nonatomic) NaverThirdPartyLoginConnection *thirdPartyLoginConn;
 @property (weak, nonatomic) id<OAuthDelegate> delegate;
-
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+    
 + (OAuthNaver *)sharedInstnace;
 
 - (BOOL)getLoginState; // 연동 정보 확인

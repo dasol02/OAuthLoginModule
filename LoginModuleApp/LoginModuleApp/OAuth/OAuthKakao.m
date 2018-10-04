@@ -13,6 +13,17 @@
     return oAuthKakao;
 }
     
+    
+-(instancetype)init{
+    self = [super init];
+
+    self.accessToken = [[[KOSession sharedSession] token] accessToken];
+    self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
+
+    return self;
+}
+
+    
 - (BOOL)getLoginState{
     if([[KOSession sharedSession] state] == KOSessionStateOpen){
         return YES;
@@ -26,12 +37,16 @@
     
     [[KOSession sharedSession] openWithCompletionHandler:^(NSError *error) {
         if ([[KOSession sharedSession] isOpen]) {
-            // login success
-            NSLog(@"kakao login succeeded.");
+            self.accessToken = [[[KOSession sharedSession] token] accessToken];
+            self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
+            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLoginResult:OAuthName:)]){
+                [self.delegate oAuthResponseLoginResult:YES OAuthName:oAuthName_Kakao];
+            }
+//            NSLog(@"kakao login succeeded.");
         } else {
-            // failed
-            NSLog(@"kakao login failed.");
+            [self kakaoResponseError:error Type:kakaoError_Login];
         }
+
     }];
 }
     
@@ -39,9 +54,14 @@
     
     [[KOSession sharedSession] logoutAndCloseWithCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
-           NSLog(@"oAuthKakaoLogout Success");
+            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
+                [self.delegate oAuthResponseLogoutResult:YES OAuthName:oAuthName_Kakao];
+            }
+//           NSLog(@"oAuthKakaoLogout Success");
         } else {
-           NSLog(@"oAuthKakaoLogout Fail");
+            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
+                [self.delegate oAuthResponseLogoutResult:NO OAuthName:oAuthName_Kakao];
+            }
         }
     }];
 }
@@ -50,9 +70,12 @@
     
     [KOSessionTask unlinkTaskWithCompletionHandler:^(BOOL success, NSError *error) {
         if (success) {
-            NSLog(@"oAuthKakaoDelete Success");
+            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
+                [self.delegate oAuthResponseLogoutResult:YES OAuthName:oAuthName_Kakao];
+            }
+//            NSLog(@"oAuthKakaoDelete Success");
         } else {
-            NSLog(@"oAuthKakaoDelete Fail");
+            [self kakaoResponseError:error Type:kakaoError_Delete];
         }
     }];
 }
@@ -66,8 +89,7 @@
                                                 @"kakao_account.gender"]
                                    completion:^(NSError *error, KOUserMe *me) {
                                        if (error) {
-                                           NSLog(@"oAuthKakaoUserData Fail");
-                                           
+                                           [self kakaoResponseError:error Type:kakaoError_UserData];
                                        } else {
                                            NSString *userID = [NSString stringWithFormat:@"사용자 아이디: %@",me.ID];
                                            NSString *userEmail = [NSString stringWithFormat:@"사용자 이메일: %@",me.account.email];
@@ -91,18 +113,13 @@
     
     [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
         if (error) {
-            NSLog(@"oAuthKakaoGetToken Fail");
-            switch (error.code) {
-                case KOErrorDeactivatedSession:
-                // 세션이 만료된(access_token, refresh_token이 모두 만료된 경우) 상태
-                break;
-                default:
-                // 예기치 못한 에러. 서버 에러
-                break;
-            }
+            [self kakaoResponseError:error Type:kakaoError_GetToken];
         } else {
+            self.accessToken = [[[KOSession sharedSession] token] accessToken];
+            self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
+//            self.accessToken = [accessTokenInfo.ID stringValue];
             // 성공 (토큰이 유효함)
-            NSLog(@"남은 유효시간: %@ (단위: ms)", accessTokenInfo.expiresInMillis);
+//            NSLog(@"남은 유효시간: %@ (단위: ms)", accessTokenInfo.expiresInMillis);
         }
     }];
 }
@@ -110,6 +127,8 @@
     
 - (void)oAuthKakaoRefreshToken{
     [KOSession sharedSession].automaticPeriodicRefresh = YES;
+    self.accessToken = [[[KOSession sharedSession] token] accessToken];
+    self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
 }
     
     
@@ -119,6 +138,38 @@
 }
 - (BOOL)handleOpenURL:(NSURL *)url{
     return [KOSession handleOpenURL:url];
+}
+    
+#pragma mark- DELEGATE
+- (void)kakaoResponseError:(NSError*)error Type:(int)type{
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseErorr:OAuthName:)]){
+        [self.delegate oAuthResponseErorr:error OAuthName:oAuthName_Kakao];
+    }
+    
+#if defined(OAuth_LOG_KAKAO)
+    NSString *strType;
+    switch (type) {
+        case kakaoError_Login:
+        strType = @"LOGIN";
+        break;
+        case kakaoError_Logout:
+        strType = @"Logout";
+        break;
+        case kakaoError_Delete:
+        strType = @"Delete";
+        break;
+        case kakaoError_UserData:
+        strType = @"UserData";
+        break;
+        case kakaoError_GetToken:
+        strType = @"GetToken";
+        break;
+        default:
+        strType = @"Default";
+        break;
+    }
+    NSLog(@"OAuth Kakao Response Error %@",strType);
+#endif
 }
     
 @end

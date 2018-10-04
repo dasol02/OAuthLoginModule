@@ -39,7 +39,7 @@
 #pragma mark - REQUEST
 - (void)oAuthManagerUserData{
 #ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
-    NSLog(@"\nOAUTH MANAGER request UserData");
+    NSLog(@"OAUTH MANAGER request UserData");
 #endif
     
     [[IndicatorView sharedInstnace] show];
@@ -67,7 +67,7 @@
 // 로그인
 - (void)oAuthManagerLogin:(int)loginoAuthName {
 #ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
-    NSLog(@"\nOAUTH MANAGER request Login");
+    NSLog(@"OAUTH MANAGER request Login");
 #endif
     [[IndicatorView sharedInstnace] show];
     switch (loginoAuthName) {
@@ -96,8 +96,9 @@
 // 로그아웃
 - (void)oAuthManagerLogout{
 #ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
-    NSLog(@"\nOAUTH MANAGER request Logout");
+    NSLog(@"OAUTH MANAGER request Logout");
 #endif
+    [[IndicatorView sharedInstnace]show];
     switch (oAuthLoginName) {
         case oAuthName_Naver:
             [self.oAuthNaver oAuthNaverLogout];
@@ -114,6 +115,7 @@
             break;
             
         default:
+            [[IndicatorView sharedInstnace]dismiss];
             break;
     }
 }
@@ -122,8 +124,9 @@
 // 인증 해제
 - (void)oAuthManagerDelete{
 #ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
-    NSLog(@"\nOAUTH MANAGER request Delete");
+    NSLog(@"OAUTH MANAGER request Delete");
 #endif
+    [[IndicatorView sharedInstnace]show];
     switch (oAuthLoginName) {
         case oAuthName_Naver:
             [self.oAuthNaver oAuthNaverDelete];
@@ -140,6 +143,7 @@
             break;
             
         default:
+            [[IndicatorView sharedInstnace]dismiss];
             break;
     }
 }
@@ -148,7 +152,7 @@
 // 토큰 갱신
 - (void)oAuthManagerRefreshToken{
 #ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
-    NSLog(@"\nOAUTH MANAGER request RefreshToken");
+    NSLog(@"OAUTH MANAGER request RefreshToken");
 #endif
     switch (oAuthLoginName) {
         case oAuthName_Naver:
@@ -156,7 +160,7 @@
             break;
             
         case oAuthName_Kakao:
-        [self.oAuthKakao oAuthKakaoRefreshToken];
+            [self.oAuthKakao oAuthKakaoRefreshToken];
             break;
             
         case oAuthName_Facebook:
@@ -195,7 +199,7 @@
             break;
     }
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER LoginName == %@",strOAuthLoginName);
+    NSLog(@"OAUTH MANAGER LoginName == %@",strOAuthLoginName);
 #endif
     return strOAuthLoginName;
 }
@@ -204,15 +208,30 @@
 - (BOOL)oAuthManagerLoginState{
     if([self.oAuthNaver getLoginState]){
         oAuthLoginName = oAuthName_Naver;
+        self.oAuthAccessToken = self.oAuthNaver.accessToken;
+        self.oAuthRefreshToken = self.oAuthNaver.refreshToken;
         [self getOAuthgetLoginName];
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
+#endif
         return YES;
     }else if([self.oAuthKakao getLoginState]){
         oAuthLoginName = oAuthName_Kakao;
+        self.oAuthAccessToken = self.oAuthKakao.accessToken;
+        self.oAuthRefreshToken = self.oAuthKakao.refreshToken;
         [self getOAuthgetLoginName];
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
+#endif
         return YES;
     }else{
         oAuthLoginName = oAuthName_Default;
         [self getOAuthgetLoginName];
+        self.oAuthAccessToken = nil;
+        self.oAuthRefreshToken = nil;
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
+#endif
         return NO;
     }
 }
@@ -221,7 +240,7 @@
 #pragma mark - OAuth OPEN URL SCHEME
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER request OpenURL");
+    NSLog(@"OAUTH MANAGER request OpenURL");
 #endif
     if([[options objectForKey:OAuth_Open_URLSchemeKEY] isEqualToString:OAuth_Open_URLSchemeKEY_NAVER]){
         return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
@@ -236,35 +255,73 @@
 
 - (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-     NSLog(@"\nOAUTH MANAGER Response Success %@",[NSString stringWithFormat:@"%d",oAuthName]);
+    NSLog(@"OAUTH MANAGER Response LOGIN %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
         [self.delegate responseLoginResult:YES];
     }
     [[IndicatorView sharedInstnace]dismiss];
 }
-
--(void)oAuthResponseSuccess:(int)oAuthName{
+    
+- (void)oAuthResponseLogoutResult:(BOOL)state OAuthName:(int)oAuthName{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response Success %@",[NSString stringWithFormat:@"%d",oAuthName]);
+     NSLog(@"OAUTH MANAGER Response Logout %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
 #endif
-    [[IndicatorView sharedInstnace]dismiss];
-}
-
-- (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response Erorr %@",[NSString stringWithFormat:@"%d",oAuthName]);
-#endif
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLogoutResult:)]){
+        [self.delegate responseLogoutResult:state];
+    }
     [[IndicatorView sharedInstnace]dismiss];
 }
 
 -(void)oAuthResponseOAuthManagerUserData:(NSString *)userData{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response OAuthManagerUserData");
+    NSLog(@"OAUTH MANAGER Response OAuthManagerUserData");
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerUserData:)]){
         [self.delegate getOAuthManagerUserData:userData];
     }
     [[IndicatorView sharedInstnace]dismiss];
+}
+    
+    -(void)oAuthResponseSuccess:(int)oAuthName{
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Response Success %@",[self getOAuthName:oAuthName]);
+#endif
+        [[IndicatorView sharedInstnace]dismiss];
+    }
+    
+- (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+    NSLog(@"OAUTH MANAGER Response Erorr %@",[self getOAuthName:oAuthName]);
+#endif
+    [[IndicatorView sharedInstnace]dismiss];
+}
+    
+    
+    
+- (NSString *)getOAuthName:(int)oAuthName{
+    NSString *strOauthName;
+    switch (oAuthName) {
+        case oAuthName_Naver:
+        strOauthName = @"Naver";
+        break;
+        case oAuthName_Kakao:
+        strOauthName = @"Kakao";
+        break;
+        case oAuthName_Google:
+        strOauthName = @"Google";
+        break;
+        case oAuthName_Facebook:
+        strOauthName = @"Facebook";
+        break;
+        case oAuthName_Default:
+        strOauthName = @"Default";
+        break;
+        default:
+        strOauthName = @"Default";
+        break;
+    }
+    return strOauthName;
 }
 @end

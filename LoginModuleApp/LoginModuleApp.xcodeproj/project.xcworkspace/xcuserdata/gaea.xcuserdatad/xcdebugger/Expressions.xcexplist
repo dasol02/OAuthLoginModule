@@ -56,5 +56,21 @@
       <ContextState
          contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
       </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager oAuthManagerLoginState]:OAuthManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.oAuthNaver.accessToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__29-[OAuthKakao oAuthKakaoLogin]_block_invoke:OAuthKakao.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[KOSession sharedSession] token]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

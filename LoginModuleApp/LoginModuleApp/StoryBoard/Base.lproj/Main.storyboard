@@ -211,7 +211,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="연동해제"/>
                                 <connections>
-                                    <action selector="actionLogout:" destination="QAq-oo-5zz" eventType="touchUpInside" id="ljj-88-eKV"/>
                                     <action selector="actionOAuthDelete:" destination="QAq-oo-5zz" eventType="touchUpInside" id="ddN-v4-39u"/>
                                 </connections>
                             </button>

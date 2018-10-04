@@ -20,6 +20,9 @@
     self.thirdPartyLoginConn.delegate = self;
     [self setOAuthNaverSetting];
     
+    self.accessToken = self.thirdPartyLoginConn.accessToken;
+    self.refreshToken = self.thirdPartyLoginConn.refreshToken;
+    
     return self;
 }
 
@@ -54,19 +57,36 @@
 
 - (void)oAuthNaverLogin{
      [self.thirdPartyLoginConn requestThirdPartyLogin];
-    
 }
 
 - (void)oAuthNaverLogout{
-     [self.thirdPartyLoginConn resetToken];
+    [self.thirdPartyLoginConn resetToken];
+    
+    // 임시 추후 동기로 변경
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(logOutResult) userInfo:nil repeats:NO];
     
 }
 
 - (void)oAuthNaverDelete{
-     [self.thirdPartyLoginConn requestDeleteToken];
+    [self.thirdPartyLoginConn requestDeleteToken];
     
+    // 임시 추후 동기로 변경
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(logOutResult) userInfo:nil repeats:NO];
 }
-
+    
+- (void)logOutResult{
+    
+    BOOL state = NO;
+    
+    if([self getLoginState]){
+        state = YES;
+    }
+    
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
+        [self.delegate oAuthResponseLogoutResult:state OAuthName:oAuthName_Naver];
+    }
+}
+    
 - (void)oAuthNaverRefreshToken{
     // 전급 토근은 있고 &&  유효기간이 지난 경우
     if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
@@ -131,6 +151,10 @@
 #ifdef OAuth_LOG_NAVER
     NSLog(@"\nOAuth NAVER Response Login Success  ===  \n%@",result);
 #endif
+    
+    self.accessToken = self.thirdPartyLoginConn.accessToken;
+    self.refreshToken = self.thirdPartyLoginConn.refreshToken;
+    
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLoginResult:OAuthName:)]){
         [self.delegate oAuthResponseLoginResult:YES OAuthName:oAuthName_Naver];
     }
@@ -160,6 +184,8 @@
 // 토큰 갱신
 - (void)oauth20ConnectionDidFinishRequestACTokenWithRefreshToken{
     NSString *result = [NSString stringWithFormat:@"Refresh Success!\n\nAccess Token - %@\n\nAccess sToken ExpireDate- %@", _thirdPartyLoginConn.accessToken, _thirdPartyLoginConn.accessTokenExpireDate ];
+    self.accessToken = self.thirdPartyLoginConn.accessToken;
+    self.refreshToken = self.thirdPartyLoginConn.refreshToken;
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseSuccess:)]){
         [self.delegate oAuthResponseSuccess:oAuthName_Naver];
     }

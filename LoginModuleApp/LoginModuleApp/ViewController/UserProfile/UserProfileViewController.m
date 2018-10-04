@@ -32,11 +32,14 @@
 
 - (IBAction)actionLogout:(id)sender {
     [[OAuthManager sharedInstnace] oAuthManagerLogout];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)actionOAuthDelete:(id)sender {
     [[OAuthManager sharedInstnace] oAuthManagerDelete];
-    [self.navigationController popViewControllerAnimated:YES];
+}
+    
+    
+- (void)responseLogoutResult:(BOOL)state{
+     [self.navigationController popViewControllerAnimated:state];
 }
 @end
