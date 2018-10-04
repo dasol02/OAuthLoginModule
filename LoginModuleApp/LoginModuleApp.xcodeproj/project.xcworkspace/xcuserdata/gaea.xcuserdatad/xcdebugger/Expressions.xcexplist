@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "-[AppDelegate application:openURL:options:]:AppDelegate.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[MainViewController setUpdateButtonUI]:MainViewController.m">
+         contextName = "-[OAuthKakao getLoginState]:OAuthKakao.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
+               value = "[KOSession sharedSession] state]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,10 +19,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LoginViewController actionKakaoLogin:]:LoginViewController.m">
+         contextName = "-[AppDelegate application:openURL:options:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[MainViewController setUpdateButtonUI]:MainViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[OAuthManager sharedInstnace].oAuthNaver.thirdPartyLoginConn state]">
+               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,6 +36,25 @@
                value = "self.oAuthNaver.thirdPartyLoginConn.accessToken">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthNaver oauth20ConnectionDidFinishRequestACTokenWithAuthCode]:OAuthNaver.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.delegate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController actionKakaoLogin:]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[OAuthManager sharedInstnace].oAuthNaver.thirdPartyLoginConn state]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

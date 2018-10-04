@@ -37,7 +37,7 @@
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {
-    
+    [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Kakao];
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {

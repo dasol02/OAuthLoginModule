@@ -3,6 +3,7 @@
 #import "IndicatorView.h"
 #import "OAuthDelegate.h"
 #import "OAuthNaver.h"
+#import "OAuthKakao.h"
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
@@ -15,6 +16,7 @@
 }
 @property (weak, nonatomic) id<OAuthManagerDelegate> delegate;
 @property (strong, nonatomic) OAuthNaver *oAuthNaver;
+@property (strong, nonatomic) OAuthKakao *oAuthKakao;
 
 + (OAuthManager *)sharedInstnace;
 

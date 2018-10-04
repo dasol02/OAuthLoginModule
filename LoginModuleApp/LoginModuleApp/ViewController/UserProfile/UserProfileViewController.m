@@ -25,9 +25,10 @@
 }
 
 -(void)getOAuthManagerUserData:(NSString *)userData{
-    dispatch_sync(dispatch_get_main_queue(), ^{
-            [self.textFieldUserData setText:userData];
-    });
+//     [self.textFieldUserData setText:userData];
+//    dispatch_sync(dispatch_get_main_queue(), ^{
+//            [self.textFieldUserData setText:userData];
+//    });
 }
 
 - (IBAction)actionLogout:(id)sender {

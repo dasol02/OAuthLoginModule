@@ -16,13 +16,25 @@
 -(instancetype)init{
     self = [super init];
     
-    self.oAuthNaver = [[OAuthNaver sharedInstnace]init];
+    // 네이버
+    self.oAuthNaver = [[OAuthNaver sharedInstnace] init];
     self.oAuthNaver.delegate = self;
-    [self.oAuthNaver oAuthNaverRefreshToken]; //토큰 갱신
     
+    
+    // 카카오
+//    self.oAuthKakao = [[OAuthKakao sharedInstnace] init];
+    
+    
+    [self oAuthManagerRefreshToken];
+    
+
     return self;
 }
 
+// 카카오 토큰 확인
+- (void)getOAuthToken{
+    [self.oAuthKakao oAuthKakaoGetToken];
+}
 
 #pragma mark - REQUEST
 - (void)oAuthManagerUserData{
@@ -37,6 +49,7 @@
             break;
             
         case oAuthName_Kakao:
+            [self.oAuthKakao oAuthKakaoUserData];
             break;
             
         case oAuthName_Facebook:
@@ -63,6 +76,8 @@
             break;
             
         case oAuthName_Kakao:
+            [[IndicatorView sharedInstnace]dismiss];
+            [self.oAuthKakao oAuthKakaoLogin];
             break;
             
         case oAuthName_Facebook:
@@ -89,6 +104,7 @@
             break;
             
         case oAuthName_Kakao:
+            [self.oAuthKakao oAuthKakaoLogout];
             break;
             
         case oAuthName_Facebook:
@@ -114,6 +130,7 @@
             break;
             
         case oAuthName_Kakao:
+            [self.oAuthKakao oAuthKakaoDelete];
             break;
             
         case oAuthName_Facebook:
@@ -139,6 +156,7 @@
             break;
             
         case oAuthName_Kakao:
+        [self.oAuthKakao oAuthKakaoRefreshToken];
             break;
             
         case oAuthName_Facebook:
@@ -188,6 +206,10 @@
         oAuthLoginName = oAuthName_Naver;
         [self getOAuthgetLoginName];
         return YES;
+    }else if([self.oAuthKakao getLoginState]){
+        oAuthLoginName = oAuthName_Kakao;
+        [self getOAuthgetLoginName];
+        return YES;
     }else{
         oAuthLoginName = oAuthName_Default;
         [self getOAuthgetLoginName];
@@ -203,6 +225,8 @@
 #endif
     if([[options objectForKey:OAuth_Open_URLSchemeKEY] isEqualToString:OAuth_Open_URLSchemeKEY_NAVER]){
         return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
+    }else if([self.oAuthKakao isKakaoAccountLoginCallback:url]){
+        return [self.oAuthKakao handleOpenURL:url];
     }else{
         return NO;
     }
@@ -214,7 +238,6 @@
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
      NSLog(@"\nOAUTH MANAGER Response Success %@",[NSString stringWithFormat:@"%d",oAuthName]);
 #endif
-    
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
         [self.delegate responseLoginResult:YES];
     }

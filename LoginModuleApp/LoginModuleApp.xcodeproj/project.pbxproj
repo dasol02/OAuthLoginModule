@@ -14,6 +14,7 @@
 		16941200215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411FD215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m */; };
 		16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */; };
 		169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 169412032152062F00CA7EE0 /* UIImage+GIF.m */; };
+		16B90FDD2165A10F004CC253 /* OAuthKakao.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B90FDC2165A10F004CC253 /* OAuthKakao.m */; };
 		16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
 		16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; };
 		16CC7AB12153363200C1305A /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -72,6 +73,8 @@
 		169412032152062F00CA7EE0 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
 		169412052152156400CA7EE0 /* OAuthAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthAPI.h; sourceTree = "<group>"; };
 		169412062152205C00CA7EE0 /* OAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthDelegate.h; sourceTree = "<group>"; };
+		16B90FDB2165A10F004CC253 /* OAuthKakao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthKakao.h; sourceTree = "<group>"; };
+		16B90FDC2165A10F004CC253 /* OAuthKakao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthKakao.m; sourceTree = "<group>"; };
 		16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 				16CF0440214A2DB5007631B2 /* OAuthManager.m */,
 				169411F12151E12100CA7EE0 /* OAuthNaver.h */,
 				169411F22151E12100CA7EE0 /* OAuthNaver.m */,
+				16B90FDB2165A10F004CC253 /* OAuthKakao.h */,
+				16B90FDC2165A10F004CC253 /* OAuthKakao.m */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				16FC51DD2148A84200219255 /* LoginViewController.m in Sources */,
 				16FC51EB2148A84600219255 /* main.m in Sources */,
 				16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */,
+				16B90FDD2165A10F004CC253 /* OAuthKakao.m in Sources */,
 				169411F32151E12100CA7EE0 /* OAuthNaver.m in Sources */,
 				169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */,
 				169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */,
