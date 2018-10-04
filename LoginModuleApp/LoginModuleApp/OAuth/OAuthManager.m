@@ -22,8 +22,8 @@
     
     
     // 카카오
-//    self.oAuthKakao = [[OAuthKakao sharedInstnace] init];
-    
+    self.oAuthKakao = [[OAuthKakao sharedInstnace] init];
+    self.oAuthKakao.delegate = self;
     
     [self oAuthManagerRefreshToken];
     
@@ -234,7 +234,7 @@
 
 #pragma mark- DELEGATE
 
-- (void)oAuthResponseLoginResult:(BOOL)state oAuthName:(int)oAuthName{
+- (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
      NSLog(@"\nOAUTH MANAGER Response Success %@",[NSString stringWithFormat:@"%d",oAuthName]);
 #endif
@@ -251,7 +251,7 @@
     [[IndicatorView sharedInstnace]dismiss];
 }
 
-- (void)oAuthResponseErorr:(NSError *)error oAuthName:(int)oAuthName{
+- (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
     NSLog(@"\nOAUTH MANAGER Response Erorr %@",[NSString stringWithFormat:@"%d",oAuthName]);
 #endif
