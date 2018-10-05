@@ -38,7 +38,7 @@
 
 #pragma mark - REQUEST
 - (void)oAuthManagerUserData{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
+#ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request UserData");
 #endif
     
@@ -66,7 +66,7 @@
 
 // 로그인
 - (void)oAuthManagerLogin:(int)loginoAuthName {
-#ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
+#ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request Login");
 #endif
     [[IndicatorView sharedInstnace] show];
@@ -95,7 +95,7 @@
 
 // 로그아웃
 - (void)oAuthManagerLogout{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
+#ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request Logout");
 #endif
     [[IndicatorView sharedInstnace]show];
@@ -123,7 +123,7 @@
 
 // 인증 해제
 - (void)oAuthManagerDelete{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
+#ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request Delete");
 #endif
     [[IndicatorView sharedInstnace]show];
@@ -151,7 +151,7 @@
 
 // 토큰 갱신
 - (void)oAuthManagerRefreshToken{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER
+#ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request RefreshToken");
 #endif
     switch (oAuthLoginName) {
@@ -198,7 +198,7 @@
             strOAuthLoginName = @"NULL";
             break;
     }
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
     NSLog(@"OAUTH MANAGER LoginName == %@",strOAuthLoginName);
 #endif
     return strOAuthLoginName;
@@ -211,7 +211,7 @@
         self.oAuthAccessToken = self.oAuthNaver.accessToken;
         self.oAuthRefreshToken = self.oAuthNaver.refreshToken;
         [self getOAuthgetLoginName];
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
         NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
 #endif
         return YES;
@@ -220,7 +220,7 @@
         self.oAuthAccessToken = self.oAuthKakao.accessToken;
         self.oAuthRefreshToken = self.oAuthKakao.refreshToken;
         [self getOAuthgetLoginName];
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
         NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
 #endif
         return YES;
@@ -229,7 +229,7 @@
         [self getOAuthgetLoginName];
         self.oAuthAccessToken = nil;
         self.oAuthRefreshToken = nil;
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
         NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
 #endif
         return NO;
@@ -239,7 +239,7 @@
 
 #pragma mark - OAuth OPEN URL SCHEME
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
     NSLog(@"OAUTH MANAGER request OpenURL");
 #endif
     if([[options objectForKey:OAuth_Open_URLSchemeKEY] isEqualToString:OAuth_Open_URLSchemeKEY_NAVER]){
@@ -254,7 +254,7 @@
 #pragma mark- DELEGATE
 
 - (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
     NSLog(@"OAUTH MANAGER Response LOGIN %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
@@ -264,7 +264,7 @@
 }
     
 - (void)oAuthResponseLogoutResult:(BOOL)state OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
      NSLog(@"OAUTH MANAGER Response Logout %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
 #endif
     
@@ -275,7 +275,7 @@
 }
 
 -(void)oAuthResponseOAuthManagerUserData:(NSString *)userData{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
     NSLog(@"OAUTH MANAGER Response OAuthManagerUserData");
 #endif
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerUserData:)]){
@@ -285,14 +285,14 @@
 }
     
     -(void)oAuthResponseSuccess:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
         NSLog(@"OAUTH MANAGER Response Success %@",[self getOAuthName:oAuthName]);
 #endif
         [[IndicatorView sharedInstnace]dismiss];
     }
     
 - (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER_DEVELOPER)
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
     NSLog(@"OAUTH MANAGER Response Erorr %@",[self getOAuthName:oAuthName]);
 #endif
     [[IndicatorView sharedInstnace]dismiss];
