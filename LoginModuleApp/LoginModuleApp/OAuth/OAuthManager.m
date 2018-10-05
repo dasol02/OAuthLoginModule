@@ -25,16 +25,19 @@
     self.oAuthKakao = [[OAuthKakao sharedInstnace] init];
     self.oAuthKakao.delegate = self;
     
+    self.oAuthFacebook = [[OAuthFacebook sharedInstnace]init];
+    self.oAuthFacebook.delegate = self;
+    
     [self oAuthManagerRefreshToken];
     
 
     return self;
 }
 
-// 카카오 토큰 확인
-- (void)getOAuthToken{
-    [self.oAuthKakao oAuthKakaoGetToken];
-}
+//// 카카오 토큰 확인
+//- (void)getOAuthToken{
+//    [self.oAuthKakao oAuthKakaoGetToken];
+//}
 
 #pragma mark - REQUEST
 - (void)oAuthManagerUserData{
@@ -53,6 +56,7 @@
             break;
             
         case oAuthName_Facebook:
+            [self.oAuthFacebook oAuthFacebookUserData];
             break;
             
         case oAuthName_Google:
@@ -76,11 +80,13 @@
             break;
             
         case oAuthName_Kakao:
-            [[IndicatorView sharedInstnace]dismiss];
+            [[IndicatorView sharedInstnace]dismiss]; // 앱내부 카카오 내부 선택 링크 생성
             [self.oAuthKakao oAuthKakaoLogin];
             break;
             
         case oAuthName_Facebook:
+            [[IndicatorView sharedInstnace]dismiss]; // 앱 내부 사파리 화면으로 이동
+            [self.oAuthFacebook oAuthFacebookLogin];
             break;
             
         case oAuthName_Google:
@@ -109,6 +115,7 @@
             break;
             
         case oAuthName_Facebook:
+            [self.oAuthFacebook oAuthFacebookLogout];
             break;
             
         case oAuthName_Google:
@@ -137,6 +144,7 @@
             break;
             
         case oAuthName_Facebook:
+             [self.oAuthFacebook oAuthFacebookLogout];
             break;
             
         case oAuthName_Google:
@@ -164,6 +172,7 @@
             break;
             
         case oAuthName_Facebook:
+            [self.oAuthFacebook oAuthFacebookRefreshToken];
             break;
             
         case oAuthName_Google:
@@ -224,6 +233,15 @@
         NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
 #endif
         return YES;
+    }else if([self.oAuthFacebook getLoginState]){
+        oAuthLoginName = oAuthName_Facebook;
+        self.oAuthAccessToken = self.oAuthFacebook.accessToken;
+        self.oAuthRefreshToken = self.oAuthFacebook.userID;
+        [self getOAuthgetLoginName];
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
+#endif
+        return YES;
     }else{
         oAuthLoginName = oAuthName_Default;
         [self getOAuthgetLoginName];
@@ -236,7 +254,9 @@
     }
 }
 
-
+/**
+ * Facebook 지원 하지 않음
+ */
 #pragma mark - OAuth OPEN URL SCHEME
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
 #if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)

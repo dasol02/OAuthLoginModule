@@ -1,6 +1,7 @@
 #import "LoginViewController.h"
 
 @interface LoginViewController ()
+
 @end
 
 @implementation LoginViewController
@@ -41,9 +42,13 @@
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {
+   [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Facebook];
 }
 
 - (IBAction)actionGoogleLogin:(id)sender {
 }
+
+
+
 
 @end

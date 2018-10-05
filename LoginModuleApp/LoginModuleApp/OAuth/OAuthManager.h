@@ -4,6 +4,7 @@
 #import "OAuthDelegate.h"
 #import "OAuthNaver.h"
 #import "OAuthKakao.h"
+#import "OAuthFacebook.h"
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
@@ -21,6 +22,7 @@
     
 @property (strong, nonatomic) OAuthNaver *oAuthNaver;
 @property (strong, nonatomic) OAuthKakao *oAuthKakao;
+@property (strong, nonatomic) OAuthFacebook *oAuthFacebook;
 
 + (OAuthManager *)sharedInstnace;
 

@@ -1,4 +1,6 @@
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @interface AppDelegate ()
 @end
@@ -8,14 +10,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [OAuthManager sharedInstnace];
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
 
+
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
-    
     return [[OAuthManager sharedInstnace] oAuthCheckOpenURL:app openURL:url options:options];
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

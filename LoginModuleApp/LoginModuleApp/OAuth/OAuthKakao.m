@@ -99,7 +99,7 @@
                                            NSString *userGender = [NSString stringWithFormat:@"사용자 성별: %lu", (unsigned long)me.account.gender];
                                            
                                            
-                                           NSString *responseStr = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n",userID,userEmail,userNickName,userBirthday,userAgeRang,userGender];
+                                           NSString *responseStr = [NSString stringWithFormat:@"\n\n%@\n%@\n%@\n%@\n%@\n%@\n\n토큰 : \n%@\n\n리플레시 토큰 : \n%@",userID,userEmail,userNickName,userBirthday,userAgeRang,userGender,self.accessToken,self.refreshToken];
                                            
                                            if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseOAuthManagerUserData:)]){
                                                [self.delegate oAuthResponseOAuthManagerUserData:responseStr];
@@ -168,7 +168,7 @@
         strType = @"Default";
         break;
     }
-    NSLog(@"OAuth Kakao Response Error %@",strType);
+    NSLog(@"\nOAuth Kakao Response Error %@",strType);
 #endif
 }
     

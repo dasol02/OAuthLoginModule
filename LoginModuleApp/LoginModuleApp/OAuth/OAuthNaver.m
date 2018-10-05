@@ -132,9 +132,23 @@
       ^(NSData * _Nullable data,
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
-          NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-          if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseOAuthManagerUserData:)]){
-              [self.delegate oAuthResponseOAuthManagerUserData:responseStr];
+          
+          if(!error){
+              NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+              NSDictionary *userData = [dict objectForKey:@"response"];
+              
+              NSString *userAge = [userData objectForKey:@"name"];
+              NSString *userBirthday = [userData objectForKey:@"birthday"];
+              NSString *userEmail = [userData objectForKey:@"email"];
+              NSString *userGender = [userData objectForKey:@"gender"];
+              NSString *userID = [userData objectForKey:@"id"];
+              NSString *userName = [userData objectForKey:@"name"];
+              
+              NSString *responseStr = [NSString stringWithFormat:@"\n\n연령대 : %@\n생일 : %@\n이메일 : %@\n성별 : %@\n아이디 : %@\n이름 : %@\n\n토큰 : %@\n\n리플레시토큰 : %@",userAge,userBirthday,userEmail,userGender,userID,userName,self.accessToken,self.refreshToken];
+              
+              if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseOAuthManagerUserData:)]){
+                  [self.delegate oAuthResponseOAuthManagerUserData:responseStr];
+              }
           }
 #ifdef OAuth_LOG_NAVER
           NSLog(@"\nOAuth NAVER Response received: %@", responseStr);

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1617A68621673C7F00D633E8 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1617A68421673C7F00D633E8 /* FBSDKCoreKit.framework */; };
+		1617A68721673C7F00D633E8 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1617A68521673C7F00D633E8 /* FBSDKLoginKit.framework */; };
+		1617A68A216740D600D633E8 /* OAuthFacebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 1617A689216740D600D633E8 /* OAuthFacebook.m */; };
 		169411F02151D1B600CA7EE0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411EF2151D1B600CA7EE0 /* MainViewController.m */; };
 		169411F32151E12100CA7EE0 /* OAuthNaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411F22151E12100CA7EE0 /* OAuthNaver.m */; };
 		169411F72151EC2900CA7EE0 /* IndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 169411F62151EC2900CA7EE0 /* IndicatorView.m */; };
@@ -57,6 +60,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1617A68421673C7F00D633E8 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		1617A68521673C7F00D633E8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		1617A688216740D600D633E8 /* OAuthFacebook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthFacebook.h; sourceTree = "<group>"; };
+		1617A689216740D600D633E8 /* OAuthFacebook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthFacebook.m; sourceTree = "<group>"; };
 		169411EE2151D1B600CA7EE0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		169411EF2151D1B600CA7EE0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		169411F12151E12100CA7EE0 /* OAuthNaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthNaver.h; sourceTree = "<group>"; };
@@ -103,6 +110,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */,
+				1617A68621673C7F00D633E8 /* FBSDKCoreKit.framework in Frameworks */,
+				1617A68721673C7F00D633E8 /* FBSDKLoginKit.framework in Frameworks */,
 				16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -186,6 +195,8 @@
 				169411F22151E12100CA7EE0 /* OAuthNaver.m */,
 				16B90FDB2165A10F004CC253 /* OAuthKakao.h */,
 				16B90FDC2165A10F004CC253 /* OAuthKakao.m */,
+				1617A688216740D600D633E8 /* OAuthFacebook.h */,
+				1617A689216740D600D633E8 /* OAuthFacebook.m */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -257,6 +268,8 @@
 		16FC52012148A86300219255 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1617A68421673C7F00D633E8 /* FBSDKCoreKit.framework */,
+				1617A68521673C7F00D633E8 /* FBSDKLoginKit.framework */,
 				16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */,
 				16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */,
 			);
@@ -392,6 +405,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16FC51E32148A84200219255 /* LoginModuleApp.xcdatamodeld in Sources */,
+				1617A68A216740D600D633E8 /* OAuthFacebook.m in Sources */,
 				16FC51DD2148A84200219255 /* LoginViewController.m in Sources */,
 				16FC51EB2148A84600219255 /* main.m in Sources */,
 				16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */,
@@ -566,6 +580,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LoginModuleApp/Frameworks",
 					"$(PROJECT_DIR)/LoginModuleApp/Libray",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LoginModuleApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -592,6 +607,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/LoginModuleApp/Frameworks",
 					"$(PROJECT_DIR)/LoginModuleApp/Libray",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LoginModuleApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
