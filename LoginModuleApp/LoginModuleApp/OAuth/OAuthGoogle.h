@@ -25,6 +25,7 @@ typedef NS_ENUM(int,google_Error){
 - (void)oAuthGoogleUserData; // 사용자 데이터 호출
 - (void)oAuthGoogleLogin; // 로그인
 - (void)oAuthGoogleLogout; // 로그아웃
+- (void)signInSilently;
 
 - (BOOL)oAuthCheckOpenURL:(NSURL *)url options:(NSDictionary *)options; // 스키마 전달
 

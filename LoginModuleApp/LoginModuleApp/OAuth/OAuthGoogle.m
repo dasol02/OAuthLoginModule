@@ -21,8 +21,12 @@
     [GIDSignIn sharedInstance].clientID = OAuth_Google_ClientID;
     [GIDSignIn sharedInstance].delegate = self;
     [GIDSignIn sharedInstance].uiDelegate = self;
-    [[GIDSignIn sharedInstance] signInSilently]; // 이전 로그인 여부 확인
+   
     return self;
+}
+
+- (void)signInSilently{
+    [[GIDSignIn sharedInstance] signInSilently]; // 이전 로그인 여부 확
 }
 
 

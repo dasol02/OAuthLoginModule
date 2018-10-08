@@ -20,8 +20,9 @@
     [[IndicatorView sharedInstnace] show];
     self.oAuthGoogle = [OAuthGoogle sharedInstnace];
     self.oAuthGoogle.delegate = self;
-
+    [self.oAuthGoogle signInSilently];
     
+
     // 네이버
     self.oAuthNaver = [OAuthNaver sharedInstnace];
     self.oAuthNaver.delegate = self;
