@@ -6,7 +6,7 @@
 //#define OAuth_LOG_MANAGER           YES // 로그인 모듈 로그 노출
 //#define OAuth_LOG_NAVER             YES // 네이버 로그인 로그 노출
 //#define OAuth_LOG_KAKAO             YES // 카카오 로그인 로그 노출
-#define OAuth_LOG_FACEBOOK          YES // 페이스북 로그인 로그 노출
+//#define OAuth_LOG_FACEBOOK          YES // 페이스북 로그인 로그 노출
 #define OAuth_LOG_GOOGLE            YES // 구글 로그인 로그 노출
 
 #pragma mark- OPEN                      URL

@@ -61,7 +61,7 @@
                  NSString *userName = result[@"name"];
                  NSString *userEmail = result[@"email"];
                  
-                 NSString *strUserData = [NSString stringWithFormat:@"\n\nRefreshDate = %@\nUserID = %@\nUserName = %@\nUserEmail = %@\n\nTOKEN = \n%@",[self dateFormat:dateTOKEN_refreshDate],strTOKEN_UserID,userName,userEmail,strTOKEN_Token];
+                 NSString *strUserData = [NSString stringWithFormat:@"\nFacebook\n\nRefreshDate = %@\nUserID = %@\nUserName = %@\nUserEmail = %@\n\nTOKEN = \n%@",[self dateFormat:dateTOKEN_refreshDate],strTOKEN_UserID,userName,userEmail,strTOKEN_Token];
                  
 #if defined(OAuth_LOG_FACEBOOK)
                  NSLog(@"\nOAuth Facebook oAuthFacebookUserData SUCCES");

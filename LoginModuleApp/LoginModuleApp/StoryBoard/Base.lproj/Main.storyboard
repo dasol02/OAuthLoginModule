@@ -156,17 +156,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1y-Oh-5LN">
-                                <rect key="frame" x="98" y="540" width="179" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1y-Oh-5LN">
+                                <rect key="frame" x="87.5" y="517" width="200" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="GJI-JA-T6R"/>
+                                    <constraint firstAttribute="height" constant="150" id="Zal-0E-9xo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
                                     <action selector="actionRequestUserLogin:" destination="wgn-Zr-e2k" eventType="touchUpInside" id="eo3-ig-m8c"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQy-z2-kKl">
-                                <rect key="frame" x="149" y="559" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQy-z2-kKl">
+                                <rect key="frame" x="87.5" y="517" width="200" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="DaC-Xh-oBw"/>
+                                    <constraint firstAttribute="height" constant="150" id="HI4-vc-oRA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="UserProfile"/>
                                 <connections>
                                     <action selector="actionUserProfile:" destination="wgn-Zr-e2k" eventType="touchUpInside" id="JsP-Gu-noP"/>
@@ -174,6 +182,12 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ZQy-z2-kKl" firstAttribute="centerX" secondItem="LhP-Eo-9EW" secondAttribute="centerX" id="XUg-7l-2vK"/>
+                            <constraint firstItem="f1y-Oh-5LN" firstAttribute="centerX" secondItem="LhP-Eo-9EW" secondAttribute="centerX" id="b39-ST-BDC"/>
+                            <constraint firstItem="dTV-G0-RrF" firstAttribute="top" secondItem="f1y-Oh-5LN" secondAttribute="bottom" id="led-FF-Ubm"/>
+                            <constraint firstItem="dTV-G0-RrF" firstAttribute="top" secondItem="ZQy-z2-kKl" secondAttribute="bottom" id="zuI-U2-Shg"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hjO-XZ-HbV"/>
                     <connections>
@@ -198,28 +212,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CPu-R9-o37">
-                                <rect key="frame" x="16" y="20" width="343" height="597"/>
+                                <rect key="frame" x="16" y="20" width="343" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XwL-6c-gZJ">
-                                <rect key="frame" x="187.5" y="617" width="171.5" height="50"/>
+                                <rect key="frame" x="187.5" y="567" width="171.5" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="0wK-I6-EfB"/>
+                                    <constraint firstAttribute="height" constant="100" id="0wK-I6-EfB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="연동해제"/>
                                 <connections>
                                     <action selector="actionOAuthDelete:" destination="QAq-oo-5zz" eventType="touchUpInside" id="ddN-v4-39u"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0U-95-5w4">
-                                <rect key="frame" x="16" y="617" width="171.5" height="50"/>
+                                <rect key="frame" x="16" y="567" width="171.5" height="100"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="FTO-IF-33B"/>
+                                    <constraint firstAttribute="height" constant="100" id="FTO-IF-33B"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="actionLogout:" destination="QAq-oo-5zz" eventType="touchUpInside" id="qBd-TK-e7y"/>

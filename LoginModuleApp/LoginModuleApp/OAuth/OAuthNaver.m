@@ -144,7 +144,7 @@
               NSString *userID = [userData objectForKey:@"id"];
               NSString *userName = [userData objectForKey:@"name"];
               
-              NSString *responseStr = [NSString stringWithFormat:@"\n\n연령대 : %@\n생일 : %@\n이메일 : %@\n성별 : %@\n아이디 : %@\n이름 : %@\n\n토큰 : %@\n\n리플레시토큰 : %@",userAge,userBirthday,userEmail,userGender,userID,userName,self.accessToken,self.refreshToken];
+              NSString *responseStr = [NSString stringWithFormat:@"\nNaver\n\n연령대 : %@\n생일 : %@\n이메일 : %@\n성별 : %@\n아이디 : %@\n이름 : %@\n\n토큰 : %@\n\n리플레시토큰 : %@",userAge,userBirthday,userEmail,userGender,userID,userName,self.accessToken,self.refreshToken];
               
               if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseOAuthManagerUserData:)]){
                   [self.delegate oAuthResponseOAuthManagerUserData:responseStr];
