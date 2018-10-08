@@ -67,7 +67,6 @@
 #endif
             }else{
                 NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"Data received: %@", responseStr);
 //                userGender = [NSString stringWithFormat:@"사용자 성별: %lu", (unsigned long)me.account.gender];
             }
             

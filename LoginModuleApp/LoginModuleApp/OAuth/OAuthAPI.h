@@ -2,12 +2,13 @@
 #define OAuthAPI_h
 
 #pragma mark - LOG
-#define OAuth_LOG_MANAGER_DEVELOPER YES // 개발확인 로그
-//#define OAuth_LOG_MANAGER           YES // 로그인 모듈 로그 노출
+//#define OAuth_LOG_MANAGER_DEVELOPER YES // 개발확인 로그
+#define OAuth_LOG_MANAGER           YES // 로그인 모듈 로그 노출
 //#define OAuth_LOG_NAVER             YES // 네이버 로그인 로그 노출
 //#define OAuth_LOG_KAKAO             YES // 카카오 로그인 로그 노출
 //#define OAuth_LOG_FACEBOOK          YES // 페이스북 로그인 로그 노출
 //#define OAuth_LOG_GOOGLE            YES // 구글 로그인 로그 노출
+//#define INDICATION_COUNT_LOG_SHOW // 인디케이터 카운트 로그 노출 여부
 
 #pragma mark- OPEN                      URL
 #define OAuth_Open_URLSchemeKEY         @"UIApplicationOpenURLOptionsSourceApplicationKey"
