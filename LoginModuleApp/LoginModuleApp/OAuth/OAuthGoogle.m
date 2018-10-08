@@ -67,7 +67,14 @@
 #endif
             }else{
                 NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-//                userGender = [NSString stringWithFormat:@"사용자 성별: %lu", (unsigned long)me.account.gender];
+                
+#if defined(OAuth_LOG_GOOGLE)
+                NSLog(@"Data received: %@", responseStr);
+#endif
+                
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
+                userGender = [dict objectForKey:@"gender"];
+                userGender = [NSString stringWithFormat:@"사용자 성별: %@", userGender];
             }
             
             NSString *responseStr = [NSString stringWithFormat:@"\nGoogle\n\n%@\n%@\n%@\n%@\n\n아이디 토큰 : \n%@\n\n악세스 토큰 : \n%@\n\n리플레시 토큰 :\n%@",userID,userEmail,userName,userGender,self.userIDToken,self.accessToken,self.refreshToken];
