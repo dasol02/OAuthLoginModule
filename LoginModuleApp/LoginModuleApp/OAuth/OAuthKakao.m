@@ -42,7 +42,6 @@
             if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLoginResult:OAuthName:)]){
                 [self.delegate oAuthResponseLoginResult:YES OAuthName:oAuthName_Kakao];
             }
-//            NSLog(@"kakao login succeeded.");
         } else {
             [self kakaoResponseError:error Type:kakaoError_Login];
         }
@@ -57,7 +56,6 @@
             if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
                 [self.delegate oAuthResponseLogoutResult:YES OAuthName:oAuthName_Kakao];
             }
-//           NSLog(@"oAuthKakaoLogout Success");
         } else {
             if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
                 [self.delegate oAuthResponseLogoutResult:NO OAuthName:oAuthName_Kakao];
@@ -73,7 +71,6 @@
             if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseLogoutResult:OAuthName:)]){
                 [self.delegate oAuthResponseLogoutResult:YES OAuthName:oAuthName_Kakao];
             }
-//            NSLog(@"oAuthKakaoDelete Success");
         } else {
             [self kakaoResponseError:error Type:kakaoError_Delete];
         }

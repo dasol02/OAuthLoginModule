@@ -27,6 +27,7 @@
     return self;
 }
 
+
 - (NSString *)dateFormat:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -34,19 +35,14 @@
 }
 
 
-
-
 - (BOOL)getLoginState{
-    
     if ([FBSDKAccessToken currentAccessToken]){
-        
          return YES;
     }else{
-        
          return NO;
     }
-   
 }
+
 
 - (void)oAuthFacebookUserData{
     

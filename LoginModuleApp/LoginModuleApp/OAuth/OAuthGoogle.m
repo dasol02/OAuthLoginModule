@@ -208,13 +208,13 @@
     
 }
 
-// Present a view that prompts the user to sign in with Google
+
 - (void)signIn:(GIDSignIn *)signIn
 presentViewController:(UIViewController *)viewController {
     
 }
 
-// Dismiss the "Sign in with Google" view
+
 - (void)signIn:(GIDSignIn *)signIn
 dismissViewController:(UIViewController *)viewController {
     

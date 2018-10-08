@@ -26,6 +26,7 @@
     return self;
 }
 
+
 #pragma mark - OAuth NAVER First Setting
 - (void)setOAuthNaverSetting{
     [self.thirdPartyLoginConn setIsNaverAppOauthEnable:YES];
@@ -34,6 +35,7 @@
     [self.thirdPartyLoginConn setConsumerSecret:OAuth_Naver_ConsumerSecret];
     [self.thirdPartyLoginConn setAppName:OAuth_Naver_ServiceAppName];
 }
+
 
 #pragma mark - REQUEST OAuth
 - (BOOL)getLoginState{
@@ -161,8 +163,8 @@
 #pragma mark- NAVER OAuth20 deleagate
 // 로그인 성공
 - (void)oauth20ConnectionDidFinishRequestACTokenWithAuthCode {
-    NSString *result = [NSString stringWithFormat:@"OAuth Success!\n\nAccess Token - %@\n\nAccess Token Expire Date- %@\n\nRefresh Token - %@", self.thirdPartyLoginConn.accessToken, self.thirdPartyLoginConn.accessTokenExpireDate, self.thirdPartyLoginConn.refreshToken];
 #ifdef OAuth_LOG_NAVER
+    NSString *result = [NSString stringWithFormat:@"OAuth Success!\n\nAccess Token - %@\n\nAccess Token Expire Date- %@\n\nRefresh Token - %@", self.thirdPartyLoginConn.accessToken, self.thirdPartyLoginConn.accessTokenExpireDate, self.thirdPartyLoginConn.refreshToken];
     NSLog(@"\nOAuth NAVER Response Login Success  ===  \n%@",result);
 #endif
     
@@ -197,13 +199,14 @@
 
 // 토큰 갱신
 - (void)oauth20ConnectionDidFinishRequestACTokenWithRefreshToken{
-    NSString *result = [NSString stringWithFormat:@"Refresh Success!\n\nAccess Token - %@\n\nAccess sToken ExpireDate- %@", _thirdPartyLoginConn.accessToken, _thirdPartyLoginConn.accessTokenExpireDate ];
     self.accessToken = self.thirdPartyLoginConn.accessToken;
     self.refreshToken = self.thirdPartyLoginConn.refreshToken;
     if(self.delegate != nil && [self.delegate respondsToSelector:@selector(oAuthResponseSuccess:)]){
         [self.delegate oAuthResponseSuccess:oAuthName_Naver];
     }
+    
 #ifdef OAuth_LOG_NAVER
+    NSString *result = [NSString stringWithFormat:@"Refresh Success!\n\nAccess Token - %@\n\nAccess sToken ExpireDate- %@", _thirdPartyLoginConn.accessToken, _thirdPartyLoginConn.accessTokenExpireDate ];
     NSLog(@"\nOAuth NAVER Response RefreshToken Success == \n%@",result);
 #endif
 }

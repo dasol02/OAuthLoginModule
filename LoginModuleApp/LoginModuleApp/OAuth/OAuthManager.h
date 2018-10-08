@@ -11,9 +11,9 @@
 @protocol OAuthManagerDelegate<NSObject>
 @optional
 - (void)getOAuthManagerUserData:(NSString *)userData; // 사용자 정보 확인
-- (void)responseLoginResult:(BOOL)state; // 로그인 여부 확인
-- (void)responseLogoutResult:(BOOL)state; // 로그인 여부 확인
-- (void)responseAppFirstStart:(BOOL)state; // 사용자 정보 확인
+- (void)responseLoginResult:(BOOL)state;              // 로그인 성공 여부 확인
+- (void)responseLogoutResult:(BOOL)state;             // 로그인 실패 여부 확인
+- (void)responseAppFirstStart:(BOOL)state;            // 사용자 로그인 정보 확인 (메인 화면 앱 첫 실행시)
 @end
 
 @interface OAuthManager : NSObject<OAuthDelegate>{
@@ -30,13 +30,14 @@
 
 + (OAuthManager *)sharedInstnace;
 
-- (BOOL)oAuthManagerLoginState; // 로그인 상태
-- (void)oAuthManagerUserData; // 사용자 데이터 호출
-- (void)oAuthManagerLogin:(int)loginoAuthName; // 로그인
-- (void)oAuthManagerLogout; // 로그아웃
-- (void)oAuthManagerDelete; // 인증해제
-- (void)oAuthManagerRefreshToken; // 토큰 업데이트
-- (NSString *)getOAuthgetLoginName; // 연동중인 API 확인
+- (BOOL)oAuthManagerLoginState;                  // 로그인 상태
+- (void)oAuthManagerUserData;                    // 사용자 데이터 호출
+- (void)oAuthManagerLogin:(int)loginoAuthName;   // 로그인
+- (void)oAuthManagerLogout;                      // 로그아웃
+- (void)oAuthManagerDelete;                      // 인증해제
+- (void)oAuthManagerRefreshToken;                // 토큰 업데이트
+- (NSString *)getOAuthgetLoginName;              // 연동중인 API 확인
+
 
 // 외부 로그인 앱 연동 스키마 전달
 - (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options;

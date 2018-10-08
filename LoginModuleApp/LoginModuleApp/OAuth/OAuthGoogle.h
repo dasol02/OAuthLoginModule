@@ -12,7 +12,7 @@ typedef NS_ENUM(int,google_Error){
 @import GoogleSignIn;
 
 @interface OAuthGoogle : NSObject<GIDSignInDelegate,GIDSignInUIDelegate>{
-    BOOL appFirstState; //  최초 실행 여부
+    BOOL appFirstState;                                     //  최초 실행 여부
 }
 @property (strong, nonatomic) NSString *accessToken;
 @property (strong, nonatomic) NSString *refreshToken;
@@ -21,11 +21,11 @@ typedef NS_ENUM(int,google_Error){
 
 + (OAuthGoogle *)sharedInstnace;
 
-- (BOOL)getLoginState; // 연동 정보 확인
-- (void)oAuthGoogleUserData; // 사용자 데이터 호출
-- (void)oAuthGoogleLogin; // 로그인
-- (void)oAuthGoogleLogout; // 로그아웃
-- (void)signInSilently;
+- (BOOL)getLoginState;                                      // 연동 정보 확인
+- (void)oAuthGoogleUserData;                                // 사용자 데이터 호출
+- (void)oAuthGoogleLogin;                                   // 로그인
+- (void)oAuthGoogleLogout;                                  // 로그아웃
+- (void)signInSilently;                                     // 로그인 정보 확인 (앱 최초 실행시)
 
 - (BOOL)oAuthCheckOpenURL:(NSURL *)url options:(NSDictionary *)options; // 스키마 전달
 
