@@ -16,28 +16,32 @@
 -(instancetype)init{
     self = [super init];
     
+    // 구글
+    [[IndicatorView sharedInstnace] show];
+    self.oAuthGoogle = [OAuthGoogle sharedInstnace];
+    self.oAuthGoogle.delegate = self;
+
+    
     // 네이버
-    self.oAuthNaver = [[OAuthNaver sharedInstnace] init];
+    self.oAuthNaver = [OAuthNaver sharedInstnace];
     self.oAuthNaver.delegate = self;
     
     
     // 카카오
-    self.oAuthKakao = [[OAuthKakao sharedInstnace] init];
+    self.oAuthKakao = [OAuthKakao sharedInstnace];
     self.oAuthKakao.delegate = self;
     
-    self.oAuthFacebook = [[OAuthFacebook sharedInstnace]init];
+    
+    // 페이스북
+    self.oAuthFacebook = [OAuthFacebook sharedInstnace];
     self.oAuthFacebook.delegate = self;
+    
     
     [self oAuthManagerRefreshToken];
     
 
     return self;
 }
-
-//// 카카오 토큰 확인
-//- (void)getOAuthToken{
-//    [self.oAuthKakao oAuthKakaoGetToken];
-//}
 
 #pragma mark - REQUEST
 - (void)oAuthManagerUserData{
@@ -60,6 +64,7 @@
             break;
             
         case oAuthName_Google:
+            [self.oAuthGoogle oAuthGoogleUserData];
             break;
             
         default:
@@ -73,27 +78,26 @@
 #ifdef OAuth_LOG_MANAGER_DEVELOPER
     NSLog(@"OAUTH MANAGER request Login");
 #endif
-    [[IndicatorView sharedInstnace] show];
+    
     switch (loginoAuthName) {
         case oAuthName_Naver:
+            [[IndicatorView sharedInstnace] show];
             [self.oAuthNaver oAuthNaverLogin];
             break;
             
         case oAuthName_Kakao:
-            [[IndicatorView sharedInstnace]dismiss]; // 앱내부 카카오 내부 선택 링크 생성
             [self.oAuthKakao oAuthKakaoLogin];
             break;
             
         case oAuthName_Facebook:
-            [[IndicatorView sharedInstnace]dismiss]; // 앱 내부 사파리 화면으로 이동
             [self.oAuthFacebook oAuthFacebookLogin];
             break;
             
         case oAuthName_Google:
+            [self.oAuthGoogle oAuthGoogleLogin];
             break;
             
         default:
-            [[IndicatorView sharedInstnace]dismiss];
             break;
     }
 }
@@ -119,6 +123,7 @@
             break;
             
         case oAuthName_Google:
+            [self.oAuthGoogle oAuthGoogleLogout];
             break;
             
         default:
@@ -148,6 +153,7 @@
             break;
             
         case oAuthName_Google:
+             [self.oAuthGoogle oAuthGoogleLogout];
             break;
             
         default:
@@ -242,6 +248,15 @@
         NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
 #endif
         return YES;
+    }else if([self.oAuthGoogle getLoginState]){
+        oAuthLoginName = oAuthName_Google;
+        self.oAuthAccessToken = self.oAuthGoogle.accessToken;
+        self.oAuthRefreshToken = self.oAuthGoogle.refreshToken;
+        [self getOAuthgetLoginName];
+#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
+        NSLog(@"OAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
+#endif
+        return YES;
     }else{
         oAuthLoginName = oAuthName_Default;
         [self getOAuthgetLoginName];
@@ -266,6 +281,8 @@
         return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
     }else if([self.oAuthKakao isKakaoAccountLoginCallback:url]){
         return [self.oAuthKakao handleOpenURL:url];
+    }else if([self.oAuthGoogle oAuthCheckOpenURL:url options:options]){
+        return [self.oAuthGoogle oAuthCheckOpenURL:url options:options];
     }else{
         return NO;
     }
@@ -343,5 +360,13 @@
         break;
     }
     return strOauthName;
+}
+
+
+- (void)responseGoogleAppFirstStart:(BOOL)state{
+    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseAppFirstStart:)]){
+        [self.delegate responseAppFirstStart:state];
+    }
+    [[IndicatorView sharedInstnace] dismiss];
 }
 @end

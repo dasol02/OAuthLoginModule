@@ -46,8 +46,7 @@
 }
 
 - (IBAction)actionGoogleLogin:(id)sender {
-//    [[GIDSignIn sharedInstance] signIn];
+    [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Google];
 }
-
 
 @end

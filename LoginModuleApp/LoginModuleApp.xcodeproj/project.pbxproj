@@ -626,6 +626,7 @@
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,6 +658,7 @@
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-ObjC",
+					"-all_load",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

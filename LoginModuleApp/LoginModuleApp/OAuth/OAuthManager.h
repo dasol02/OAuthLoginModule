@@ -2,15 +2,18 @@
 #import "OAuthAPI.h"
 #import "IndicatorView.h"
 #import "OAuthDelegate.h"
+
 #import "OAuthNaver.h"
 #import "OAuthKakao.h"
 #import "OAuthFacebook.h"
+#import "OAuthGoogle.h"
 
 @protocol OAuthManagerDelegate<NSObject>
 @optional
 - (void)getOAuthManagerUserData:(NSString *)userData; // 사용자 정보 확인
 - (void)responseLoginResult:(BOOL)state; // 로그인 여부 확인
 - (void)responseLogoutResult:(BOOL)state; // 로그인 여부 확인
+- (void)responseAppFirstStart:(BOOL)state; // 사용자 정보 확인
 @end
 
 @interface OAuthManager : NSObject<OAuthDelegate>{
@@ -23,6 +26,7 @@
 @property (strong, nonatomic) OAuthNaver *oAuthNaver;
 @property (strong, nonatomic) OAuthKakao *oAuthKakao;
 @property (strong, nonatomic) OAuthFacebook *oAuthFacebook;
+@property (strong, nonatomic) OAuthGoogle *oAuthGoogle;
 
 + (OAuthManager *)sharedInstnace;
 

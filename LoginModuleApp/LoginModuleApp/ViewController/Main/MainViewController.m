@@ -8,12 +8,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [OAuthManager sharedInstnace].delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[IndicatorView sharedInstnace]show];
-    [self setUpdateButtonUI];
+    [self setUpdateButtonUI]; // 로그인 유저 프로필 화면 갱신
+}
+
+- (void)responseAppFirstStart:(BOOL)state{
+    [self setUpdateButtonUI]; // 로그인 유저 프로필 화면 갱신
 }
 
 
@@ -27,7 +31,6 @@
         self.buttonUserLogin.hidden = NO;
         self.buttonUserProfile.hidden = YES;
     }
-    [[IndicatorView sharedInstnace]dismiss];
 }
 
 
