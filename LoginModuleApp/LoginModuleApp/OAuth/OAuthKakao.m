@@ -47,7 +47,7 @@
             [self kakaoResponseError:error Type:kakaoError_Login];
         }
 
-    }];
+    } authType:(KOAuthType)KOAuthTypeTalk, nil];
 }
     
 - (void)oAuthKakaoLogout{
