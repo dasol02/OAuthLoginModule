@@ -46,9 +46,8 @@
 }
 
 - (IBAction)actionGoogleLogin:(id)sender {
+//    [[GIDSignIn sharedInstance] signIn];
 }
-
-
 
 
 @end

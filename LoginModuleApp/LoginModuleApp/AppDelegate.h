@@ -2,7 +2,11 @@
 #import <CoreData/CoreData.h>
 #import "OAuth/OAuthManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+#import <GoogleSignIn/GoogleSignIn.h>
+@import GoogleSignIn;
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, GIDSignInDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

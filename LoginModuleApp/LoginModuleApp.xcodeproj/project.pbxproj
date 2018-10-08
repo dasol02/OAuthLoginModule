@@ -18,6 +18,14 @@
 		16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */; };
 		169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 169412032152062F00CA7EE0 /* UIImage+GIF.m */; };
 		16B90FDD2165A10F004CC253 /* OAuthKakao.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B90FDC2165A10F004CC253 /* OAuthKakao.m */; };
+		16C9F5E7216ADE8000332B1D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5E5216ADE4200332B1D /* Bolts.framework */; };
+		16C9F5E8216ADE8200332B1D /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 16C9F5E3216ADDC200332B1D /* GoogleSignIn.bundle */; };
+		16C9F5E9216ADE8500332B1D /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5DD216ADD5400332B1D /* GoogleSignInDependencies.framework */; };
+		16C9F5EA216ADE8800332B1D /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5DE216ADD5400332B1D /* GoogleSignIn.framework */; };
+		16C9F5EC216AE18400332B1D /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5EB216AE18400332B1D /* LocalAuthentication.framework */; };
+		16C9F5EE216AE18C00332B1D /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5ED216AE18C00332B1D /* SafariServices.framework */; };
+		16C9F5F0216AE19300332B1D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5EF216AE19300332B1D /* SystemConfiguration.framework */; };
+		16C9F5F3216AEE4600332B1D /* OAuthGoogle.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C9F5F2216AEE4600332B1D /* OAuthGoogle.m */; };
 		16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */; };
 		16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; };
 		16CC7AB12153363200C1305A /* KakaoOpenSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -82,6 +90,15 @@
 		169412062152205C00CA7EE0 /* OAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthDelegate.h; sourceTree = "<group>"; };
 		16B90FDB2165A10F004CC253 /* OAuthKakao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthKakao.h; sourceTree = "<group>"; };
 		16B90FDC2165A10F004CC253 /* OAuthKakao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthKakao.m; sourceTree = "<group>"; };
+		16C9F5DD216ADD5400332B1D /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
+		16C9F5DE216ADD5400332B1D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		16C9F5E3216ADDC200332B1D /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		16C9F5E5216ADE4200332B1D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		16C9F5EB216AE18400332B1D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		16C9F5ED216AE18C00332B1D /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		16C9F5EF216AE19300332B1D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		16C9F5F1216AEE4600332B1D /* OAuthGoogle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthGoogle.h; sourceTree = "<group>"; };
+		16C9F5F2216AEE4600332B1D /* OAuthGoogle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthGoogle.m; sourceTree = "<group>"; };
 		16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KakaoOpenSDK.framework; sourceTree = "<group>"; };
 		16CF04382149FD86007631B2 /* NaverThirdPartyLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NaverThirdPartyLogin.framework; sourceTree = "<group>"; };
 		16CF043F214A2DB5007631B2 /* OAuthManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthManager.h; sourceTree = "<group>"; };
@@ -109,10 +126,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C9F5F0216AE19300332B1D /* SystemConfiguration.framework in Frameworks */,
+				16C9F5EE216AE18C00332B1D /* SafariServices.framework in Frameworks */,
+				16C9F5EC216AE18400332B1D /* LocalAuthentication.framework in Frameworks */,
+				16C9F5EA216ADE8800332B1D /* GoogleSignIn.framework in Frameworks */,
 				16CC7AAF2153362A00C1305A /* NaverThirdPartyLogin.framework in Frameworks */,
+				16C9F5E9216ADE8500332B1D /* GoogleSignInDependencies.framework in Frameworks */,
 				1617A68621673C7F00D633E8 /* FBSDKCoreKit.framework in Frameworks */,
 				1617A68721673C7F00D633E8 /* FBSDKLoginKit.framework in Frameworks */,
 				16CC7AB02153363200C1305A /* KakaoOpenSDK.framework in Frameworks */,
+				16C9F5E7216ADE8000332B1D /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +203,9 @@
 		16CC7AAE2153362A00C1305A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16C9F5EF216AE19300332B1D /* SystemConfiguration.framework */,
+				16C9F5ED216AE18C00332B1D /* SafariServices.framework */,
+				16C9F5EB216AE18400332B1D /* LocalAuthentication.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -197,6 +223,8 @@
 				16B90FDC2165A10F004CC253 /* OAuthKakao.m */,
 				1617A688216740D600D633E8 /* OAuthFacebook.h */,
 				1617A689216740D600D633E8 /* OAuthFacebook.m */,
+				16C9F5F1216AEE4600332B1D /* OAuthGoogle.h */,
+				16C9F5F2216AEE4600332B1D /* OAuthGoogle.m */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -268,6 +296,10 @@
 		16FC52012148A86300219255 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				16C9F5E5216ADE4200332B1D /* Bolts.framework */,
+				16C9F5E3216ADDC200332B1D /* GoogleSignIn.bundle */,
+				16C9F5DE216ADD5400332B1D /* GoogleSignIn.framework */,
+				16C9F5DD216ADD5400332B1D /* GoogleSignInDependencies.framework */,
 				1617A68421673C7F00D633E8 /* FBSDKCoreKit.framework */,
 				1617A68521673C7F00D633E8 /* FBSDKLoginKit.framework */,
 				16CC7AAA2153351000C1305A /* KakaoOpenSDK.framework */,
@@ -384,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16FC51E82148A84600219255 /* LaunchScreen.storyboard in Resources */,
+				16C9F5E8216ADE8200332B1D /* GoogleSignIn.bundle in Resources */,
 				16FC51E52148A84600219255 /* Assets.xcassets in Resources */,
 				16FC51E02148A84200219255 /* Main.storyboard in Resources */,
 				16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */,
@@ -418,6 +451,7 @@
 				169411F72151EC2900CA7EE0 /* IndicatorView.m in Sources */,
 				16941200215204FE00CA7EE0 /* SVIndefiniteAnimatedView.m in Sources */,
 				16CF0441214A2DB5007631B2 /* OAuthManager.m in Sources */,
+				16C9F5F3216AEE4600332B1D /* OAuthGoogle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,7 +622,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-all_load";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -615,7 +653,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-all_load";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gaeasoft.loginoauthapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

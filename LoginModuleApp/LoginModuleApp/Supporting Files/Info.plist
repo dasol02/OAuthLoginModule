@@ -18,8 +18,6 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
-    <key>KAKAO_APP_KEY</key>
-    <string>3518487ea1bd3a639d1fdf1ffea5bd28</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -40,34 +38,44 @@
 				<string>kakao3518487ea1bd3a639d1fdf1ffea5bd28</string>
 			</array>
 		</dict>
-        <dict>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>fb1750035155124396</string>
-            </array>
-        </dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1750035155124396</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.463686728262-mqjt49pp0e46sf415ui9o7bo8cj9pgn6</string>
+			</array>
+		</dict>
 	</array>
-    <key>FacebookAppID</key>
-    <string>1750035155124396</string>
-    <key>FacebookDisplayName</key>
-    <string>LoginOAuthApp</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>1750035155124396</string>
+	<key>FacebookDisplayName</key>
+	<string>LoginOAuthApp</string>
+	<key>KAKAO_APP_KEY</key>
+	<string>3518487ea1bd3a639d1fdf1ffea5bd28</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>naversearchapp</string>
 		<string>naversearchthirdlogin</string>
-        <string>kakao0123456789abcdefghijklmn</string>
-        <string>kakaokompassauth</string>
-        <string>storykompassauth</string>
-        <string>kakaolink</string>
-        <string>kakaotalk-5.9.7</string>
-        <string>kakaostory-2.9.0</string>
-        <string>storylink</string>
-        <string>fbapi</string>
-        <string>fb-messenger-api</string>
-        <string>fbauth2</string>
-        <string>fbshareextension</string>
+		<string>kakao0123456789abcdefghijklmn</string>
+		<string>kakaokompassauth</string>
+		<string>storykompassauth</string>
+		<string>kakaolink</string>
+		<string>kakaotalk-5.9.7</string>
+		<string>kakaostory-2.9.0</string>
+		<string>storylink</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

@@ -1,6 +1,5 @@
 #import "AppDelegate.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <GoogleSignIn/GoogleSignIn.h>
 
 @interface AppDelegate ()
 @end
@@ -12,13 +11,20 @@
     [OAuthManager sharedInstnace];
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
+    
+    [GIDSignIn sharedInstance].clientID = @"463686728262-mqjt49pp0e46sf415ui9o7bo8cj9pgn6.apps.googleusercontent.com";
+    [GIDSignIn sharedInstance].delegate = self;
     return YES;
 }
 
 
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
-    return [[OAuthManager sharedInstnace] oAuthCheckOpenURL:app openURL:url options:options];
+//    return [[OAuthManager sharedInstnace] oAuthCheckOpenURL:app openURL:url options:options];
+    
+    return [[GIDSignIn sharedInstance] handleURL:url
+                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                      annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 
 
@@ -51,6 +57,55 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
 }
+
+
+
+// [START signin_handler]
+- (void)signIn:(GIDSignIn *)signIn didSignInForUser:(GIDGoogleUser *)user withError:(NSError *)error {
+    
+    if(error){
+        
+    }else{
+        NSString *userId = user.userID;
+        NSString *idToken = user.authentication.idToken;
+        NSString *accessToken = [GIDSignIn sharedInstance].currentUser.authentication.accessToken;
+        NSString *fullName = user.profile.name;
+        NSString *email = user.profile.email;
+        
+        // 추가적인 개인정보 호출
+        NSString *targetUrl = [NSString stringWithFormat:@"https://www.googleapis.com/oauth2/v3/userinfo?access_token=%@",[GIDSignIn sharedInstance].currentUser.authentication.accessToken];
+        [self getGoogleUserData:targetUrl];
+    }
+}
+
+
+- (void)getGoogleUserData:(NSString *)userToken{
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    
+    
+    NSDictionary *tmp = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         @"basic_attribution", @"scenario_type",
+                         nil];
+    NSError *error;
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:tmp options:0 error:&error];
+    
+    [request setHTTPBody:postData];
+    [request setHTTPMethod:@"POST"];
+    [request setURL:[NSURL URLWithString:userToken]];
+    
+    [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data,
+        NSURLResponse * _Nullable response,NSError * _Nullable error) {
+        
+        if(error){
+            
+        }else{
+            NSString *responseStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSLog(@"Data received: %@", responseStr);
+        }
+      }] resume];
+}
+
 
 
 @end
