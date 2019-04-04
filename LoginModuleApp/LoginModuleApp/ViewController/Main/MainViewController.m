@@ -8,7 +8,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [OAuthManager sharedInstnace].delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -24,7 +23,7 @@
 #pragma mark -
 // 로그인, 유저프로필 버튼 UI변경
 - (void)setUpdateButtonUI{
-    if([[OAuthManager sharedInstnace] oAuthManagerLoginState] == YES){
+    if ([[OAuthManager sharedInstnace] requestOAuthManagerIsLogin] == YES){
         self.buttonUserLogin.hidden = YES;
         self.buttonUserProfile.hidden = NO;
     }else{

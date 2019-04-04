@@ -8,19 +8,19 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-//    [OAuthManager sharedInstnace];
-    [[FBSDKApplicationDelegate sharedInstance] application:application
-                             didFinishLaunchingWithOptions:launchOptions];
+    [[OAuthManager sharedInstnace] requestStartOAuthManager:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
 
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options {
-    return [[OAuthManager sharedInstnace] oAuthCheckOpenURL:app openURL:url options:options];
+    return [[OAuthManager sharedInstnace] requestOAuthManagerNativeOpenURL:app openURL:url options:options];
 }
-
-
+//
+//-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+//    return [[OAuthManager sharedInstnace] requestOAuthManagerNativeOpenURL:app openURL:url options:options];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -41,8 +41,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [KOSession handleDidBecomeActive];
-    [FBSDKAppEvents activateApp];
+    [[OAuthManager sharedInstnace] requestDidOAuthManager];
 }
 
 

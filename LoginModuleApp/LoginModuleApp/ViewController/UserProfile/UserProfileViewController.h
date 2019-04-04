@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import "OAuthManager.h"
 
-@interface UserProfileViewController : UIViewController<OAuthManagerDelegate>
+@interface UserProfileViewController : UIViewController
 
 - (IBAction)actionLogout:(id)sender;
 - (IBAction)actionOAuthDelete:(id)sender;

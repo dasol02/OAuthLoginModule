@@ -1,7 +1,16 @@
 #import "OAuthManager.h"
+#import "OAuthBase.h"
+
+#import "OAuthNaver.h"
+#import "OAuthKakao.h"
+#import "OAuthFacebook.h"
+#import "OAuthGoogle.h"
+
+@interface OAuthManager()
+@property (strong, nonatomic) OAuthBase *oAuthObject;
+@end
 
 @implementation OAuthManager
-
 + (OAuthManager *)sharedInstnace{
     static OAuthManager *oAuthManager = nil;
     
@@ -13,364 +22,93 @@
     return oAuthManager;
 }
 
--(instancetype)init{
-    self = [super init];
-    
-   
-    [[IndicatorView sharedInstnace] show];              // 로그인 정보 확인
-    
-     // 구글
-    self.oAuthGoogle = [OAuthGoogle sharedInstnace];
-    self.oAuthGoogle.delegate = self;
-    [self.oAuthGoogle signInSilently];
-    
-
-    // 네이버
-    self.oAuthNaver = [OAuthNaver sharedInstnace];
-    self.oAuthNaver.delegate = self;
-    
-    
-    // 카카오
-    self.oAuthKakao = [OAuthKakao sharedInstnace];
-    self.oAuthKakao.delegate = self;
-    
-    
-    // 페이스북
-    self.oAuthFacebook = [OAuthFacebook sharedInstnace];
-    self.oAuthFacebook.delegate = self;
-    
-    // 토큰 갱신
-    [self oAuthManagerRefreshToken];
-    
-
-    return self;
-}
-
 #pragma mark - REQUEST
-- (void)oAuthManagerUserData{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER
-    NSLog(@"OAUTH MANAGER request UserData");
-#endif
-    
-    [[IndicatorView sharedInstnace] show];
-    switch (oAuthLoginName) {
-        case oAuthName_Naver:
-             [self.oAuthNaver oAuthNaverUserData];
-            break;
-            
-        case oAuthName_Kakao:
-            [self.oAuthKakao oAuthKakaoUserData];
-            break;
-            
-        case oAuthName_Facebook:
-            [self.oAuthFacebook oAuthFacebookUserData];
-            break;
-            
-        case oAuthName_Google:
-            [self.oAuthGoogle oAuthGoogleUserData];
-            break;
-            
-        default:
-            break;
-    }
-}
-
-
 // 로그인
-- (void)oAuthManagerLogin:(int)loginoAuthName {
-#ifdef OAuth_LOG_MANAGER_DEVELOPER
-    NSLog(@"OAUTH MANAGER request Login");
-#endif
-    
-    switch (loginoAuthName) {
-        case oAuthName_Naver:
-            [[IndicatorView sharedInstnace] show];
-            [self.oAuthNaver oAuthNaverLogin];
-            break;
-            
-        case oAuthName_Kakao:
-            [self.oAuthKakao oAuthKakaoLogin];
-            break;
-            
-        case oAuthName_Facebook:
-            [self.oAuthFacebook oAuthFacebookLogin];
-            break;
-            
-        case oAuthName_Google:
-            [self.oAuthGoogle oAuthGoogleLogin];
-            break;
-            
-        default:
-            break;
-    }
+- (void)requestOAuthManagerLogin:(OAUTH_TYPE)loginOAuthType handler:(responseOAuthResult)responseOAuthResult{
+    [self initSocialLogin:(OAUTH_TYPE)loginOAuthType]; // SNS Login 클래스 생성
+    if ([self isOAuthObject] == NO) { responseOAuthResult(NO); return; }
+    [self.oAuthObject requestOAuthLogin:responseOAuthResult];
 }
-
 
 // 로그아웃
-- (void)oAuthManagerLogout{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER
-    NSLog(@"OAUTH MANAGER request Logout");
-#endif
-    [[IndicatorView sharedInstnace]show];
-    switch (oAuthLoginName) {
-        case oAuthName_Naver:
-            [self.oAuthNaver oAuthNaverLogout];
-            break;
-            
-        case oAuthName_Kakao:
-            [self.oAuthKakao oAuthKakaoLogout];
-            break;
-            
-        case oAuthName_Facebook:
-            [self.oAuthFacebook oAuthFacebookLogout];
-            break;
-            
-        case oAuthName_Google:
-            [self.oAuthGoogle oAuthGoogleLogout];
-            break;
-            
-        default:
-            [[IndicatorView sharedInstnace]dismiss];
-            break;
-    }
+- (void)requestOAuthManagerLogout:(responseOAuthResult)responseOAuthResult{
+    if ([self isOAuthObject] == NO) { return; }
+    [self.oAuthObject requestOAuthLogout:responseOAuthResult];
 }
-
 
 // 인증 해제
-- (void)oAuthManagerDelete{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER
-    NSLog(@"OAUTH MANAGER request Delete");
-#endif
-    [[IndicatorView sharedInstnace]show];
-    switch (oAuthLoginName) {
-        case oAuthName_Naver:
-            [self.oAuthNaver oAuthNaverDelete];
-            break;
-            
-        case oAuthName_Kakao:
-            [self.oAuthKakao oAuthKakaoDelete];
-            break;
-            
-        case oAuthName_Facebook:
-             [self.oAuthFacebook oAuthFacebookLogout];
-            break;
-            
-        case oAuthName_Google:
-             [self.oAuthGoogle oAuthGoogleLogout];
-            break;
-            
-        default:
-            [[IndicatorView sharedInstnace]dismiss];
-            break;
-    }
+- (void)requestOAuthManagerRemove:(responseOAuthResult)responseOAuthResult{
+    if ([self isOAuthObject] == NO) { responseOAuthResult(NO); return; }
+    [self.oAuthObject requestOAuthRemove:responseOAuthResult];
 }
-
 
 // 토큰 갱신
-- (void)oAuthManagerRefreshToken{
-#ifdef OAuth_LOG_MANAGER_DEVELOPER
-    NSLog(@"OAUTH MANAGER request RefreshToken");
-#endif
-    switch (oAuthLoginName) {
-        case oAuthName_Naver:
-            [self.oAuthNaver oAuthNaverRefreshToken];
-            break;
-            
-        case oAuthName_Kakao:
-            [self.oAuthKakao oAuthKakaoRefreshToken];
-            break;
-            
-        case oAuthName_Facebook:
-            [self.oAuthFacebook oAuthFacebookRefreshToken];
-            break;
-            
-        case oAuthName_Google:
-            break;
-            
-        default:
-            break;
-    }
+- (void)requestOAuthManagerRefreshToken:(responseOAuthResult)responseOAuthResult{
+    if ([self isOAuthObject] == NO) { return; }
+    [self.oAuthObject requsetOAuthRefreshToken:responseOAuthResult];
 }
 
-#pragma mark - GET OAUTH LOGIN NAME
-- (NSString *)getOAuthgetLoginName{
-    NSString *strOAuthLoginName;
-    switch (oAuthLoginName) {
-        case oAuthName_Naver:
-            strOAuthLoginName = @"NAVER";
-            break;
-            
-        case oAuthName_Kakao:
-            strOAuthLoginName = @"KAKAO";
-            break;
-            
-        case oAuthName_Facebook:
-            strOAuthLoginName = @"FACEBOOK";
-            break;
-            
-        case oAuthName_Google:
-            strOAuthLoginName = @"GOOGLE";
-            break;
-            
-        default:
-            strOAuthLoginName = @"NULL";
-            break;
-    }
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER LoginName == %@",strOAuthLoginName);
-#endif
-    return strOAuthLoginName;
+// 사용자 데이터 조회
+- (void)requestOAuthManagerGetUserData:(responseUserData)responseUserData{
+    if ([self isOAuthObject] == NO) { return; }
+    [self.oAuthObject requestOAuthGetUserData:responseUserData];
 }
 
 // 로그인 여부 확인
-- (BOOL)oAuthManagerLoginState{
-    
-    BOOL loginState = YES;
-    
-    if([self.oAuthNaver getLoginState]){                        // Naver
-        oAuthLoginName = oAuthName_Naver;
-        self.oAuthAccessToken = self.oAuthNaver.accessToken;
-        self.oAuthRefreshToken = self.oAuthNaver.refreshToken;
-        
-    }else if([self.oAuthKakao getLoginState]){                  // Kakao
-        oAuthLoginName = oAuthName_Kakao;
-        self.oAuthAccessToken = self.oAuthKakao.accessToken;
-        self.oAuthRefreshToken = self.oAuthKakao.refreshToken;
-        
-    }else if([self.oAuthFacebook getLoginState]){               // Facebook
-        oAuthLoginName = oAuthName_Facebook;
-        self.oAuthAccessToken = self.oAuthFacebook.accessToken;
-        self.oAuthRefreshToken = self.oAuthFacebook.userID;
+- (BOOL)requestOAuthManagerIsLogin{
+    if ([self isOAuthObject] == NO) { return NO; }
+    return [self.oAuthObject requestOAuthIsLogin];
+}
 
-    }else if([self.oAuthGoogle getLoginState]){                 // Google
-        oAuthLoginName = oAuthName_Google;
-        self.oAuthAccessToken = self.oAuthGoogle.accessToken;
-        self.oAuthRefreshToken = self.oAuthGoogle.refreshToken;
+// 네이티브 앱 로그인 연동
+- (BOOL)requestOAuthManagerNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
+    if ([self isOAuthObject] == NO) { return NO; }
+    if ([self.oAuthObject isKindOfClass:[OAuthFacebook class]] == YES ) { return NO; };
+    return [self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options];
+}
 
-    }else{
-        oAuthLoginName = oAuthName_Default;
-        self.oAuthAccessToken = nil;
-        self.oAuthRefreshToken = nil;
-        loginState = NO;
-    }
-    
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Token \n==============================\noAuthAccessToken == %@\noAuthRefreshToken == %@ \n==============================",self.oAuthAccessToken,self.oAuthRefreshToken);
-#endif
-    
-    [self getOAuthgetLoginName];
-    return loginState;
+#pragma makr- SDK Setting
+
+
+// 앱 시작
+-(void)requestStartOAuthManager:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    if ([self isOAuthObject] == NO) { return; }
+    [self.oAuthObject requestStartOAuth:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+// 앱 종료
+-(void)requestDidOAuthManager{
+    if ([self isOAuthObject] == NO) { return; }
+    [self.oAuthObject requestDidOAuth];
 }
 
 
-#pragma mark - OAuth OPEN URL SCHEME
+#pragma mark - privite
 
-- (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
-    
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER request OpenURL = \n%@",[NSString stringWithFormat:@"%@",url]);
-#endif
-    
-    if([[options objectForKey:OAuth_Open_URLSchemeKEY] isEqualToString:OAuth_Open_URLSchemeKEY_NAVER]){
-        return [self.oAuthNaver oAuthCheckOpenURL:app openURL:url options:options];
-    }else if([self.oAuthKakao isKakaoAccountLoginCallback:url]){
-        return [self.oAuthKakao handleOpenURL:url];
-    }else if([self.oAuthGoogle oAuthCheckOpenURL:url options:options]){
-        return [self.oAuthGoogle oAuthCheckOpenURL:url options:options];
-    }else{
+-(BOOL)isOAuthObject{
+    if(self.oAuthObject == nil){
         return NO;
+    }else{
+        return YES;
     }
+}
+
+/**
+ * SNS Social 로그인 클래스 생성
+ */
+- (void)initSocialLogin:(int)loginSocialType{
     
-    // Facebook 지원 하지 않음
-}
-
-
-#pragma mark- DELEGATE
-
-- (void)oAuthResponseLoginResult:(BOOL)state OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response LOGIN %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
-#endif
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLoginResult:)]){
-        [self.delegate responseLoginResult:YES];
-    }
-    [[IndicatorView sharedInstnace]dismiss];
-}
-
-
-- (void)oAuthResponseLogoutResult:(BOOL)state OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-     NSLog(@"\nOAUTH MANAGER Response Logout %@, %@",state?@"YES":@"NO",[self getOAuthName:oAuthName]);
-#endif
+    self.oAuthObject = nil;
     
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseLogoutResult:)]){
-        [self.delegate responseLogoutResult:state];
+    if(loginSocialType == OAUTH_TYPE_NAVER){
+        self.oAuthObject = [[OAuthNaver alloc] init];
+    }else if(loginSocialType == OAUTH_TYPE_KAKAO){
+        self.oAuthObject = [[OAuthKakao alloc] init];
+    }else if(loginSocialType == OAUTH_TYPE_FACEBOOK){
+        self.oAuthObject = [[OAuthFacebook alloc] init];
+    }else if(loginSocialType == OAUTH_TYPE_GOOGLE){
+        self.oAuthObject = [[OAuthGoogle alloc] init];
     }
-    [[IndicatorView sharedInstnace]dismiss];
 }
-
-
-- (void)oAuthResponseOAuthManagerUserData:(NSString *)userData{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response OAuthManagerUserData = \n%@",userData);
-#endif
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(getOAuthManagerUserData:)]){
-        [self.delegate getOAuthManagerUserData:userData];
-    }
-    [[IndicatorView sharedInstnace]dismiss];
-}
-
-
--(void)oAuthResponseSuccess:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response Success %@",[self getOAuthName:oAuthName]);
-#endif
-    [[IndicatorView sharedInstnace]dismiss];
-}
-
-
-- (void)oAuthResponseErorr:(NSError *)error OAuthName:(int)oAuthName{
-#if defined(OAuth_LOG_MANAGER) || defined(OAuth_LOG_MANAGER_DEVELOPER)
-    NSLog(@"\nOAUTH MANAGER Response \nOAuthName = %@\nErorr = %@",[self getOAuthName:oAuthName],[NSString stringWithFormat:@"%@",error]);
-#endif
-    [[IndicatorView sharedInstnace]dismiss];
-}
-
-
-// 앱 첫 실행시 구글 로그인 여부 확인
-- (void)responseGoogleAppFirstStart:(BOOL)state{
-    if(self.delegate != nil && [self.delegate respondsToSelector:@selector(responseAppFirstStart:)]){
-        [self.delegate responseAppFirstStart:state];
-    }
-    [[IndicatorView sharedInstnace] dismiss];
-}
-
-    
-// 로그 출력
-- (NSString *)getOAuthName:(int)oAuthName{
-    NSString *strOauthName;
-    switch (oAuthName) {
-        case oAuthName_Naver:
-        strOauthName = @"Naver";
-        break;
-        case oAuthName_Kakao:
-        strOauthName = @"Kakao";
-        break;
-        case oAuthName_Google:
-        strOauthName = @"Google";
-        break;
-        case oAuthName_Facebook:
-        strOauthName = @"Facebook";
-        break;
-        case oAuthName_Default:
-        strOauthName = @"Default";
-        break;
-        default:
-        strOauthName = @"Default";
-        break;
-    }
-    return strOauthName;
-}
-
 
 @end

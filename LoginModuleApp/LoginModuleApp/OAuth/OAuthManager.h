@@ -1,45 +1,26 @@
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "OAuthAPI.h"
-#import "IndicatorView.h"
-#import "OAuthDelegate.h"
 
-#import "OAuthNaver.h"
-#import "OAuthKakao.h"
-#import "OAuthFacebook.h"
-#import "OAuthGoogle.h"
-
-@protocol OAuthManagerDelegate<NSObject>
-@optional
-- (void)getOAuthManagerUserData:(NSString *)userData; // 사용자 정보 확인
-- (void)responseLoginResult:(BOOL)state;              // 로그인 성공 여부 확인
-- (void)responseLogoutResult:(BOOL)state;             // 로그인 실패 여부 확인
-- (void)responseAppFirstStart:(BOOL)state;            // 사용자 로그인 정보 확인 (메인 화면 앱 첫 실행시)
-@end
-
-@interface OAuthManager : NSObject<OAuthDelegate>{
-    int oAuthLoginName;
-}
-@property (weak, nonatomic) id<OAuthManagerDelegate> delegate;
+@interface OAuthManager : NSObject
 @property (strong, nonatomic) NSString *oAuthAccessToken;
 @property (strong, nonatomic) NSString *oAuthRefreshToken;
-    
-@property (strong, nonatomic) OAuthNaver *oAuthNaver;
-@property (strong, nonatomic) OAuthKakao *oAuthKakao;
-@property (strong, nonatomic) OAuthFacebook *oAuthFacebook;
-@property (strong, nonatomic) OAuthGoogle *oAuthGoogle;
 
 + (OAuthManager *)sharedInstnace;
 
-- (BOOL)oAuthManagerLoginState;                  // 로그인 상태
-- (void)oAuthManagerUserData;                    // 사용자 데이터 호출
-- (void)oAuthManagerLogin:(int)loginoAuthName;   // 로그인
-- (void)oAuthManagerLogout;                      // 로그아웃
-- (void)oAuthManagerDelete;                      // 인증해제
-- (void)oAuthManagerRefreshToken;                // 토큰 업데이트
-- (NSString *)getOAuthgetLoginName;              // 연동중인 API 확인
+#pragma mark - request
+- (BOOL)requestOAuthManagerIsLogin;                                                                            // 로그인 상태
+- (void)requestOAuthManagerGetUserData:(responseUserData)responseUserData;                               // 사용자 데이터 호출
+- (void)requestOAuthManagerLogin:(OAUTH_TYPE)loginOAuthType handler:(responseOAuthResult)responseOAuthResult;  // 로그인
+- (void)requestOAuthManagerLogout:(responseOAuthResult)responseOAuthResult;                             // 로그아웃
+- (void)requestOAuthManagerRemove:(responseOAuthResult)responseOAuthResult;                                    // 인증해제
+- (void)requestOAuthManagerRefreshToken:(responseOAuthResult)responseOAuthResult;                                          // 토큰 업데이트
 
+- (BOOL)requestOAuthManagerNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options; // 외부 로그인 앱 연동 스키마 전달
 
-// 외부 로그인 앱 연동 스키마 전달
-- (BOOL)oAuthCheckOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options;
+#pragma mark - SDK Setting
+- (void)requestStartOAuthManager:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions; // 앱 시작
+- (void)requestDidOAuthManager; // 앱 종료
 
 @end
+

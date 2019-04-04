@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[OAuthGoogle signIn:didSignInForUser:withError:]:OAuthGoogle.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.userIDToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OAuthNaver oauth20ConnectionDidFinishRequestACTokenWithAuthCode]:OAuthNaver.m">
          <PersistentStrings>
             <PersistentString
@@ -11,15 +19,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OAuthManager oAuthManagerLoginState]:OAuthManager.m">
+         contextName = "-[OAuthGoogle init]:OAuthGoogle.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.oAuthNaver.accessToken">
+               value = "[[GIDSignIn sharedInstance] hasAuthInKeychain]">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
       </ContextState>
       <ContextState
          contextName = "-[OAuthKakao getLoginState]:OAuthKakao.m">
@@ -38,32 +43,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager oAuthManagerLoginState]:OAuthManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.oAuthNaver.accessToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "__29-[OAuthKakao oAuthKakaoLogin]_block_invoke:OAuthKakao.m">
          <PersistentStrings>
             <PersistentString
                value = "[[KOSession sharedSession] token]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[OAuthGoogle getLoginState]:OAuthGoogle.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.accessToken">
-            </PersistentString>
-            <PersistentString
-               value = "self.userIDToken">
-            </PersistentString>
-            <PersistentString
-               value = "[GIDSignIn sharedInstance].currentUser">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[OAuthGoogle init]:OAuthGoogle.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[GIDSignIn sharedInstance] hasAuthInKeychain]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -87,10 +81,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OAuthGoogle signIn:didSignInForUser:withError:]:OAuthGoogle.m">
+         contextName = "-[AppDelegate signIn:didSignInForUser:withError:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager requestOAuthManagerNativeOpenURL:openURL:options:]:OAuthManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.userIDToken">
+               value = "[self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -122,15 +119,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "-[OAuthGoogle getLoginState]:OAuthGoogle.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[GIDSignIn sharedInstance].currentUser">
+            </PersistentString>
+            <PersistentString
+               value = "self.accessToken">
+            </PersistentString>
+            <PersistentString
+               value = "self.userIDToken">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OAuthManager init]:OAuthManager.m">
          <PersistentStrings>
             <PersistentString
                value = "self.oAuthNaver.thirdPartyLoginConn.accessToken">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[AppDelegate signIn:didSignInForUser:withError:]:AppDelegate.m">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

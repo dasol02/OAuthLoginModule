@@ -9,14 +9,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [OAuthManager sharedInstnace].delegate = self;
-    [[OAuthManager sharedInstnace] oAuthManagerUserData];
-    
-#ifdef OAuth_LOG_MANAGER
-   NSLog(@"\nUserProfileViewController Login Oauth Type == %@",[[OAuthManager sharedInstnace] getOAuthgetLoginName]);
-#endif
-    
-
+    [[OAuthManager sharedInstnace] requestOAuthManagerGetUserData:^(bool result, NSString *userData) {
+        if (result) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//
+//            });
+             [self.textFieldUserData setText:userData];
+        }
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,21 +24,18 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)getOAuthManagerUserData:(NSString *)userData{
-    dispatch_async(dispatch_get_main_queue(), ^{
-            [self.textFieldUserData setText:userData];
-    });
-}
-
 - (IBAction)actionLogout:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLogout];
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogout:^(bool result){
+        [self responseLogoutResult:result];
+    }];
 }
 
 - (IBAction)actionOAuthDelete:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerDelete];
+    [[OAuthManager sharedInstnace] requestOAuthManagerRemove:^(bool result) {
+        [self responseLogoutResult:result];
+    }];
 }
-    
-    
+
 - (void)responseLogoutResult:(BOOL)state{
      [self.navigationController popViewControllerAnimated:state];
 }

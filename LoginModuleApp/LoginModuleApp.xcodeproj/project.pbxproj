@@ -18,6 +18,7 @@
 		16941201215204FE00CA7EE0 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */; };
 		169412042152062F00CA7EE0 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 169412032152062F00CA7EE0 /* UIImage+GIF.m */; };
 		16B90FDD2165A10F004CC253 /* OAuthKakao.m in Sources */ = {isa = PBXBuildFile; fileRef = 16B90FDC2165A10F004CC253 /* OAuthKakao.m */; };
+		16C405A92255D5FB0026A77C /* OAuthBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C405A82255D5FB0026A77C /* OAuthBase.m */; };
 		16C9F5E7216ADE8000332B1D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5E5216ADE4200332B1D /* Bolts.framework */; };
 		16C9F5E8216ADE8200332B1D /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 16C9F5E3216ADDC200332B1D /* GoogleSignIn.bundle */; };
 		16C9F5E9216ADE8500332B1D /* GoogleSignInDependencies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C9F5DD216ADD5400332B1D /* GoogleSignInDependencies.framework */; };
@@ -72,6 +73,7 @@
 		1617A68521673C7F00D633E8 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		1617A688216740D600D633E8 /* OAuthFacebook.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthFacebook.h; sourceTree = "<group>"; };
 		1617A689216740D600D633E8 /* OAuthFacebook.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthFacebook.m; sourceTree = "<group>"; };
+		1664B1F122546BFA00FDE016 /* OAuthBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthBase.h; sourceTree = "<group>"; };
 		169411EE2151D1B600CA7EE0 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		169411EF2151D1B600CA7EE0 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		169411F12151E12100CA7EE0 /* OAuthNaver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthNaver.h; sourceTree = "<group>"; };
@@ -86,10 +88,10 @@
 		169411FE215204FE00CA7EE0 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		169412022152062F00CA7EE0 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		169412032152062F00CA7EE0 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
-		169412052152156400CA7EE0 /* OAuthAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthAPI.h; sourceTree = "<group>"; };
-		169412062152205C00CA7EE0 /* OAuthDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthDelegate.h; sourceTree = "<group>"; };
 		16B90FDB2165A10F004CC253 /* OAuthKakao.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthKakao.h; sourceTree = "<group>"; };
 		16B90FDC2165A10F004CC253 /* OAuthKakao.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OAuthKakao.m; sourceTree = "<group>"; };
+		16C405A82255D5FB0026A77C /* OAuthBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OAuthBase.m; sourceTree = "<group>"; };
+		16C405AA2255E3B40026A77C /* OAuthAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OAuthAPI.h; sourceTree = "<group>"; };
 		16C9F5DD216ADD5400332B1D /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignInDependencies.framework; sourceTree = "<group>"; };
 		16C9F5DE216ADD5400332B1D /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		16C9F5E3216ADDC200332B1D /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
@@ -149,6 +151,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1664B1E922544BEF00FDE016 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				1617A688216740D600D633E8 /* OAuthFacebook.h */,
+				1617A689216740D600D633E8 /* OAuthFacebook.m */,
+			);
+			path = Facebook;
+			sourceTree = "<group>";
+		};
+		1664B1EA22544BF700FDE016 /* Kakao */ = {
+			isa = PBXGroup;
+			children = (
+				16B90FDB2165A10F004CC253 /* OAuthKakao.h */,
+				16B90FDC2165A10F004CC253 /* OAuthKakao.m */,
+			);
+			path = Kakao;
+			sourceTree = "<group>";
+		};
+		1664B1EB22544BFB00FDE016 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				16C9F5F1216AEE4600332B1D /* OAuthGoogle.h */,
+				16C9F5F2216AEE4600332B1D /* OAuthGoogle.m */,
+			);
+			path = Google;
+			sourceTree = "<group>";
+		};
+		1664B1EC22544C0000FDE016 /* Naver */ = {
+			isa = PBXGroup;
+			children = (
+				169411F12151E12100CA7EE0 /* OAuthNaver.h */,
+				169411F22151E12100CA7EE0 /* OAuthNaver.m */,
+			);
+			path = Naver;
+			sourceTree = "<group>";
+		};
 		169411EB2151D18800CA7EE0 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -200,6 +238,15 @@
 			path = SVProgressHUD;
 			sourceTree = "<group>";
 		};
+		16C405862254A54D0026A77C /* OAuthBase */ = {
+			isa = PBXGroup;
+			children = (
+				1664B1F122546BFA00FDE016 /* OAuthBase.h */,
+				16C405A82255D5FB0026A77C /* OAuthBase.m */,
+			);
+			path = OAuthBase;
+			sourceTree = "<group>";
+		};
 		16CC7AAE2153362A00C1305A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,18 +260,14 @@
 		16CF043D214A2D8F007631B2 /* OAuth */ = {
 			isa = PBXGroup;
 			children = (
-				169412052152156400CA7EE0 /* OAuthAPI.h */,
-				169412062152205C00CA7EE0 /* OAuthDelegate.h */,
+				16C405862254A54D0026A77C /* OAuthBase */,
+				1664B1EC22544C0000FDE016 /* Naver */,
+				1664B1EB22544BFB00FDE016 /* Google */,
+				1664B1EA22544BF700FDE016 /* Kakao */,
+				1664B1E922544BEF00FDE016 /* Facebook */,
 				16CF043F214A2DB5007631B2 /* OAuthManager.h */,
 				16CF0440214A2DB5007631B2 /* OAuthManager.m */,
-				169411F12151E12100CA7EE0 /* OAuthNaver.h */,
-				169411F22151E12100CA7EE0 /* OAuthNaver.m */,
-				16B90FDB2165A10F004CC253 /* OAuthKakao.h */,
-				16B90FDC2165A10F004CC253 /* OAuthKakao.m */,
-				1617A688216740D600D633E8 /* OAuthFacebook.h */,
-				1617A689216740D600D633E8 /* OAuthFacebook.m */,
-				16C9F5F1216AEE4600332B1D /* OAuthGoogle.h */,
-				16C9F5F2216AEE4600332B1D /* OAuthGoogle.m */,
+				16C405AA2255E3B40026A77C /* OAuthAPI.h */,
 			);
 			path = OAuth;
 			sourceTree = "<group>";
@@ -439,6 +482,7 @@
 			files = (
 				16FC51E32148A84200219255 /* LoginModuleApp.xcdatamodeld in Sources */,
 				1617A68A216740D600D633E8 /* OAuthFacebook.m in Sources */,
+				16C405A92255D5FB0026A77C /* OAuthBase.m in Sources */,
 				16FC51DD2148A84200219255 /* LoginViewController.m in Sources */,
 				16FC51EB2148A84600219255 /* main.m in Sources */,
 				16CF0444214A3EC2007631B2 /* UserProfileViewController.m in Sources */,

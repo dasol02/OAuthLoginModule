@@ -8,14 +8,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [OAuthManager sharedInstnace].delegate = self;
 }
 
-- (void)responseLoginResult:(BOOL)state{
+- (void)responseOAuthResult:(BOOL)state{
     if(state){
         [self.navigationController popViewControllerAnimated:YES];
     }else{
-        NSLog(@"ResponseLoginResult FAIL");
+        NSLog(@"responseOAuthResult FAIL");
     }
 }
 
@@ -34,19 +33,27 @@
 
 
 - (IBAction)actionNaverLogin:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Naver];
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_NAVER handler:^(bool result) {
+        [self responseOAuthResult:result];
+    }];
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Kakao];
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_KAKAO handler:^(bool result) {
+        [self responseOAuthResult:result];
+    }];
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {
-   [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Facebook];
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_FACEBOOK handler:^(bool result) {
+        [self responseOAuthResult:result];
+    }];
 }
 
 - (IBAction)actionGoogleLogin:(id)sender {
-    [[OAuthManager sharedInstnace] oAuthManagerLogin:oAuthName_Google];
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_GOOGLE handler:^(bool result) {
+        [self responseOAuthResult:result];
+    }];
 }
 
 @end
