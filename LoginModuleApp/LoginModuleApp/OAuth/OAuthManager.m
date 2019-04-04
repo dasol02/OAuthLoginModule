@@ -6,6 +6,7 @@
 #import "OAuthFacebook.h"
 #import "OAuthGoogle.h"
 
+
 @interface OAuthManager()
 @property (strong, nonatomic) OAuthBase *oAuthObject;
 @end
@@ -22,10 +23,12 @@
     return oAuthManager;
 }
 
+
+
 #pragma mark - REQUEST
 // 로그인
 - (void)requestOAuthManagerLogin:(OAUTH_TYPE)loginOAuthType handler:(responseOAuthResult)responseOAuthResult{
-    [self initSocialLogin:(OAUTH_TYPE)loginOAuthType]; // SNS Login 클래스 생성
+    [self initSocialLogin:(OAUTH_TYPE)loginOAuthType];
     if ([self isOAuthObject] == NO) { responseOAuthResult(NO); return; }
     [self.oAuthObject requestOAuthLogin:responseOAuthResult];
 }
@@ -67,9 +70,9 @@
     return [self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options];
 }
 
+
+
 #pragma makr- SDK Setting
-
-
 // 앱 시작
 -(void)requestStartOAuthManager:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     if ([self isOAuthObject] == NO) { return; }
