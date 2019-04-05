@@ -12,7 +12,9 @@
     
     [[OAuthManager sharedInstnace] requestOAuthManagerGetUserData:^(bool result, NSString *userData) {
         if (result) {
-            [self.textFieldUserData setText:userData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.textFieldUserData setText:userData];
+            });
         }
     }];
 }

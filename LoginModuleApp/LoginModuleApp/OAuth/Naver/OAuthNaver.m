@@ -24,6 +24,12 @@
     [self.thirdPartyLoginConn setAppName:OAuth_Naver_ServiceAppName];
 }
 
+#pragma mark - SDK Setting
+-(void)requestStartOAuth:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{}
+
+
+-(void)requestDidOAuth{}
+
 #pragma mark - REQUEST OAuth
 - (BOOL)requestOAuthIsLogin{
     
