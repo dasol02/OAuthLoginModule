@@ -1,4 +1,11 @@
 #import "OAuthFacebook.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
+@interface OAuthFacebook()
+@property (strong, nonatomic) FBSDKLoginManager *fbManager;
+@end
+
 
 @implementation OAuthFacebook
 
@@ -15,24 +22,16 @@
     return self;
 }
 
-
-- (NSString *)dateFormat:(NSDate *)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    return [formatter stringFromDate:date];
-}
-
-#pragma makr- SDK Setting
+#pragma mark - SDK Setting
 -(void)requestStartOAuth:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 -(void)requestDidOAuth{
-//    [FBSDKAppEvents activateApp];
+    [FBSDKAppEvents activateApp];
 }
 
 #pragma mark - request
-
 
 - (BOOL)requestOAuthIsLogin{
     if ([FBSDKAccessToken currentAccessToken]){
@@ -42,6 +41,31 @@
     }
 }
 
+-(void)requestOAuthLogin:(responseOAuthResult)responseOAuthResult{
+    if (![FBSDKAccessToken currentAccessToken]){
+        [self.fbManager logInWithReadPermissions:@[@"email"]
+                              fromViewController:nil
+                                         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                             if(error || [result isCancelled]){
+                                                 responseOAuthResult(NO);
+                                             }else{
+                                                 self.accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
+                                                 self.userID = [FBSDKAccessToken currentAccessToken].userID;
+                                                 responseOAuthResult(YES);
+                                             }
+                                         }];
+    }else{
+        responseOAuthResult(NO);
+    }
+}
+
+- (void)requestOAuthLogout:(responseOAuthResult)responseOAuthResult{
+    [self requestFacebookRemove] ? responseOAuthResult(YES) : responseOAuthResult(NO);
+}
+
+- (void)requestOAuthRemove:(responseOAuthResult)responseOAuthResult{
+     [self requestFacebookRemove] ? responseOAuthResult(YES) : responseOAuthResult(NO);
+}
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
     
@@ -59,46 +83,11 @@
                  NSString *strUserData = [NSString stringWithFormat:@"\nFacebook\n\nRefreshDate = %@\nUserID = %@\nUserName = %@\nUserEmail = %@\n\nTOKEN = \n%@",[self dateFormat:dateTOKEN_refreshDate],strTOKEN_UserID,userName,userEmail,strTOKEN_Token];
                  responseUserData(YES,strUserData);
              }else{
-//                 [self facebookResponseError:error Type:facebookError_UserData];
                  responseUserData(NO,@"");
              }
          }];
     }else{
-//         [self facebookResponseError:nil Type:facebookError_UserData];
         responseUserData(NO,@"");
-    }
-}
-
--(void)requestOAuthLogin:(responseOAuthResult)responseOAuthResult{
-    if (![FBSDKAccessToken currentAccessToken]){
-        NSLog(@"\nFACE BOOK TRY LOGIN SUCCESS");
-        [self.fbManager logInWithReadPermissions:@[@"email"]
-                              fromViewController:nil
-                                         handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-                                             if(error){
-//                                                 [self facebookResponseError:error Type:facebookError_Login];
-                                                 responseOAuthResult(NO);
-                                             }else if([result isCancelled]){
-//                                                 [self facebookResponseError:error Type:facebookError_Login];
-                                                 responseOAuthResult(NO);
-                                             }else{
-                                                 // User Data
-                                                 self.accessToken = [FBSDKAccessToken currentAccessToken].tokenString;
-                                                 self.userID = [FBSDKAccessToken currentAccessToken].userID;
-                                                 responseOAuthResult(YES);
-                                             }
-                                         }];
-    }else{
-        responseOAuthResult(NO);
-    }
-}
-
-- (void)requestOAuthLogout:(responseOAuthResult)responseOAuthResult{
-    [self.fbManager logOut];
-    if ([FBSDKAccessToken currentAccessToken]){
-        responseOAuthResult(NO);
-    }else{
-        responseOAuthResult(YES);
     }
 }
 
@@ -111,18 +100,30 @@
          if (notification.userInfo[FBSDKAccessTokenChangeNewKey]) {
              responseOAuthResult(YES);
          }else{
-//             [self facebookResponseError:nil Type:facebookError_RefreshToken];
              responseOAuthResult(NO);
          }
      }];
 }
 
-
-
-#pragma mark- DELEGATE
-- (void)facebookResponseError:(NSError*)error Type:(int)type{
-
+- (BOOL)requestOAuthNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
+    return [[FBSDKApplicationDelegate sharedInstance] application:app openURL:url sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey] annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
 
+
+#pragma mark - privite
+- (BOOL)requestFacebookRemove{
+    [self.fbManager logOut];
+    if ([self requestOAuthIsLogin] == YES){
+        return NO;
+    }else{
+        return YES;
+    }
+}
+
+- (NSString *)dateFormat:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [formatter stringFromDate:date];
+}
 
 @end

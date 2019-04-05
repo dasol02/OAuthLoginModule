@@ -10,6 +10,14 @@
     [super viewDidLoad];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+# pragma mark - Privite
+
 - (void)responseOAuthResult:(BOOL)state{
     if(state){
         [self.navigationController popViewControllerAnimated:YES];
@@ -18,42 +26,29 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-- (IBAction)actionNaverLogin:(id)sender {
-    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_NAVER handler:^(bool result) {
+- (void)trySNSLogin:(OAUTH_TYPE)snsType{
+    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:snsType handler:^(bool result) {
         [self responseOAuthResult:result];
     }];
+}
+
+
+# pragma mark - Action
+
+- (IBAction)actionNaverLogin:(id)sender {
+    [self trySNSLogin:(OAUTH_TYPE)OAUTH_TYPE_NAVER];
 }
 
 - (IBAction)actionKakaoLogin:(id)sender {
-    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_KAKAO handler:^(bool result) {
-        [self responseOAuthResult:result];
-    }];
+    [self trySNSLogin:(OAUTH_TYPE)OAUTH_TYPE_KAKAO];
 }
 
 - (IBAction)actionFacebookLogin:(id)sender {
-    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_FACEBOOK handler:^(bool result) {
-        [self responseOAuthResult:result];
-    }];
+    [self trySNSLogin:(OAUTH_TYPE)OAUTH_TYPE_FACEBOOK];
 }
 
 - (IBAction)actionGoogleLogin:(id)sender {
-    [[OAuthManager sharedInstnace] requestOAuthManagerLogin:(OAUTH_TYPE)OAUTH_TYPE_GOOGLE handler:^(bool result) {
-        [self responseOAuthResult:result];
-    }];
+    [self trySNSLogin:(OAUTH_TYPE)OAUTH_TYPE_GOOGLE];
 }
 
 @end

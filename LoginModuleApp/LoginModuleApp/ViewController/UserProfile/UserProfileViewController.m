@@ -9,12 +9,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     [[OAuthManager sharedInstnace] requestOAuthManagerGetUserData:^(bool result, NSString *userData) {
         if (result) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//
-//            });
-             [self.textFieldUserData setText:userData];
+            [self.textFieldUserData setText:userData];
         }
     }];
 }

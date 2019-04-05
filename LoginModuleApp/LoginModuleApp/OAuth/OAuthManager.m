@@ -66,7 +66,6 @@
 // 네이티브 앱 로그인 연동
 - (BOOL)requestOAuthManagerNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
     if ([self isOAuthObject] == NO) { return NO; }
-    if ([self.oAuthObject isKindOfClass:[OAuthFacebook class]] == YES ) { return NO; };
     return [self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options];
 }
 

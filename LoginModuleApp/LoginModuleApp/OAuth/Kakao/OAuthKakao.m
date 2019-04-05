@@ -1,10 +1,13 @@
 #import "OAuthKakao.h"
+#import <KakaoOpenSDK/KakaoOpenSDK.h>
 
+#pragma mark - Kakao Propert Key
 #define KAKAO_PROPERTKEY_EMAIL      @"kakao_account.email"
 #define KAKAO_PROPERTKEY_NICKNAME   @"properties.nickname"
 #define KAKAO_PROPERTKEY_BIRTHDAY   @"kakao_account.birthday"
 #define KAKAO_PROPERTKEY_AGE_RANGE  @"kakao_account.age_range"
 #define KAKAO_PROPERTKEY_GENDER     @"kakao_account.gender"
+#pragma mark -
 
 @implementation OAuthKakao
     
@@ -15,7 +18,7 @@
     return self;
 }
 
-#pragma makr- SDK Setting
+#pragma mark - SDK Setting
 -(void)requestStartOAuth:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{}
 
 - (void)requestDidOAuth{
@@ -64,7 +67,6 @@
                                                 KAKAO_PROPERTKEY_GENDER]
                                    completion:^(NSError *error, KOUserMe *me) {
                                        if (error) {
-                                           [self kakaoResponseError:error Type:kakaoError_UserData];
                                            responseUserData(NO,@"");
                                        } else {
                                            
