@@ -4,6 +4,8 @@
 
 @interface OAuthFacebook()
 @property (strong, nonatomic) FBSDKLoginManager *fbManager;
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *userID;
 @end
 
 
@@ -31,7 +33,7 @@
     [FBSDKAppEvents activateApp];
 }
 
-#pragma mark - request
+#pragma mark - Request
 
 - (BOOL)requestOAuthIsLogin{
     if ([FBSDKAccessToken currentAccessToken]){
@@ -67,6 +69,25 @@
      [self requestFacebookRemove] ? responseOAuthResult(YES) : responseOAuthResult(NO);
 }
 
+- (void)requestOAuthGetToken:(responseToken)responseToken{
+    self.requestOAuthIsLogin ? responseToken(YES, self.accessToken) : responseToken(NO, @"");
+}
+
+
+- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
+    [[NSNotificationCenter defaultCenter] addObserverForName:FBSDKAccessTokenChangeNewKey
+                                                      object:nil
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:
+     ^(NSNotification *notification) {
+         if (notification.userInfo[FBSDKAccessTokenChangeNewKey]) {
+             responseOAuthResult(YES);
+         }else{
+             responseOAuthResult(NO);
+         }
+     }];
+}
+
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
     
     if ([FBSDKAccessToken currentAccessToken]){
@@ -89,20 +110,6 @@
     }else{
         responseUserData(NO,@"");
     }
-}
-
-- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
-    [[NSNotificationCenter defaultCenter] addObserverForName:FBSDKAccessTokenChangeNewKey
-                                                      object:nil
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:
-     ^(NSNotification *notification) {
-         if (notification.userInfo[FBSDKAccessTokenChangeNewKey]) {
-             responseOAuthResult(YES);
-         }else{
-             responseOAuthResult(NO);
-         }
-     }];
 }
 
 - (BOOL)requestOAuthNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{

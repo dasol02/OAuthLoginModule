@@ -4,6 +4,8 @@
 @interface OAuthNaver()<NaverThirdPartyLoginConnectionDelegate>
 @property (strong, nonatomic) NaverThirdPartyLoginConnection *thirdPartyLoginConn;
 @property (strong, nonatomic) responseOAuthResult naverOAuthResponseOAuthResult;
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
 @end
 
 @implementation OAuthNaver
@@ -32,11 +34,10 @@
 
 #pragma mark - SDK Setting
 -(void)requestStartOAuth:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{}
-
-
 -(void)requestDidOAuth{}
 
-#pragma mark - REQUEST OAuth
+
+#pragma mark - Request
 - (BOOL)requestOAuthIsLogin{
     
     NSString * accessToken;
@@ -66,6 +67,26 @@
     }
     responseOAuthResult(NO);
     
+}
+
+- (void)requestOAuthRemove:(responseOAuthResult)responseOAuthResult{
+    [self.thirdPartyLoginConn requestDeleteToken];
+    self.naverOAuthResponseOAuthResult = responseOAuthResult;
+}
+
+
+-(void)requestOAuthGetToken:(responseToken)responseToken{
+    self.requestOAuthIsLogin ? responseToken(YES,self.accessToken) : responseToken(NO,@"");
+}
+
+- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
+    // 전급 토근은 있고 &&  유효기간이 지난 경우
+    if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
+        [self.thirdPartyLoginConn requestAccessTokenWithRefreshToken];
+        responseOAuthResult(YES);
+    }else{
+        responseOAuthResult(NO);
+    }
 }
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
@@ -113,26 +134,10 @@
       }] resume];
 }
 
-
-- (void)requestOAuthRemove:(responseOAuthResult)responseOAuthResult{
-    [self.thirdPartyLoginConn requestDeleteToken];
-    self.naverOAuthResponseOAuthResult = responseOAuthResult;
-}
-
-
 - (BOOL)requestOAuthNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
-     return [self.thirdPartyLoginConn application:app openURL:url options:options];
+    return [self.thirdPartyLoginConn application:app openURL:url options:options];
 }
 
-- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
-    // 전급 토근은 있고 &&  유효기간이 지난 경우
-    if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
-        [self.thirdPartyLoginConn requestAccessTokenWithRefreshToken];
-        responseOAuthResult(YES);
-    }else{
-        responseOAuthResult(NO);
-    }
-}
 
 #pragma mark- NAVER OAuth20 deleagate
 // 로그인 성공

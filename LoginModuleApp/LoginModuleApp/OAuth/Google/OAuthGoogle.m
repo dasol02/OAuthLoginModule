@@ -1,8 +1,13 @@
 #import "OAuthGoogle.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 
+@import GoogleSignIn;
+
 @interface OAuthGoogle()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (strong, nonatomic) responseOAuthResult googleOAuthResponseOAuthResult;
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+@property (strong, nonatomic) NSString *userIDToken;
 @end
 
 @implementation OAuthGoogle
@@ -21,7 +26,7 @@
 -(void)requestDidOAuth{}
 
 
-#pragma mark- request
+#pragma mark- Request
 - (BOOL)requestOAuthIsLogin{
      if([GIDSignIn sharedInstance].currentUser.authentication == nil){
          return NO;
@@ -43,6 +48,12 @@
 - (void)requestOAuthRemove:(responseOAuthResult)responseOAuthResult{
     [self requestGoogleRemove] ? responseOAuthResult(YES) : responseOAuthResult(NO);
 }
+
+- (void)requestOAuthGetToken:(responseToken)responseToken{
+    self.requestOAuthIsLogin ? responseToken(YES, self.accessToken) : responseToken(NO, @"");
+}
+
+- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{}
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
     if([GIDSignIn sharedInstance].currentUser != nil){

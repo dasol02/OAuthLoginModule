@@ -9,6 +9,11 @@
 #define KAKAO_PROPERTKEY_GENDER     @"kakao_account.gender"
 #pragma mark -
 
+@interface OAuthKakao()
+@property (strong, nonatomic) NSString *accessToken;
+@property (strong, nonatomic) NSString *refreshToken;
+@end
+
 @implementation OAuthKakao
     
 -(instancetype)init{
@@ -59,6 +64,25 @@
     }];
 }
 
+-(void)requestOAuthGetToken:(responseToken)responseToken{
+    [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
+        if (error) {
+            responseToken(NO,@"");
+        } else {
+            self.accessToken = [[[KOSession sharedSession] token] accessToken];
+            self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
+            responseToken(YES,self.accessToken);
+        }
+    }];
+}
+
+-(void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
+    [KOSession sharedSession].automaticPeriodicRefresh = YES;
+    self.accessToken = [[[KOSession sharedSession] token] accessToken];
+    self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
+    responseOAuthResult(YES);
+}
+
 -(void)requestOAuthGetUserData:(responseUserData)responseUserData{
     [KOSessionTask userMeTaskWithPropertyKeys:@[KAKAO_PROPERTKEY_EMAIL,
                                                 KAKAO_PROPERTKEY_NICKNAME,
@@ -81,25 +105,6 @@
                                            responseUserData(YES,responseStr);
                                        }
                                    }];
-}
-
--(void)requestOAuthGetToken:(responseToken)responseToken{
-    [KOSessionTask accessTokenInfoTaskWithCompletionHandler:^(KOAccessTokenInfo *accessTokenInfo, NSError *error) {
-        if (error) {
-            responseToken(NO,@"");
-        } else {
-            self.accessToken = [[[KOSession sharedSession] token] accessToken];
-            self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
-            responseToken(YES,self.accessToken);
-        }
-    }];
-}
-
--(void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
-    [KOSession sharedSession].automaticPeriodicRefresh = YES;
-    self.accessToken = [[[KOSession sharedSession] token] accessToken];
-    self.refreshToken = [[[KOSession sharedSession] token] refreshToken];
-    responseOAuthResult(YES);
 }
 
 - (BOOL)requestOAuthNativeOpenURL:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary *)options{
