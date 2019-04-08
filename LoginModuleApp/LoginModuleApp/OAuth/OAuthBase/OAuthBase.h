@@ -2,17 +2,6 @@
 #import <UIKit/UIKit.h>
 #import "OAuthAPI.h"
 
-#pragma mark- OPEN                      URL
-#define OAuth_Open_URLSchemeKEY         @"UIApplicationOpenURLOptionsSourceApplicationKey"
-#define OAuth_Open_URLSchemeKEY_NAVER   @"com.nhncorp.NaverSearch"
-#pragma mark- Naver                     Define
-#define OAuth_Naver_ServiceAppUrlScheme @"loginmoduleappdeeplinkscheme"
-#define OAuth_Naver_ConsumerKey         @"DMM9F1vOnLoTdfm8Qx6w"
-#define OAuth_Naver_ConsumerSecret      @"5_uvXsmbPj"
-#define OAuth_Naver_ServiceAppName      @"loginmoduleapp"
-#pragma mark- Google                    Define
-#define OAuth_Google_ClientID           @"463686728262-mqjt49pp0e46sf415ui9o7bo8cj9pgn6.apps.googleusercontent.com"
-
 #pragma mark-
 @interface OAuthBase : NSObject
 - (BOOL)requestOAuthIsLogin;                                                    // 연동 정보 확인

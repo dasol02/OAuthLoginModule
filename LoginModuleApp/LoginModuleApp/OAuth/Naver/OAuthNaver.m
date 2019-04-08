@@ -1,4 +1,5 @@
 #import "OAuthNaver.h"
+#import "OAuthManager.h"
 #import <NaverThirdPartyLogin/NaverThirdPartyLogin.h>
 
 @interface OAuthNaver()<NaverThirdPartyLoginConnectionDelegate>
@@ -26,10 +27,10 @@
 #pragma mark - OAuth NAVER First Setting
 - (void)setOAuthNaverSetting{
     [self.thirdPartyLoginConn setIsNaverAppOauthEnable:YES];
-    [self.thirdPartyLoginConn setServiceUrlScheme:OAuth_Naver_ServiceAppUrlScheme];
-    [self.thirdPartyLoginConn setConsumerKey:OAuth_Naver_ConsumerKey];
-    [self.thirdPartyLoginConn setConsumerSecret:OAuth_Naver_ConsumerSecret];
-    [self.thirdPartyLoginConn setAppName:OAuth_Naver_ServiceAppName];
+    [self.thirdPartyLoginConn setServiceUrlScheme:[OAuthManager sharedInstnace].oAuthInfo_Naver_ServiceAppUrlScheme];
+    [self.thirdPartyLoginConn setConsumerKey:[OAuthManager sharedInstnace].oAuthInfo_Naver_ConsumerKey];
+    [self.thirdPartyLoginConn setConsumerSecret:[OAuthManager sharedInstnace].oAuthInfo_Naver_ConsumerSecret];
+    [self.thirdPartyLoginConn setAppName:[OAuthManager sharedInstnace].oAuthInfo_Naver_ServiceAppName];
 }
 
 #pragma mark - SDK Setting

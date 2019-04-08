@@ -5,7 +5,16 @@
 @interface OAuthManager : NSObject
 + (OAuthManager *)sharedInstnace;
 
+#pragma mark - SDK Info Setting
+@property (strong, nonatomic) NSString * oAuthInfo_Naver_ServiceAppUrlScheme;
+@property (strong, nonatomic) NSString * oAuthInfo_Naver_ConsumerKey;
+@property (strong, nonatomic) NSString * oAuthInfo_Naver_ConsumerSecret ;
+@property (strong, nonatomic) NSString * oAuthInfo_Naver_ServiceAppName;
+@property (strong, nonatomic) NSString * oAuthInfo_Google_ClientID;
+
 #pragma mark - request
+- (void)requestOAuthManagerInfoSettingScheme: (NSString *)naverService NaverConsumerKey: (NSString *)naverConsumerKey NaverConsumerSecret: (NSString *)naverConsumerSecret  NaverServiceAppName: (NSString *)naverServiceAppName  GoogleClientID: (NSString *)googleClientID;
+
 - (BOOL)requestOAuthManagerIsLogin;                                                                              // 로그인 상태
 - (void)requestOAuthManagerGetUserData:(responseUserData)responseUserData;                                       // 사용자 데이터 호출
 - (void)requestOAuthManagerLogin:(OAUTH_TYPE)loginOAuthType handler:(responseOAuthResult)responseOAuthResult;    // 로그인

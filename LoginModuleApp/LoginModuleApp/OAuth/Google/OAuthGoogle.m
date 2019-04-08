@@ -1,5 +1,7 @@
 #import "OAuthGoogle.h"
+#import "OAuthManager.h"
 #import <GoogleSignIn/GoogleSignIn.h>
+
 
 @import GoogleSignIn;
 
@@ -14,7 +16,7 @@
 
 - (instancetype)init{
     self = [super init];
-    [GIDSignIn sharedInstance].clientID = OAuth_Google_ClientID;
+    [GIDSignIn sharedInstance].clientID = [[OAuthManager sharedInstnace] oAuthInfo_Google_ClientID];
     [GIDSignIn sharedInstance].delegate = self;
     [GIDSignIn sharedInstance].uiDelegate = self;
     return self;
@@ -53,7 +55,9 @@
     self.requestOAuthIsLogin ? responseToken(YES, self.accessToken) : responseToken(NO, @"");
 }
 
-- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{}
+- (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
+    responseOAuthResult(YES);
+}
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
     if([GIDSignIn sharedInstance].currentUser != nil){
