@@ -3,12 +3,86 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[OAuthKakao getLoginState]:OAuthKakao.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[KOSession sharedSession] state]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager oAuthResponseLoginResult:OAuthName:]:OAuthManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.delegate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__30-[OAuthNaver getNaverUserData]_block_invoke:OAuthNaver.m">
+         <PersistentStrings>
+            <PersistentString
+               value = " [[dict objectForKey:@&quot;response&quot;]objectForKey:@&quot;name&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "[userData objectForKey:@&quot;name&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager requestOAuthManagerNativeOpenURL:openURL:options:]:OAuthManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[OAuthGoogle signIn:didSignInForUser:withError:]:OAuthGoogle.m">
          <PersistentStrings>
             <PersistentString
                value = "self.userIDToken">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[UserProfileViewController viewDidLoad]_block_invoke:UserProfileViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[AppDelegate signIn:didSignInForUser:withError:]:AppDelegate.m">
+      </ContextState>
+      <ContextState
+         contextName = "__43-[LoginViewController actionFacebookLogin:]_block_invoke:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[result isCancelled]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__40-[UserProfileViewController viewDidLoad]_block_invoke_2:UserProfileViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__38-[OAuthNaver requestOAuthGetUserData:]_block_invoke:OAuthNaver.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OAuthManager requestOAuthManagerIsLogin]:OAuthManager.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "OAUTH_TYPE_NAVER">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController responseOAuthResult:SNSType:]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[NSNumber numberWithUnsignedInteger:snsType] ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
       </ContextState>
       <ContextState
          contextName = "-[OAuthNaver oauth20ConnectionDidFinishRequestACTokenWithAuthCode]:OAuthNaver.m">
@@ -27,23 +101,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OAuthKakao getLoginState]:OAuthKakao.m">
+         contextName = "-[OAuthManager init]:OAuthManager.m">
          <PersistentStrings>
             <PersistentString
-               value = "[KOSession sharedSession] state]">
+               value = "self.oAuthNaver.thirdPartyLoginConn.accessToken">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LoginViewController actionKakaoLogin:]:LoginViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[OAuthManager sharedInstnace].oAuthNaver.thirdPartyLoginConn state]">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "-[AppDelegate application:openURL:options:]:AppDelegate.m">
       </ContextState>
       <ContextState
-         contextName = "__32-[OAuthKakao oAuthKakaoGetToken]_block_invoke:OAuthKakao.m">
+         contextName = "__38-[OAuthKakao requestOAuthGetUserData:]_block_invoke:OAuthKakao.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "me.account.ageRange">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "-[OAuthManager oAuthManagerLoginState]:OAuthManager.m">
@@ -54,55 +128,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "__29-[OAuthKakao oAuthKakaoLogin]_block_invoke:OAuthKakao.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[[KOSession sharedSession] token]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__43-[LoginViewController actionFacebookLogin:]_block_invoke:LoginViewController.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[result isCancelled]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "__30-[OAuthNaver getNaverUserData]_block_invoke:OAuthNaver.m">
-         <PersistentStrings>
-            <PersistentString
-               value = " [[dict objectForKey:@&quot;response&quot;]objectForKey:@&quot;name&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "[userData objectForKey:@&quot;name&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[AppDelegate signIn:didSignInForUser:withError:]:AppDelegate.m">
-      </ContextState>
-      <ContextState
-         contextName = "-[OAuthManager requestOAuthManagerNativeOpenURL:openURL:options:]:OAuthManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "[self.oAuthObject requestOAuthNativeOpenURL:app openURL:url options:options]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[OAuthManager oAuthResponseLoginResult:OAuthName:]:OAuthManager.m">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.delegate">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "-[AppDelegate application:openURL:options:]:AppDelegate.m">
-      </ContextState>
-      <ContextState
          contextName = "-[MainViewController setUpdateButtonUI]:MainViewController.m">
          <PersistentStrings>
             <PersistentString
@@ -111,10 +136,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[LoginViewController viewWillAppear:]:LoginViewController.m">
+         contextName = "-[LoginViewController actionKakaoLogin:]:LoginViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
+               value = "[[OAuthManager sharedInstnace].oAuthNaver.thirdPartyLoginConn state]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -133,10 +158,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "-[OAuthManager init]:OAuthManager.m">
+         contextName = "__29-[OAuthKakao oAuthKakaoLogin]_block_invoke:OAuthKakao.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.oAuthNaver.thirdPartyLoginConn.accessToken">
+               value = "[[KOSession sharedSession] token]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LoginViewController viewWillAppear:]:LoginViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[[OAuthManager sharedInstnace] oAuthManagerLoginState]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

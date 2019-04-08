@@ -89,26 +89,29 @@
 }
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
+     struct OAuthUserInfo userInfo;
     
     if ([FBSDKAccessToken currentAccessToken]){
         
         [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields":@"name,email"}]
          startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+            struct OAuthUserInfo userInfo;
+             
              if (!error) {
-                 NSString *strTOKEN_Token = [FBSDKAccessToken currentAccessToken].tokenString;
-                 NSString *strTOKEN_UserID = [FBSDKAccessToken currentAccessToken].userID;
-                 NSDate *dateTOKEN_refreshDate = [FBSDKAccessToken currentAccessToken].refreshDate;
-                 NSString *userName = result[@"name"];
-                 NSString *userEmail = result[@"email"];
-                 
-                 NSString *strUserData = [NSString stringWithFormat:@"\nFacebook\n\nRefreshDate = %@\nUserID = %@\nUserName = %@\nUserEmail = %@\n\nTOKEN = \n%@",[self dateFormat:dateTOKEN_refreshDate],strTOKEN_UserID,userName,userEmail,strTOKEN_Token];
-                 responseUserData(YES,strUserData);
+                 userInfo.userName = result[@"name"];
+                 userInfo.userID = [FBSDKAccessToken currentAccessToken].userID;
+                 userInfo.userEmail = result[@"email"];
+                 userInfo.userAccessToken = self.accessToken;
+                 userInfo.userTokenRefreshDate = [NSString stringWithFormat:@"%@",[FBSDKAccessToken currentAccessToken].refreshDate];
+                 responseUserData(YES,userInfo);
              }else{
-                 responseUserData(NO,@"");
+                 userInfo.userName = @"";
+                 responseUserData(NO,userInfo);
              }
          }];
     }else{
-        responseUserData(NO,@"");
+        userInfo.userName = @"";
+        responseUserData(NO,userInfo);
     }
 }
 

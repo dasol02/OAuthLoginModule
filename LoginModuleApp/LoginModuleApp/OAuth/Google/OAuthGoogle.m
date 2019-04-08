@@ -60,6 +60,8 @@
 }
 
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
+   
+    
     if([GIDSignIn sharedInstance].currentUser != nil){
         
         NSString *targetUrl = [NSString stringWithFormat:@"https://www.googleapis.com/oauth2/v3/userinfo?access_token=%@",[GIDSignIn sharedInstance].currentUser.authentication.accessToken];
@@ -75,23 +77,26 @@
         
         [[[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data,
                                                                                        NSURLResponse * _Nullable response,NSError * _Nullable error) {
+            struct OAuthUserInfo userInfo;
         
-            if(error){ responseUserData(NO,@""); return; }
+            if(error){ userInfo.userName = @""; responseUserData(NO,userInfo); return; }
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-            NSString *userGender = [dict objectForKey:@"gender"];
-            userGender = [NSString stringWithFormat:@"사용자 성별: %@", userGender];
-            NSString *userID = [NSString stringWithFormat:@"사용자 아이디: %@",[[[GIDSignIn sharedInstance] currentUser] userID]];
-            NSString *userEmail = [NSString stringWithFormat:@"사용자 이메일: %@",[[[[GIDSignIn sharedInstance] currentUser] profile] email]];
-            NSString *userName = [NSString stringWithFormat:@"사용자 이름: %@", [[[[GIDSignIn sharedInstance] currentUser] profile] name]];
             
-            NSString * responseStr = [NSString stringWithFormat:@"\nGoogle\n\n%@\n%@\n%@\n%@\n\n아이디 토큰 : \n%@\n\n악세스 토큰 : \n%@\n\n리플레시 토큰 :\n%@",userID,userEmail,userName,userGender,self.userIDToken,self.accessToken,self.refreshToken];
-
-            responseUserData(YES,responseStr);
+            userInfo.userName = [[[[GIDSignIn sharedInstance] currentUser] profile] name];
+            userInfo.userID = [[[GIDSignIn sharedInstance] currentUser] userID];
+            userInfo.userEmail = [[[[GIDSignIn sharedInstance] currentUser] profile] email];
+            userInfo.userGender = [dict objectForKey:@"gender"];
+            userInfo.userAccessToken = self.accessToken;
+            userInfo.userRefreshToken = self.refreshToken;
+        
+            responseUserData(YES,userInfo);
             
         }] resume];
     }else{
-        responseUserData(NO,@"");
+        struct OAuthUserInfo userInfo;
+        userInfo.userName = @"";
+        responseUserData(NO,userInfo);
     }
 }
 

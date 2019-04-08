@@ -90,19 +90,21 @@
                                                 KAKAO_PROPERTKEY_AGE_RANGE,
                                                 KAKAO_PROPERTKEY_GENDER]
                                    completion:^(NSError *error, KOUserMe *me) {
+                                       struct OAuthUserInfo userInfo;
+                                       
                                        if (error) {
-                                           responseUserData(NO,@"");
+                                           userInfo.userName = @"";
+                                           responseUserData(NO,userInfo);
                                        } else {
+                                           userInfo.userID = me.ID;
+                                           userInfo.userEmail = me.account.email;
+                                           userInfo.userNickName = me.nickname;
+                                           userInfo.userBirthday = me.account.birthday;
+                                           userInfo.userAccessToken = self.accessToken;
+                                           userInfo.userRefreshToken = self.refreshToken;
+                                           userInfo.userAgeRang = [self getKOUserAgeRange: me.account.ageRange];
                                            
-                                           NSString *userID = [NSString stringWithFormat:@"사용자 아이디: %@",me.ID];
-                                           NSString *userEmail = [NSString stringWithFormat:@"사용자 이메일: %@",me.account.email];
-                                           NSString *userNickName = [NSString stringWithFormat:@"사용자 닉네임: %@", me.nickname];
-                                           NSString *userBirthday = [NSString stringWithFormat:@"사용자 생일: %@", me.account.birthday];
-                                           NSString *userAgeRang = [NSString stringWithFormat:@"사용자 연령대: %lu", (unsigned long)me.account.ageRange];
-                                           NSString *userGender = [NSString stringWithFormat:@"사용자 성별: %lu", (unsigned long)me.account.gender];
-                                           NSString *responseStr = [NSString stringWithFormat:@"\nKakao\n\n%@\n%@\n%@\n%@\n%@\n%@\n\n토큰 : \n%@\n\n리플레시 토큰 : \n%@",userID,userEmail,userNickName,userBirthday,userAgeRang,userGender,self.accessToken,self.refreshToken];
-                                           
-                                           responseUserData(YES,responseStr);
+                                           responseUserData(YES,userInfo);
                                        }
                                    }];
 }
@@ -114,5 +116,42 @@
         return NO;
     }
 }
+
+
+#pragma mark - Privite
+- (NSString *)getKOUserAgeRange:(KOUserAgeRange)age{
+    
+    NSString *result;
+    
+    if (!age) {
+        return result;
+    }
+    
+    switch (age) {
+        case KOUserAgeRangeType15:
+            result = @"15세~19세"; break;
+        case KOUserAgeRangeType20:
+            result = @"20세~29세"; break;
+        case KOUserAgeRangeType30:
+            result = @"30세~39세"; break;
+        case KOUserAgeRangeType40:
+            result = @"40세~49세"; break;
+        case KOUserAgeRangeType50:
+            result = @"50세~59세"; break;
+        case KOUserAgeRangeType70:
+            result = @"60세~69세"; break;
+        case KOUserAgeRangeType80:
+            result = @"70세~79세"; break;
+        case KOUserAgeRangeType90:
+            result = @"80세~89세"; break;
+        default:
+            break;
+    }
+    
+    return result;
+    
+}
+
+
     
 @end

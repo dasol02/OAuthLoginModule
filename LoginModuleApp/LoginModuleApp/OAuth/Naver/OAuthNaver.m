@@ -114,22 +114,27 @@
         NSURLResponse * _Nullable response,
         NSError * _Nullable error) {
           
+          struct OAuthUserInfo userInfo;
+          
           if(!error){
               NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
               NSDictionary *userData = [dict objectForKey:@"response"];
-              
-              NSString *userAge = [userData objectForKey:@"name"];
-              NSString *userBirthday = [userData objectForKey:@"birthday"];
-              NSString *userEmail = [userData objectForKey:@"email"];
-              NSString *userGender = [userData objectForKey:@"gender"];
-              NSString *userID = [userData objectForKey:@"id"];
-              NSString *userName = [userData objectForKey:@"name"];
-              
-              NSString *responseStr = [NSString stringWithFormat:@"\nNaver\n\n연령대 : %@\n생일 : %@\n이메일 : %@\n성별 : %@\n아이디 : %@\n이름 : %@\n\n토큰 : %@\n\n리플레시토큰 : %@",userAge,userBirthday,userEmail,userGender,userID,userName,self.accessToken,self.refreshToken];
-              
-              responseUserData(YES,responseStr);
+
+              userInfo.userName = [userData objectForKey:@"name"];
+              userInfo.userID = [userData objectForKey:@"id"];
+              userInfo.userGender = [userData objectForKey:@"gender"];
+              userInfo.userEmail = [userData objectForKey:@"email"];
+              userInfo.userNickName = [userData objectForKey:@"nickname"];
+              userInfo.userAgeRang = [userData objectForKey:@"age"];
+              userInfo.userBirthday = [userData objectForKey:@"birthday"];
+              userInfo.userProfileImage = [userData objectForKey:@"profile_image"];
+              userInfo.userAccessToken = self.accessToken;
+              userInfo.userRefreshToken = self.refreshToken;
+
+              responseUserData(YES,userInfo);
           }else{
-              responseUserData(NO,@"");
+              userInfo.userName = @"";
+              responseUserData(NO,userInfo);
           }
           
       }] resume];
