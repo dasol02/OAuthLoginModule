@@ -1,6 +1,7 @@
 #import "OAuthGoogle.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
-@interface OAuthGoogle()
+@interface OAuthGoogle()<GIDSignInDelegate,GIDSignInUIDelegate>
 @property (strong, nonatomic) responseOAuthResult googleOAuthResponseOAuthResult;
 @end
 

@@ -1,4 +1,10 @@
 #import "OAuthNaver.h"
+#import <NaverThirdPartyLogin/NaverThirdPartyLogin.h>
+
+@interface OAuthNaver()<NaverThirdPartyLoginConnectionDelegate>
+@property (strong, nonatomic) NaverThirdPartyLoginConnection *thirdPartyLoginConn;
+@property (strong, nonatomic) responseOAuthResult naverOAuthResponseOAuthResult;
+@end
 
 @implementation OAuthNaver
 
@@ -46,6 +52,22 @@
     return YES;
 }
 
+
+- (void)requestOAuthLogin:(responseOAuthResult)responseOAuthResult{
+    [self.thirdPartyLoginConn requestThirdPartyLogin];
+    self.naverOAuthResponseOAuthResult = responseOAuthResult;
+}
+
+- (void)requestOAuthLogout:(responseOAuthResult)responseOAuthResult{
+    [self.thirdPartyLoginConn resetToken];
+    
+    if([self requestOAuthIsLogin] == NO){
+        responseOAuthResult(YES);
+    }
+    responseOAuthResult(NO);
+    
+}
+
 - (void)requestOAuthGetUserData:(responseUserData)responseUserData{
     
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc]init];
@@ -91,25 +113,10 @@
       }] resume];
 }
 
-- (void)requestOAuthLogin:(responseOAuthResult)responseOAuthResult{
-//     [self.thirdPartyLoginConn requestThirdPartyLogin];
-    responseOAuthResult((BOOL*)YES);
-}
-
-- (void)requestOAuthLogout:(responseOAuthResult)responseOAuthResult{
-    [self.thirdPartyLoginConn resetToken];
-    
-    // 임시 추후 동기로 변경
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(logOutResult) userInfo:nil repeats:NO];
-    
-    responseOAuthResult(YES);
-}
 
 - (void)requestOAuthRemove:(responseOAuthResult)responseOAuthResult{
     [self.thirdPartyLoginConn requestDeleteToken];
-    
-    // 임시 추후 동기로 변경
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(logOutResult) userInfo:nil repeats:NO];
+    self.naverOAuthResponseOAuthResult = responseOAuthResult;
 }
 
 
@@ -117,70 +124,52 @@
      return [self.thirdPartyLoginConn application:app openURL:url options:options];
 }
 
-
-# pragma mark - Privite
-    
-- (void)logOutResult{
-    
-    BOOL state = NO;
-    
-    if([self requestOAuthIsLogin]){
-        state = YES;
-    }
-    
-}
-    
 - (void)requsetOAuthRefreshToken:(responseOAuthResult)responseOAuthResult{
     // 전급 토근은 있고 &&  유효기간이 지난 경우
     if([self.thirdPartyLoginConn state] && [self.thirdPartyLoginConn isValidAccessTokenExpireTimeNow] == NO){
         [self.thirdPartyLoginConn requestAccessTokenWithRefreshToken];
-
+        responseOAuthResult(YES);
     }else{
-
+        responseOAuthResult(NO);
     }
 }
 
 #pragma mark- NAVER OAuth20 deleagate
 // 로그인 성공
 - (void)oauth20ConnectionDidFinishRequestACTokenWithAuthCode {
-
-    
     self.accessToken = self.thirdPartyLoginConn.accessToken;
     self.refreshToken = self.thirdPartyLoginConn.refreshToken;
-    
+    self.naverOAuthResponseOAuthResult(YES);
+    self.naverOAuthResponseOAuthResult = nil;
 }
 
-// 로그인 실패
+// 로그인 및 인증해제 실패
 - (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailWithError:(NSError *)error{
-
+    self.naverOAuthResponseOAuthResult(NO);
+    self.naverOAuthResponseOAuthResult = nil;
 }
 
-// 인증해제
+// 인증해제 (성공)
+// # 인증해제 실패시 (인증해제 실패시 앱내의 저장된 토큰은 삭제되어 따로 처리 하지 않음.)
 - (void)oauth20ConnectionDidFinishDeleteToken{
-
+    self.naverOAuthResponseOAuthResult(YES);
+    self.naverOAuthResponseOAuthResult = nil;
 }
 
-// 토큰 갱신
+
+// 토큰 갱신 (성공)
 - (void)oauth20ConnectionDidFinishRequestACTokenWithRefreshToken{
     self.accessToken = self.thirdPartyLoginConn.accessToken;
     self.refreshToken = self.thirdPartyLoginConn.refreshToken;
-
-
 }
 
-// 인앱 로그인 // 실행여부 미확인
-- (void)oauth20ConnectionDidOpenInAppBrowserForOAuth:(NSURLRequest *)request{
 
-
-}
-
-- (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFinishAuthorizationWithResult:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{
-
-}
-
-- (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailAuthorizationWithRecieveType:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{
-
-}
+// 인앱 로그인 내부 브라우저 생성
+- (void)oauth20ConnectionDidOpenInAppBrowserForOAuth:(NSURLRequest *)request{}
+// Getting auth code from NaverApp faile
+- (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFinishAuthorizationWithResult:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{}
+// Getting auth code from NaverApp success
+- (void)oauth20Connection:(NaverThirdPartyLoginConnection *)oauthConnection didFailAuthorizationWithRecieveType:(THIRDPARTYLOGIN_RECEIVE_TYPE)recieveType{}
 
 
 @end
