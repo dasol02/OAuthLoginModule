@@ -160,15 +160,14 @@
     self.naverOAuthResponseOAuthResult = nil;
 }
 
-// 인증해제 (성공)
-// # 인증해제 실패시 (인증해제 실패시 앱내의 저장된 토큰은 삭제되어 따로 처리 하지 않음.)
+// 인증해제 성공
 - (void)oauth20ConnectionDidFinishDeleteToken{
     self.naverOAuthResponseOAuthResult(YES);
     self.naverOAuthResponseOAuthResult = nil;
 }
 
 
-// 토큰 갱신 (성공)
+// 토큰 갱신 성공
 - (void)oauth20ConnectionDidFinishRequestACTokenWithRefreshToken{
     self.accessToken = self.thirdPartyLoginConn.accessToken;
     self.refreshToken = self.thirdPartyLoginConn.refreshToken;

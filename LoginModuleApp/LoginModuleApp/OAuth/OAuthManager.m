@@ -110,15 +110,23 @@
     
     self.oAuthObject = nil;
     
-    if(loginSocialType == OAUTH_TYPE_NAVER){
-        self.oAuthObject = [[OAuthNaver alloc] init];
-    }else if(loginSocialType == OAUTH_TYPE_KAKAO){
-        self.oAuthObject = [[OAuthKakao alloc] init];
-    }else if(loginSocialType == OAUTH_TYPE_FACEBOOK){
-        self.oAuthObject = [[OAuthFacebook alloc] init];
-    }else if(loginSocialType == OAUTH_TYPE_GOOGLE){
-        self.oAuthObject = [[OAuthGoogle alloc] init];
+    switch (loginSocialType) {
+        case OAUTH_TYPE_NAVER:
+            self.oAuthObject = [[OAuthNaver alloc] init];
+            break;
+        case OAUTH_TYPE_KAKAO:
+            self.oAuthObject = [[OAuthKakao alloc] init];
+            break;
+        case OAUTH_TYPE_FACEBOOK:
+            self.oAuthObject = [[OAuthFacebook alloc] init];
+            break;
+        case OAUTH_TYPE_GOOGLE:
+            self.oAuthObject = [[OAuthGoogle alloc] init];
+            break;
+        default:
+            break;
     }
+    
 }
 
 @end
