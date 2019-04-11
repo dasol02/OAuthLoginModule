@@ -9,12 +9,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[OAuthManager sharedInstnace] requestStartOAuthManager:application didFinishLaunchingWithOptions:launchOptions];
-    [[OAuthManager sharedInstnace] requestOAuthManagerInfoSettingScheme:@"loginmoduleappdeeplinkscheme"
-                                                       NaverConsumerKey:@"DMM9F1vOnLoTdfm8Qx6w"
-                                                    NaverConsumerSecret:@"5_uvXsmbPj"
-                                                    NaverServiceAppName:@"loginmoduleapp"
-                                                         GoogleClientID:@"463686728262-mqjt49pp0e46sf415ui9o7bo8cj9pgn6.apps.googleusercontent.com"
-     ];
     
     return YES;
 }

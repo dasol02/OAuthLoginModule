@@ -2,5 +2,6 @@
 #import "OAuthBase.h"
 
 @interface OAuthKakao : OAuthBase
+
 @end
 

@@ -55,6 +55,16 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+    <key>NAVER_SERVICE_APP_URL_SCHEME</key>
+    <string>loginmoduleappdeeplinkscheme</string>
+    <key>NAVER_CONSUMER_KEY</key>
+    <string>DMM9F1vOnLoTdfm8Qx6w</string>
+    <key>NAVER_CONSUMER_SECRET</key>
+    <string>5_uvXsmbPj</string>
+    <key>NAVER_SERVICE_APP_NAME</key>
+    <string>loginmoduleapp</string>
+    <key>GOOGLE_CLIENT_ID</key>
+    <string>463686728262-mqjt49pp0e46sf415ui9o7bo8cj9pgn6.apps.googleusercontent.com</string>
 	<key>FacebookAppID</key>
 	<string>1750035155124396</string>
 	<key>FacebookDisplayName</key>

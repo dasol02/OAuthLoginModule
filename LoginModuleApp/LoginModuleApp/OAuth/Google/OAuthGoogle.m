@@ -16,7 +16,7 @@
 
 - (instancetype)init{
     self = [super init];
-    [GIDSignIn sharedInstance].clientID = [[OAuthManager sharedInstnace] oAuthInfo_Google_ClientID];
+    [GIDSignIn sharedInstance].clientID = [self getClientInfo:@"GOOGLE_CLIENT_ID"];
     [GIDSignIn sharedInstance].delegate = self;
     [GIDSignIn sharedInstance].uiDelegate = self;
     return self;

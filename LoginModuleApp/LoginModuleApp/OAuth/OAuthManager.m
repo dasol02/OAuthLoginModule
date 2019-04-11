@@ -23,16 +23,6 @@
     return oAuthManager;
 }
 
-#pragma mark - SDK Info Setting
-- (void)requestOAuthManagerInfoSettingScheme: (NSString *)naverService NaverConsumerKey: (NSString *)naverConsumerKey NaverConsumerSecret: (NSString *)naverConsumerSecret  NaverServiceAppName: (NSString *)naverServiceAppName  GoogleClientID: (NSString *)googleClientID{
-    self.oAuthInfo_Naver_ServiceAppUrlScheme = naverService;
-    self.oAuthInfo_Naver_ConsumerKey = naverConsumerKey;
-    self.oAuthInfo_Naver_ConsumerSecret = naverConsumerSecret;
-    self.oAuthInfo_Naver_ServiceAppName = naverServiceAppName;
-    self.oAuthInfo_Google_ClientID = googleClientID;
-}
-
-
 #pragma mark - REQUEST
 // 로그인
 - (void)requestOAuthManagerLogin:(OAUTH_TYPE)loginOAuthType handler:(responseOAuthResult)responseOAuthResult{

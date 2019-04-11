@@ -27,10 +27,10 @@
 #pragma mark - OAuth NAVER First Setting
 - (void)setOAuthNaverSetting{
     [self.thirdPartyLoginConn setIsNaverAppOauthEnable:YES];
-    [self.thirdPartyLoginConn setServiceUrlScheme:[OAuthManager sharedInstnace].oAuthInfo_Naver_ServiceAppUrlScheme];
-    [self.thirdPartyLoginConn setConsumerKey:[OAuthManager sharedInstnace].oAuthInfo_Naver_ConsumerKey];
-    [self.thirdPartyLoginConn setConsumerSecret:[OAuthManager sharedInstnace].oAuthInfo_Naver_ConsumerSecret];
-    [self.thirdPartyLoginConn setAppName:[OAuthManager sharedInstnace].oAuthInfo_Naver_ServiceAppName];
+    [self.thirdPartyLoginConn setServiceUrlScheme:[self getClientInfo:@"NAVER_SERVICE_APP_URL_SCHEME"]];
+    [self.thirdPartyLoginConn setConsumerKey:[self getClientInfo:@"NAVER_CONSUMER_KEY"]];
+    [self.thirdPartyLoginConn setConsumerSecret:[self getClientInfo:@"NAVER_CONSUMER_SECRET"]];
+    [self.thirdPartyLoginConn setAppName:[self getClientInfo:@"NAVER_SERVICE_APP_NAME"]];
 }
 
 #pragma mark - SDK Setting
