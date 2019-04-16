@@ -451,7 +451,7 @@ allprojects {
 
 **프로젝트내에 프레임워크 직접 추가**
 
-* [SNS OAuth Framework 다운로드](https://github.com/dasol02/SNSOAuthManageriOSFramework) 이후 프로젝트내에 추가
+* [SNS OAuth Framework 다운로드](https://github.com/dasol02/OAuthLoginModuleiOS/tree/master/Frameworks) 이후 프로젝트내에 추가
 
 **Cocoapods 사용시**
 
