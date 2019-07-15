@@ -1,8 +1,8 @@
-# SNS OAuth Login Manager Developer Guide 
+# SNS OAuth Login Manager Guide 
 
-OAuth Manager은 Android, iOS의 OS에서 SNS OAuth Login 개발을 
+OAuth Manager은 iOS의 OS에서 SNS OAuth Login 개발을 
 
-각 연동사 별로 구현없이 하나의 Manager를 이용하여 연동할 수 있게 개발되었다.
+각 연동사 별로 구현없이 하나의 Manager 연동 개발 모듈
 
 개발 가이드는 아래 방법에 따라 진행 한다.
 ```ruby
@@ -199,7 +199,7 @@ OAuthManager 사용을 위한 기본설정 내용이며, 각 SNS OAuth 연동사
 [앱 등록 페이지](https://developers.facebook.com/?advanced_app_create=true)(내앱 - 새 앱 추가)
 
 ### Google
-구글 API 콘솔 프로젝트 등록 및 구성([Android](https://developers.google.com/identity/sign-in/android/start-integrating), [iOS](https://developers.google.com/identity/sign-in/ios/start-integrating))에 따라 사용하고자 하는 앱서비스를 등록한다.
+구글 API 콘솔 프로젝트 등록 및 구성([iOS](https://developers.google.com/identity/sign-in/ios/start-integrating))에 따라 앱서비스를 등록한다.
 
 
 
@@ -337,7 +337,7 @@ $ pod install
 ```
 **Project Linked Frameworks and Libraries 설정**
 
-```py
+```
 Naver
 - NaverThirdPartyLogin.framework
 
@@ -358,17 +358,21 @@ Facebook
 - Bolts.framework
 
 ```
-![](https://github.com/dasol02/BixbyDeveloperGuideIMG/blob/master/OAuth_iOS_LinkedFramework.png?raw=true)
 **Project Embedded Binarles 설정**
-![](https://github.com/dasol02/BixbyDeveloperGuideIMG/blob/master/OAuth_iOS_Embedded%20Binarles.png?raw=true)
-**Project info URL Types 설정**
-![](https://github.com/dasol02/BixbyDeveloperGuideIMG/blob/master/OAuth_iOS_URL_Types.png?raw=true)
+```
+NaverThirdPatyLogin.framework
+KakaoOpenSDK.framework
+```
 
+**Project info URL Types 설정**
+```
+각 해당 연동사에 정의된 URL Type 추가
+```
 
 **Project  Build Settings 설정**
-
+```
 Linking - Other Linker Flags에 -all_load, -ObjC를 추가한다.
-
+```
 
 # SNS Login App Key 설정
 iOS App 번들 ID 등록 
