@@ -6,7 +6,6 @@ OAuth Manager은 Android, iOS의 OS에서 SNS OAuth Login 개발을
 
 개발 가이드는 아래 방법에 따라 진행 한다.
 ```ruby
-# Andorid Api 9 이상
 # iOS 9.0 이상
 ```
 
@@ -16,42 +15,12 @@ OAuth Manager은 Android, iOS의 OS에서 SNS OAuth Login 개발을
 * Facebook
 * Google
 
-<img src="https://github.com/dasol02/BixbyDeveloperGuideIMG/blob/master/OAuthManager_Sample.gif?raw=true" width="300" height="550"><img src="https://github.com/dasol02/BixbyDeveloperGuideIMG/blob/master/OAuthManager_sample_android.gif?raw=true" width="300" height="550">
-
 
 # OAuth Manager API
 
 ## 로그인
-로그인 진행할 클래스에서 아래의 내용을 각 OS에 추가하여 구현한다.
+로그인 진행할 클래스에서 아래 내용을 구현한다.
 
-**Android**
-```ruby
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthBaseClass;
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthManager;
-import static com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthBaseClass.OAuthType.*;
-```
-```ruby
-@Override
-protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    super.onActivityResult(requestCode, resultCode, data);
-    OAuthManager.getsInstance().responseOnActivityResult(requestCode,resultCode,data);
-}
-```
-```ruby
-OAuthManager.getsInstance().requestSNSLogin(OAuth_NAVER, this, new OAuthManager.OAuthLoginInterface() {
-    @Override
-    public void responseLoginResult(Boolean result, String token, String error) {
-        if(result){
-        	// TODO : Login Success
-        }else{
-           // TODO : Login Fail
-        }
-    }
-});
-
-```
-
-**iOS**
 ```
 #import "OAuthManager.h"
 ```
@@ -68,62 +37,16 @@ OAuthManager.getsInstance().requestSNSLogin(OAuth_NAVER, this, new OAuthManager.
 
 ## 사용자 정보 조회
 
-사용자 정보조회를 진행할 클래스에서 아래의 내용을 각 OS에 추가하여 구현한다.
-
-**사용자 제공 정보**
-
-아래 내용은 각 연동사에서 제공하는 사용자 기본제공 정보이며 이외의 사용자정보는 추가 요청하여야 한다.
-
+> 사용자 정보 (이외의 사용자정보는 추가 요청 필요)
 ```
 Naver  : 이름, 이메일, 성별, 생년월일, 연령대, 별명, 프로필사진
 Kakao : 이름, 이메일, 성별,  생년월일, 연령대, 전화번호
 Facebook : 이름, 이메일(휴대전화로 가입시 이메일 정보 공백)
 Google : 이름, 이메일
-
 ```
 
-**Android**
-```ruby
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthBaseClass;
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthManager;
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthUserInfo;
-```
-```ruby
-OAuthManager.getsInstance().requestUserFrofileInfo(this, new OAuthManager.OAuthUserFrofileInterface() {
-    @Override
-    public void responseUserFrofileInfoResult(Boolean result, final OAuthUserInfo oAuthUserInfo, String error) {
-        // TODO : OAuth Request Userinfo Success
-        // Response Userinfo
-        if(result){
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    // UI Updagte
-                }
-            });
-        }
-    }
-});
-```
-**OAuthUserinfo**
-```ruby
-public class OAuthUserInfo {
-    private String userName;
-    private String userID;
-    private String userGender;
-    private String userEmail;
-    private String userNickName;
-    private String userAgeRang;
-    private String userBirthday;
-    private String userProfileImage;
-    private String userAccessToken;
-    private String userRefreshToken;
-    private String userTokenRefreshDate;
-	.....
-}
-```
+사용자 정보조회를 진행할 클래스에서 아래 내용을 구현한다.
 
-**iOS**
 ```
 #import "OAuthManager.h"
 ```
@@ -140,7 +63,7 @@ public class OAuthUserInfo {
 }];
 ```
 
-**OAuthUserinfo**
+> OAuthUserinfo 클래스 구조
 ```ruby
 typedef struct OAuthUserInfo {
     NSString *userName;
@@ -159,13 +82,7 @@ typedef struct OAuthUserInfo {
 
 ## 로그아웃
 
-로그아웃을 진행할 클래스에서 아래의 내용을 각 OS에 추가하여 구현한다.
-
-**Android**
-```ruby
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthBaseClass;
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthManager;
-```
+로그아웃을 진행할 클래스에서 아래의 내용을 구현한다.
 
 ```ruby
 OAuthManager.getsInstance().requestSNSLogOut(this, new OAuthManager.OAuthLogoutInterface() {
@@ -180,7 +97,6 @@ OAuthManager.getsInstance().requestSNSLogOut(this, new OAuthManager.OAuthLogoutI
 });
 ```
 
-**iOS**
 ```
 #import "OAuthManager.h"
 ```
@@ -196,32 +112,11 @@ OAuthManager.getsInstance().requestSNSLogOut(this, new OAuthManager.OAuthLogoutI
 
 ## 연동해제
 
-연동해제를 진행할 클래스에서 아래의 내용을 각 OS에 추가하여 구현한다.
+연동해제를 진행할 클래스에서 아래의 내용을 구현한다.
 ```
 페이스북의 경우 연동해제는 제공되지 않으며, 사용자가 직접 페이스북에서 연동을 해제하여야 한다.
 ```
 
-
-**Android**
-```ruby
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthBaseClass;
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthManager;
-```
-```ruby
-OAuthManager.getsInstance().requestSNSDelete(this, new OAuthManager.OAuthRemoveInterface() {
-    @Override
-    public void responseRemoveResult(Boolean result, String error) {
-        if(result){
-			// TODO : Remove Success
-        }else{
-			// TODO : Remove Fail
-        }
-    }
-});
-
-```
-
-**iOS**
 ```
 #import "OAuthManager.h"
 ```
@@ -236,58 +131,10 @@ OAuthManager.getsInstance().requestSNSDelete(this, new OAuthManager.OAuthRemoveI
 }];
 ```
 
-
-
 # OAuth Manager 환경 설정
 OAuthManager 사용을 위한 기본설정 내용이며, 각 SNS OAuth 연동사에 대한 연동설정은 다음 단락의 내용을 참고
 
-## Android
-[OAuthManager Android Download Github](https://github.com/dasol02/OAuthLoginModuleAndroid) import Your Project
-
-![](https://raw.githubusercontent.com/dasol02/BixbyDeveloperGuideIMG/master/Android%20OAuth.png)
-
-**Application**
-```ruby
-import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuthManager;
-```
-```ruby
- @Override
-    public void onCreate() {
-        super.onCreate();
-        OAuthManager.getsInstance().requestStartApp();
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-        OAuthManager.getsInstance().requestDidApp();
-    }
-
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-        OAuthManager.getsInstance().requestDidApp();
-    }
-```
-
-**strings.xml**
-```XML
-<resources>
-    <string name="naver_client_id">Your App Naver Client Key</string>
-    <string name="naver_client_secret">Your App Naver Client Secret</string>
-    <string name="naver_client_name">Your App Naver Client Name</string>
-    <string name="kakao_app_key">Your Kakao App Key</string>
-    <string name="facebook_app_id">Your Facebook App ID</string>
-    <string name="fb_login_protocol_scheme">Your Facebook Login Scheme</string>
-    <string name="server_client_id">Your App Google Client ID</string>
-</resources>
-```
-
-## iOS
-
 [OAuthManager iOS Download Github](https://github.com/dasol02/OAuthLoginModuleiOS) import Your Project
-
-![](https://raw.githubusercontent.com/dasol02/BixbyDeveloperGuideIMG/master/iOS%20OAuth.png)
 
 **AppDelegate.m**
 ```
@@ -357,97 +204,6 @@ import com.oauthloginmoduleandroid.gaea.oauthloginmoduleandroid.OAuthLogin.OAuth
 
 
 ## SDK 설정
-
-### Android
-**build.gradle 설정 (App)**
-```ruby
-android {
-    ...
-    // Naver ProGuard Exception Setting
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-...
-dependencies {
-    // Kakao
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: '1.13.0'
-    // Naver
-    implementation 'com.naver.nid:naveridlogin-android-sdk:4.2.5'
-    // Facebook
-    implementation 'com.facebook.android:facebook-login:[4,5)'
-    // Google
-    implementation 'com.google.android.gms:play-services-auth:15.0.1'
-}
-```
-
-**build.gradle 설정 (Project)**
-```ruby
-buildscript {
-    repositories {
-        // Google
-		google()
-        // Facebook
-        jcenter()
-    }
-    ...
-    // Kakao
-    subprojects {
-        repositories {
-            mavenCentral()
-            maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
-        }
-    }
-}
-
-allprojects {
-    repositories {
-        // Google
-		google()
-        // Facebook
-        jcenter()
-    }
-}
-```
-
-**AndroidManifest.xml 설정**
-```XML
-<uses-permission android:name="android.permission.INTERNET" />
-```
-```python
-<application
-    // kakao
-    <meta-data
-        android:name="com.kakao.sdk.AppKey"
-        android:value="@string/kakao_app_key"/>
-
-    // Facebook
-    <meta-data
-        android:name="com.facebook.sdk.ApplicationId"
-        android:value="@string/facebook_app_id"/>
-    <activity
-        android:name="com.facebook.FacebookActivity"
-        android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:label="@string/app_name" />
-    <activity
-        android:name="com.facebook.CustomTabActivity"
-        android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/fb_login_protocol_scheme" />
-        </intent-filter>
-    </activity>
-</application>
-```
-
-
-### iOS 
 
 **프로젝트내에 프레임워크 직접 추가**
 
@@ -615,27 +371,6 @@ Linking - Other Linker Flags에 -all_load, -ObjC를 추가한다.
 
 
 # SNS Login App Key 설정
-
-## Android
-
-**Naver**
-```
-네이버 자체 클라이언트 아이디 및 시크릿 아이디로 등록
-```
-**Kakao**
-```
-debug, release Key 등록 필수
-```
-**Facebook **
-```
-debug, release Key 등록 필수
-```
-**Google**
-```
-자체 클라이언트 ID로 등록
-```
-## iOS
-
 iOS App 번들 ID 등록 
 
 ```
