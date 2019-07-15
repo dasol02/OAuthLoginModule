@@ -180,10 +180,10 @@ OAuthManager 사용을 위한 기본설정 내용이며, 각 SNS OAuth 연동사
 
 ## 각 연동사 SNS OAuth Login 설정 가이드
 
-* Naver ([Android Guide](https://developers.naver.com/docs/login/android/), [iOS Guide](https://developers.naver.com/docs/login/ios/))
-* Kakao ([Android Guide](https://developers.kakao.com/docs/android/user-management#%EB%A1%9C%EA%B7%B8%EC%9D%B8), [iOS Guide](https://developers.kakao.com/docs/ios/user-management#%EB%A1%9C%EA%B7%B8%EC%9D%B8))
-* Facebook ([Android Guide](https://developers.facebook.com/docs/facebook-login/android), [iOS Guide](https://developers.facebook.com/docs/facebook-login/ios))
-* Google ([Android Guide](https://developers.google.com/identity/sign-in/android/start), [iOS Guide](https://developers.google.com/identity/sign-in/ios/start-integrating))
+* Naver ([iOS Guide](https://developers.naver.com/docs/login/ios/))
+* Kakao ([iOS Guide](https://developers.kakao.com/docs/ios/user-management#%EB%A1%9C%EA%B7%B8%EC%9D%B8))
+* Facebook ([iOS Guide](https://developers.facebook.com/docs/facebook-login/ios))
+* Google ([iOS Guide](https://developers.google.com/identity/sign-in/ios/start-integrating))
 
 
 ## SNS Applicsation Service 등록
